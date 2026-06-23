@@ -2,28 +2,22 @@ import { Button, ButtonText } from "@/components/ui/button";
 import { useRouter } from "expo-router";
 import { Text, View } from "react-native";
 
-const Index = () => {
+const Home = () => {
   const router = useRouter();
   return (
     <View className="flex-1 items-center justify-center bg-background-0">
-      <Text className="text-typography-900">
-        Edit src/app/index.tsx to edit this screen.
-      </Text>
-      <Button size="md" variant="solid" action="primary" className="mt-4">
-        <ButtonText>Uji Coba Button</ButtonText>
-      </Button>
-
+      <Text className="text-typography-900">Home Screen</Text>
       <Button
         size="md"
         variant="solid"
         action="primary"
         className="mt-4"
-        onPress={() => router.push("/(tabs)/home")}
+        onPress={() => router.push("/")}
       >
-        <ButtonText>Home</ButtonText>
+        <ButtonText>Click Me</ButtonText>
       </Button>
     </View>
   );
 };
 
-export default Index;
+export default Home;
