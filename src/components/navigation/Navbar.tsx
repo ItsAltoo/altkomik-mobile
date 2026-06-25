@@ -20,7 +20,7 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 export const Navbar = () => {
   const [isSearchExpanded, setIsSearchExpanded] = useState(false);
-  const { colorScheme, setColorScheme } = useColorScheme();
+  const { setColorScheme } = useColorScheme();
   const [themePref, setThemePref] = useState<"system" | "light" | "dark">(
     "system",
   );
