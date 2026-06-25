@@ -1,56 +1,41 @@
-# Welcome to your Expo app 👋
+# AltKomik Mobile
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+Welcome to the AltKomik Mobile repository! This project is built using Expo, React Native, and Gluestack UI.
 
-## Get started
+## Getting Started
 
-1. Install dependencies
-
+1. **Install dependencies**
    ```bash
-   npm install
+   pnpm install
    ```
 
-2. Start the app
-
+2. **Start the application**
    ```bash
-   npx expo start
+   pnpm dev
    ```
 
-In the output, you'll find options to open the app in a
+---
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+## Project Architecture (Feature-Sliced Design)
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+This project uses a **Feature-Sliced / Domain-Driven Structure** to keep the codebase clean, scalable, and easy to maintain. We strictly separate the routing logic from the actual UI and business logic.
 
-## Get a fresh project
+### 1. Separation of Routing and UI
+- **`src/app/`**: This directory is strictly used for **routing** via Expo Router. Files here contain minimal code and simply import and export the respective view from the `src/screens` folder.
 
-When you're ready, run:
+### 2. Screen Architecture (`src/screens/`)
+Each tab or page in the application (e.g., `home`, `library`, `detail`) has its own dedicated folder inside `src/screens/`. This ensures that everything related to a specific feature is kept isolated and organized.
 
-```bash
-npm run reset-project
-```
+Inside a typical screen folder (e.g., `src/screens/home/`), you will find the following structure:
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+- 📄 **`index.tsx`**: The main entry point and UI View for the screen. It combines smaller components and hooks into a single page.
+- 📁 **`components/`**: UI components that are **strictly specific** to this screen (e.g., a `HomeCarousel`). Note: Global components (like a standard `Button` or `ComicCard`) live in `src/components/`.
+- 📁 **`hooks/`**: Custom React hooks containing the business logic and state management for this screen.
+- 📄 **`repository.ts`**: The data access layer. All API calls, data fetching, and data formatting for this screen are handled here. This separates data operations from the UI.
+- 📄 **`types.ts`**: TypeScript interfaces and types specific to this screen's data and props.
+- 📄 **`utils.ts`**: Small helper functions and formatters used locally within this screen.
 
-### Other setup steps
-
-- To set up ESLint for linting, run `npx expo lint`, or follow our guide on ["Using ESLint and Prettier"](https://docs.expo.dev/guides/using-eslint/)
-- If you'd like to set up unit testing, follow our guide on ["Unit Testing with Jest"](https://docs.expo.dev/develop/unit-testing/)
-- Learn more about the TypeScript setup in this template in our guide on ["Using TypeScript"](https://docs.expo.dev/guides/typescript/)
-
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+### Why this structure?
+- **Highly Organized**: If there is a bug on the Home page, you know exactly where to look (`src/screens/home/`) without digging through global folders.
+- **Prevents File Bloat**: By extracting logic into `hooks`, data fetching into `repository`, and UI into `components`, the main `index.tsx` file stays clean and short.
+- **Team-Friendly**: Developers can work on different screens simultaneously with minimal risk of merge conflicts.
