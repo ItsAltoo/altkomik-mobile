@@ -13,7 +13,7 @@ import {
 } from "lucide-react-native";
 
 const getIcon = (routeName: string, isFocused: boolean) => {
-  const iconClass = isFocused ? "text-background-light" : "text-background-0";
+  const iconClass = isFocused ? "text-typography-0" : "text-background-dark dark:text-typography-500";
   switch (routeName) {
     case "index":
       return <Icon as={Home} size="lg" className={iconClass} />;
@@ -49,8 +49,8 @@ const getLabel = (routeName: string) => {
 
 export const PillBar = ({ state, navigation }: BottomTabBarProps) => {
   return (
-    <Box className="absolute bottom-6 left-4 right-4 items-center shadow-2xl shadow-black/30">
-      <HStack className="bg-background-950 px-2 py-2 rounded-full items-center justify-between min-w-[320px]">
+    <Box className="absolute bottom-6 left-4 right-4 items-center shadow-soft-4">
+      <HStack className="bg-background-0/90 backdrop-blur-md border border-outline-100 px-2 py-2 rounded-full items-center justify-between min-w-[320px]">
         {state.routes.map((route, index) => {
           const isFocused = state.index === index;
 
@@ -77,7 +77,7 @@ export const PillBar = ({ state, navigation }: BottomTabBarProps) => {
               {getIcon(route.name, isFocused)}
               <Text
                 className={`text-[10px] mt-1 font-bold ${
-                  isFocused ? "text-background-light" : "text-background-0"
+                  isFocused ? "text-typography-0" : "text-background-dark dark:text-typography-500"
                 }`}
               >
                 {getLabel(route.name)}
