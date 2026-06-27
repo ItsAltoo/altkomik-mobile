@@ -1,7 +1,8 @@
 import { Text } from "@/components/ui/text";
 import { ComicCard } from "@/src/components/comic-card";
-import { ScrollView, View } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { RefreshControl, ScrollView, View } from "react-native";
+import { ComicCarousel } from "./components/comic-carousel";
+import { useRanking } from "./hooks/useRanking";
 
 const MOCK_DATA = [
   {
@@ -68,30 +69,52 @@ const MOCK_DATA = [
 ];
 
 const HomeScreen = () => {
-  return (
-    <SafeAreaView edges={["top"]} className="flex-1 bg-background-0">
-      <ScrollView className="flex-1" contentContainerStyle={{ padding: 16 }}>
-        <Text className="text-xl font-bold text-typography-900 mb-4">
-          Comic Cards Mockup
-        </Text>
+  const {
+    data,
+    isLoading: isLoadingCarousel,
+    isValidating,
+    mutate,
+  } = useRanking();
 
-        <View className="flex-row flex-wrap justify-between gap-y-4">
-          {MOCK_DATA.map((item) => (
-            <View key={item.slug} style={{ width: "48%" }}>
-              <ComicCard
-                title={item.title}
-                slug={item.slug}
-                thumbnail={item.thumbnail}
-                description={item.description}
-                flag={item.flag}
-                status={item.status}
-                chapters={item.chapters}
-              />
-            </View>
-          ))}
+  return (
+    <View className="flex-1 bg-background-0 ">
+      <ScrollView
+        className="flex-1"
+        showsVerticalScrollIndicator={false}
+        refreshControl={
+          <RefreshControl
+            refreshing={isValidating && !isLoadingCarousel}
+            onRefresh={() => mutate()}
+            colors={["#0ea5e9"]}
+            tintColor="#0ea5e9"
+          />
+        }
+      >
+        <View className="px-4 pb-6 pt-4">
+          <ComicCarousel data={data} isLoading={isLoadingCarousel} />
+
+          <Text className="text-xl font-bold text-typography-900 mb-4">
+            Latest Updates
+          </Text>
+
+          <View className="flex-row flex-wrap justify-between gap-y-4">
+            {MOCK_DATA.map((item) => (
+              <View key={item.slug} style={{ width: "48%" }}>
+                <ComicCard
+                  title={item.title}
+                  slug={item.slug}
+                  thumbnail={item.thumbnail}
+                  description={item.description}
+                  flag={item.flag}
+                  status={item.status}
+                  chapters={item.chapters}
+                />
+              </View>
+            ))}
+          </View>
         </View>
       </ScrollView>
-    </SafeAreaView>
+    </View>
   );
 };
 
