@@ -11,7 +11,7 @@ export const PaginationDots = ({ dataLength, activeIndex }: Props) => {
 
   return (
     <HStack
-      className="absolute bottom-6 w-full justify-center gap-1.5"
+      className="absolute bottom-2 w-full justify-center gap-1.5"
       pointerEvents="none"
     >
       {Array.from({ length: dataLength }).map((_, index) => (

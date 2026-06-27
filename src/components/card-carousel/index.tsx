@@ -49,7 +49,7 @@ export function CardCarousel<T extends ComicCardProps>({
   const renderSeparator = () => <Box className="w-4" />;
 
   return (
-    <Box className="w-full min-h-[380px]">
+    <Box className="w-full">
       {title && (
         <Text className="text-xl font-bold text-typography-900 mb-4 border-l-4 border-l-primary-500 pl-2">
           {title}

@@ -10,6 +10,7 @@ export function usePopularUpdateList(type: string = "all") {
     () => HomeRepository.getPopularUpdateList(type),
     {
       keepPreviousData: true,
+      revalidateOnFocus: false,
     },
   );
 

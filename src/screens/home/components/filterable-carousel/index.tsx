@@ -2,15 +2,16 @@ import { HStack } from "@/components/ui/hstack";
 import { Pressable } from "@/components/ui/pressable";
 import { Text } from "@/components/ui/text";
 import { CardCarousel } from "@/src/components/card-carousel";
+import { Comic } from "@/src/libs/types";
 import { startTransition } from "react";
 import { ScrollView, View } from "react-native";
-import { Comic } from "@/src/libs/types";
 
-type PopularCarouselProps = {
-  popularType: "all" | "manga" | "manhwa" | "manhua";
-  setPopularType: (type: "all" | "manga" | "manhwa" | "manhua") => void;
-  popularData: Comic[] | undefined;
-  isLoadingPopular: boolean;
+type FilterableCarouselProps = {
+  title: string;
+  type: "all" | "manga" | "manhwa" | "manhua";
+  setType: (type: "all" | "manga" | "manhwa" | "manhua") => void;
+  data: Comic[] | undefined;
+  isLoading: boolean;
 };
 
 const filterOptions = [
@@ -20,17 +21,18 @@ const filterOptions = [
   { label: "Manhua", value: "manhua" },
 ] as const;
 
-export const PopularCarousel = ({
-  popularType,
-  setPopularType,
-  popularData,
-  isLoadingPopular,
-}: PopularCarouselProps) => {
+export const FilterableCarousel = ({
+  title,
+  type,
+  setType,
+  data,
+  isLoading,
+}: FilterableCarouselProps) => {
   return (
-    <View className="mt-6">
+    <View>
       <HStack className="justify-between items-center mb-4">
         <Text className="text-xl font-bold text-typography-900 border-l-4 border-l-primary-500 pl-2">
-          Populer
+          {title}
         </Text>
       </HStack>
       <ScrollView
@@ -44,18 +46,18 @@ export const PopularCarousel = ({
               key={opt.value}
               onPress={() => {
                 startTransition(() => {
-                  setPopularType(opt.value);
+                  setType(opt.value);
                 });
               }}
               className={`px-4 py-1.5 rounded-full border ${
-                popularType === opt.value
+                type === opt.value
                   ? "bg-primary-500 border-primary-500"
                   : "bg-background-0 border-outline-200"
               }`}
             >
               <Text
                 className={`text-sm font-semibold ${
-                  popularType === opt.value
+                  type === opt.value
                     ? "text-typography-0"
                     : "text-typography-500"
                 }`}
@@ -67,7 +69,7 @@ export const PopularCarousel = ({
         </HStack>
       </ScrollView>
 
-      <CardCarousel data={popularData || []} isLoading={isLoadingPopular} />
+      <CardCarousel data={data || []} isLoading={isLoading} />
     </View>
   );
 };

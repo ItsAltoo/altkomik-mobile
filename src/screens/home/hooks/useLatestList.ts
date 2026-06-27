@@ -5,8 +5,10 @@ import { HomeRepository } from "../repository";
 const EMPTY_ARRAY: Comic[] = [];
 
 export const useLatestList = () => {
-  const { data, ...rest } = useSWR("latest-list", () =>
-    HomeRepository.getLatestList(),
+  const { data, ...rest } = useSWR(
+    "latest-list",
+    () => HomeRepository.getLatestList(),
+    { revalidateOnFocus: false }
   );
 
   return {

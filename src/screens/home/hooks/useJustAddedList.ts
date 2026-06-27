@@ -4,15 +4,16 @@ import { HomeRepository } from "../repository";
 
 const EMPTY_ARRAY: Comic[] = [];
 
-export const useRanking = () => {
-  const { data, ...rest } = useSWR(
-    "ranking-all",
-    () => HomeRepository.getRanking(),
+export function useJustAddedList(type: string = "all") {
+  const { data, mutate, ...rest } = useSWR(
+    ["just-added-list", type],
+    () => HomeRepository.getJustAddedList(type),
     { revalidateOnFocus: false },
   );
 
   return {
     data: data ?? EMPTY_ARRAY,
+    mutate,
     ...rest,
   };
-};
+}

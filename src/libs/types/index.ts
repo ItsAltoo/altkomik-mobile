@@ -35,3 +35,8 @@ export type Comic = {
   };
   description?: string;
 };
+
+export type FeaturedGenreGroup = {
+  genre: string;
+  items: Comic[];
+};
