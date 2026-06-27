@@ -3,6 +3,7 @@ import { ComicCard } from "@/src/components/comic-card";
 import { RefreshControl, ScrollView, View } from "react-native";
 import { ComicCarousel } from "./components/comic-carousel";
 import { useRanking } from "./hooks/useRanking";
+import { Footer } from "@/src/components/footer";
 
 const MOCK_DATA = [
   {
@@ -113,6 +114,7 @@ const HomeScreen = () => {
             ))}
           </View>
         </View>
+        <Footer />
       </ScrollView>
     </View>
   );
