@@ -1,32 +1,52 @@
 import { Box } from "@/components/ui/box";
 import { Text } from "@/components/ui/text";
 import { ComicCard, ComicCardProps } from "@/src/components/comic-card";
-import { Dimensions, FlatList, View } from "react-native";
+import { FlatList, useWindowDimensions } from "react-native";
 import { CardCarouselSkeleton } from "./Skeleton";
 
-const { width: SCREEN_WIDTH } = Dimensions.get("window");
-const SPACING = 16;
-// Screen has px-4 (16px left + 16px right = 32px total).
-// We want exactly 2 cards to fit in the available space.
-const CARD_WIDTH = (SCREEN_WIDTH - 48) / 2;
-const SNAP_INTERVAL = CARD_WIDTH + SPACING;
-
-type CardCarouselProps = {
+type CardCarouselProps<T extends ComicCardProps = ComicCardProps> = {
   title?: string;
-  data: ComicCardProps[];
+  data: T[];
   isLoading?: boolean;
 };
 
-export const CardCarousel = ({
+export function CardCarousel<T extends ComicCardProps>({
   title,
   data,
   isLoading = false,
-}: CardCarouselProps) => {
+}: CardCarouselProps<T>) {
+  const { width } = useWindowDimensions();
+
+  // Screen has px-4 (16px left + 16px right = 32px total).
+  // We want exactly 2 cards to fit in the available space.
+  const cardWidth = (width - 48) / 2;
+  const snapInterval = cardWidth + 14; // 16px spacing (w-4)
+
+  const baseCardStyle = { width: cardWidth };
+
   if (isLoading) {
     return <CardCarouselSkeleton title={title} />;
   }
 
   if (!data || data.length === 0) return null;
+
+  const renderItem = ({ item }: { item: T }) => {
+    // Avoid inline style object to make React.memo work perfectly
+    const customStyle = (item as any).style;
+    const finalStyle = customStyle
+      ? { width: cardWidth, ...customStyle }
+      : baseCardStyle;
+
+    return (
+      <ComicCard
+        {...item}
+        style={finalStyle}
+        className={`h-[360px] ${item.className || ""}`}
+      />
+    );
+  };
+
+  const renderSeparator = () => <Box className="w-4" />;
 
   return (
     <Box className="w-full min-h-[380px]">
@@ -39,21 +59,19 @@ export const CardCarousel = ({
         data={data}
         horizontal
         showsHorizontalScrollIndicator={false}
-        snapToInterval={SNAP_INTERVAL}
+        snapToInterval={snapInterval}
         decelerationRate="fast"
         disableIntervalMomentum={true}
         snapToAlignment="start"
         keyExtractor={(item, index) => item.slug || index.toString()}
-        contentContainerStyle={{ paddingRight: SPACING }}
-        ItemSeparatorComponent={() => <View style={{ width: SPACING }} />}
-        renderItem={({ item }) => (
-          <ComicCard
-            {...item}
-            style={{ width: CARD_WIDTH, ...((item as any).style || {}) }}
-            className={`h-[360px] ${item.className || ""}`}
-          />
-        )}
+        contentContainerClassName="pr-4"
+        ItemSeparatorComponent={renderSeparator}
+        renderItem={renderItem}
+        initialNumToRender={4}
+        maxToRenderPerBatch={4}
+        windowSize={5}
+        removeClippedSubviews={true}
       />
     </Box>
   );
-};
+}
