@@ -13,7 +13,7 @@ export const CardCarouselSkeleton = ({ title }: CardCarouselSkeletonProps) => {
   const cardWidth = (width - 48) / 2;
 
   return (
-    <Box className="w-full min-h-[380px]">
+    <Box className="w-full">
       {title && (
         <Text className="text-xl font-bold text-typography-900 mb-4 border-l-4 border-l-primary-500 pl-2">
           {title}

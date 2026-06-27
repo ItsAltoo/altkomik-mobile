@@ -25,7 +25,7 @@ export const ComicCarousel = ({
     data?.length || 0,
     isLoading,
     autoPlay,
-    itemWidth
+    itemWidth,
   );
 
   if (isLoading) {
@@ -41,7 +41,7 @@ export const ComicCarousel = ({
   });
 
   return (
-    <Box className="w-full bg-background-0 pb-4">
+    <Box className="w-full bg-background-0">
       <FlatList
         ref={flatListRef}
         data={data}

@@ -1,4 +1,4 @@
-import { ApiResponse, Comic } from "@/src/libs/types";
+import { ApiResponse, Comic, FeaturedGenreGroup } from "@/src/libs/types";
 import api from "@/src/libs/utils/api";
 
 export const HomeRepository = {
@@ -18,6 +18,20 @@ export const HomeRepository = {
   getPopularUpdateList: async (type: string = "all") => {
     const { data } = await api.get<ApiResponse<Comic[]>>(
       `/popular-update?type=${type}`,
+    );
+    return data.data;
+  },
+
+  getJustAddedList: async (type: string = "all") => {
+    const { data } = await api.get<ApiResponse<Comic[]>>(
+      `/just-added?type=${type}`,
+    );
+    return data.data;
+  },
+
+  getFeaturedGenres: async () => {
+    const { data } = await api.get<ApiResponse<FeaturedGenreGroup[]>>(
+      "/featured-genres",
     );
     return data.data;
   },

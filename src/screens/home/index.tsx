@@ -2,8 +2,10 @@ import { CardCarousel } from "@/src/components/card-carousel";
 import { Footer } from "@/src/components/footer";
 import { useState } from "react";
 import { RefreshControl, ScrollView, View } from "react-native";
+import { FilterableCarousel } from "./components/filterable-carousel";
 import { ComicCarousel } from "./components/ranking-carousel";
-import { PopularCarousel } from "./components/popular-carousel";
+import { useFeaturedGenres } from "./hooks/useFeaturedGenres";
+import { useJustAddedList } from "./hooks/useJustAddedList";
 import { useLatestList } from "./hooks/useLatestList";
 import { usePopularUpdateList } from "./hooks/usePopularUpdateList";
 import { useRanking } from "./hooks/useRanking";
@@ -30,11 +32,32 @@ const HomeScreen = () => {
     mutate: mutatePopular,
   } = usePopularUpdateList(popularType);
 
+  const [justAddedType, setJustAddedType] = useState<
+    "all" | "manga" | "manhwa" | "manhua"
+  >("all");
+  const {
+    data: justAddedData,
+    isLoading: isLoadingJustAdded,
+    mutate: mutateJustAdded,
+  } = useJustAddedList(justAddedType);
+
+  const {
+    data: featuredGenresData,
+    isLoading: isLoadingFeaturedGenres,
+    mutate: mutateFeaturedGenres,
+  } = useFeaturedGenres();
+
   const [isRefreshing, setIsRefreshing] = useState(false);
 
   const onRefresh = async () => {
     setIsRefreshing(true);
-    await Promise.all([mutateRanking(), mutateLatest(), mutatePopular()]);
+    await Promise.all([
+      mutateRanking(),
+      mutateLatest(),
+      mutatePopular(),
+      mutateJustAdded(),
+      mutateFeaturedGenres(),
+    ]);
     setIsRefreshing(false);
   };
 
@@ -47,28 +70,44 @@ const HomeScreen = () => {
           <RefreshControl
             refreshing={isRefreshing}
             onRefresh={onRefresh}
-            colors={["#0ea5e9"]}
-            tintColor="#0ea5e9"
+            colors={["#B331F1"]}
+            tintColor="#B331F1"
           />
         }
       >
-        <View className="px-4 pb-6 pt-4">
+        <View className="px-4 pb-6 pt-4 gap-8">
           <ComicCarousel data={rankingData} isLoading={isLoadingCarousel} />
 
-          <View className="mt-6">
-            <CardCarousel
-              title="Terbaru"
-              data={latestData}
-              isLoading={isLoadingLatest}
-            />
-          </View>
-
-          <PopularCarousel
-            popularType={popularType}
-            setPopularType={setPopularType}
-            popularData={popularData}
-            isLoadingPopular={isLoadingPopular}
+          <CardCarousel
+            title="Terbaru"
+            data={latestData}
+            isLoading={isLoadingLatest}
           />
+
+          <FilterableCarousel
+            title="Populer"
+            type={popularType}
+            setType={setPopularType}
+            data={popularData}
+            isLoading={isLoadingPopular}
+          />
+
+          <FilterableCarousel
+            title="Baru Ditambahkan"
+            type={justAddedType}
+            setType={setJustAddedType}
+            data={justAddedData}
+            isLoading={isLoadingJustAdded}
+          />
+
+          {featuredGenresData?.map((group) => (
+            <CardCarousel
+              key={group.genre}
+              title={group.genre}
+              data={group.items}
+              isLoading={isLoadingFeaturedGenres}
+            />
+          ))}
         </View>
         <Footer />
       </ScrollView>

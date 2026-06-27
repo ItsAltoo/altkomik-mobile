@@ -16,7 +16,7 @@
       "softwareKeyboardLayoutMode": "pan",
       "adaptiveIcon": {
         "backgroundColor": "#F8F9FA",
-        "foregroundImage": "./assets/images/noBg-altkomik.png"
+        "foregroundImage": "./assets/images/noBg-altkomik-adaptive.png"
       },
       "predictiveBackGestureEnabled": false
     },

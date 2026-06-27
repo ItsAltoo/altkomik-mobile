@@ -24,6 +24,7 @@ export const ComicCard = ({
   chapters,
   latestChapter,
   latestChapterSlug,
+  updateCount,
   priority = false,
   className = "",
   style,
@@ -85,8 +86,18 @@ export const ComicCard = ({
             </Box>
           )}
 
+          {updateCount && (
+            <Badge className="absolute top-2 left-2 bg-error-500 border-none rounded-sm px-1.5 py-0.5 shadow-hard-5">
+              <BadgeText className="text-[10px] font-extrabold tracking-wider text-white">
+                {updateCount}
+              </BadgeText>
+            </Badge>
+          )}
+
           {isColored && (
-            <Badge className="absolute top-2 left-2 bg-[#F59E0B] border-none rounded-sm px-1.5 py-0.5">
+            <Badge
+              className={`absolute ${updateCount ? "top-8" : "top-2"} left-2 bg-[#F59E0B] border-none rounded-sm px-1.5 py-0.5 shadow-hard-5`}
+            >
               <BadgeText className="text-[9px] font-bold uppercase tracking-wider text-white">
                 Color
               </BadgeText>
