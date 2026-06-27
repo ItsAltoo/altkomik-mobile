@@ -1,6 +1,6 @@
 import { ApiResponse } from "@/libs/types";
 import api from "@/src/libs/utils/api";
-import { RankingComic } from "./types";
+import { LatestComic, RankingComic } from "./types";
 
 export const HomeRepository = {
   async getRanking() {
@@ -8,6 +8,11 @@ export const HomeRepository = {
       "/ranking?period=weekly",
     );
 
+    return data.data;
+  },
+
+  async getLatestList() {
+    const { data } = await api.get<ApiResponse<LatestComic[]>>("/latest-list");
     return data.data;
   },
 };
