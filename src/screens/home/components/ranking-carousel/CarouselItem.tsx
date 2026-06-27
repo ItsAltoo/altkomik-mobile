@@ -1,29 +1,29 @@
 import { Image } from "expo-image";
 import { LinearGradient } from "expo-linear-gradient";
 import { Link } from "expo-router";
-import { Dimensions, StyleSheet } from "react-native";
+import { StyleSheet, useWindowDimensions } from "react-native";
 
 import { Badge, BadgeText } from "@/components/ui/badge";
 import { HStack } from "@/components/ui/hstack";
 import { Pressable } from "@/components/ui/pressable";
 import { Text } from "@/components/ui/text";
 import { VStack } from "@/components/ui/vstack";
-import { RankingComic } from "../../types";
-
-const { width: SCREEN_WIDTH } = Dimensions.get("window");
+import { Comic } from "@/src/libs/types";
 
 type Props = {
-  item: RankingComic;
+  item: Comic;
 };
 
 export const CarouselItem = ({ item }: Props) => {
+  const { width } = useWindowDimensions();
   const detailLink = `/detail/${item.slug}` as any;
+  const itemWidth = width - 31; // match HomeScreen px-4 container
 
   return (
     <Link href={detailLink} asChild>
       <Pressable
-        className="active:opacity-95 transition-opacity"
-        style={{ width: SCREEN_WIDTH, height: 280 }}
+        className="active:opacity-95 transition-opacity overflow-hidden rounded-xl"
+        style={{ width: itemWidth, height: 280 }}
       >
         <Image
           source={{ uri: item.thumbnail }}

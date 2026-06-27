@@ -1,14 +1,12 @@
+import { Comic } from "@/src/libs/types";
 import useSWR from "swr";
 import { HomeRepository } from "../repository";
-import { LatestComic } from "../types";
 
-const EMPTY_ARRAY: LatestComic[] = [];
+const EMPTY_ARRAY: Comic[] = [];
 
-export const useLatestList = (initialData?: LatestComic[]) => {
-  const { data, ...rest } = useSWR(
-    "home-latest-list",
-    () => HomeRepository.getLatestList(),
-    { fallbackData: initialData },
+export const useLatestList = () => {
+  const { data, ...rest } = useSWR("latest-list", () =>
+    HomeRepository.getLatestList(),
   );
 
   return {

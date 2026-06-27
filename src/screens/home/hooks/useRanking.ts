@@ -1,14 +1,12 @@
+import { Comic } from "@/src/libs/types";
 import useSWR from "swr";
 import { HomeRepository } from "../repository";
-import { RankingComic } from "../types";
 
-const EMPTY_ARRAY: RankingComic[] = [];
+const EMPTY_ARRAY: Comic[] = [];
 
-export const useRanking = (initialData?: RankingComic[]) => {
-  const { data, ...rest } = useSWR(
-    "home-ranking-all",
-    () => HomeRepository.getRanking(),
-    { fallbackData: initialData },
+export const useRanking = () => {
+  const { data, ...rest } = useSWR("ranking-all", () =>
+    HomeRepository.getRanking(),
   );
 
   return {

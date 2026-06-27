@@ -1,19 +1,18 @@
 import { useEffect, useRef, useState } from "react";
-import { Dimensions, FlatList, NativeScrollEvent, NativeSyntheticEvent } from "react-native";
-
-const { width: SCREEN_WIDTH } = Dimensions.get("window");
+import { FlatList, NativeScrollEvent, NativeSyntheticEvent } from "react-native";
 
 export const useAutoSlide = (
   dataLength: number, 
   isLoading: boolean, 
-  autoPlay: boolean
+  autoPlay: boolean,
+  itemWidth: number
 ) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const flatListRef = useRef<FlatList>(null);
 
   const onScroll = (event: NativeSyntheticEvent<NativeScrollEvent>) => {
     const scrollPosition = event.nativeEvent.contentOffset.x;
-    const index = Math.round(scrollPosition / SCREEN_WIDTH);
+    const index = Math.round(scrollPosition / itemWidth);
     if (index !== activeIndex) {
       setActiveIndex(index);
     }
@@ -31,5 +30,5 @@ export const useAutoSlide = (
     return () => clearInterval(interval);
   }, [activeIndex, autoPlay, dataLength, isLoading]);
 
-  return { activeIndex, flatListRef, onScroll, SCREEN_WIDTH };
+  return { activeIndex, flatListRef, onScroll };
 };

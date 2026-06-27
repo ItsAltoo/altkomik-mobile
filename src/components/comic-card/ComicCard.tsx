@@ -1,5 +1,4 @@
 import { Image } from "expo-image";
-import { LinearGradient } from "expo-linear-gradient";
 import { Link } from "expo-router";
 import { Calendar, Clock, Eye, Tag } from "lucide-react-native";
 import { StyleSheet, View } from "react-native";
@@ -59,26 +58,15 @@ export const ComicCard = ({
       className={`flex-1 bg-background-0 border border-outline-100 shadow-soft-1 rounded-xl overflow-hidden ${className}`}
       style={style}
     >
-      {/* IMAGE CONTAINER */}
       <Link href={apiDetailLink} asChild>
         <Pressable className="w-full h-[180px] relative overflow-hidden bg-background-50 active:scale-[0.98] transition-transform duration-200">
           {isValidImage ? (
-            <>
-              {/* Foreground Image */}
-              <Image
-                source={{ uri: thumbnail }}
-                style={StyleSheet.absoluteFill}
-                contentFit="cover"
-                priority={priority ? "high" : "normal"}
-              />
-              {/* Dark Gradient Overlay for premium text contrast */}
-              <LinearGradient
-                colors={["transparent", "rgba(0,0,0,0.2)", "rgba(0,0,0,0.9)"]}
-                locations={[0, 0.6, 1]}
-                style={StyleSheet.absoluteFill}
-                pointerEvents="none"
-              />
-            </>
+            <Image
+              source={{ uri: thumbnail }}
+              style={StyleSheet.absoluteFill}
+              contentFit="cover"
+              priority={priority ? "high" : "normal"}
+            />
           ) : (
             <View className="flex-1 items-center justify-center bg-background-100">
               <Text className="text-xs font-medium text-typography-500">
@@ -87,7 +75,6 @@ export const ComicCard = ({
             </View>
           )}
 
-          {/* Top-Right: Country Flag */}
           {flag && (
             <Box className="absolute top-2 right-2 rounded-sm overflow-hidden shadow-hard-5 border border-outline-800/30">
               <Image
@@ -98,7 +85,6 @@ export const ComicCard = ({
             </Box>
           )}
 
-          {/* Top-Left: Colored Badge */}
           {isColored && (
             <Badge className="absolute top-2 left-2 bg-[#F59E0B] border-none rounded-sm px-1.5 py-0.5">
               <BadgeText className="text-[9px] font-bold uppercase tracking-wider text-white">
@@ -107,7 +93,6 @@ export const ComicCard = ({
             </Badge>
           )}
 
-          {/* Bottom-Left: Chapter Badge */}
           {finalLatestChapter && (
             <Badge
               variant="default"
@@ -122,7 +107,6 @@ export const ComicCard = ({
             </Badge>
           )}
 
-          {/* Bottom-Right: Comic Type */}
           {comicType && (
             <Badge
               variant="default"
@@ -136,7 +120,6 @@ export const ComicCard = ({
         </Pressable>
       </Link>
 
-      {/* CONTENT CONTAINER */}
       <VStack className="p-3 gap-3 flex-1 justify-between bg-background-0">
         <Link href={apiDetailLink} asChild>
           <Pressable className="w-full active:opacity-70 transition-opacity">
@@ -158,7 +141,6 @@ export const ComicCard = ({
         </Link>
 
         <VStack className="mt-auto gap-3 pt-2">
-          {/* Metadata */}
           <VStack className="gap-1.5">
             {timeAgo && (
               <HStack className="items-center gap-1.5">
@@ -206,7 +188,6 @@ export const ComicCard = ({
             )}
           </VStack>
 
-          {/* Quick Actions: Read */}
           <HStack className="w-full gap-2">
             {apiInitialChapterLink &&
               apiInitialChapterLink !== apiChapterLink && (

@@ -1,34 +1,42 @@
 import { CardCarousel } from "@/src/components/card-carousel";
 import { Footer } from "@/src/components/footer";
+import { useState } from "react";
 import { RefreshControl, ScrollView, View } from "react-native";
-import { ComicCarousel } from "./components/comic-carousel";
+import { ComicCarousel } from "./components/ranking-carousel";
+import { PopularCarousel } from "./components/popular-carousel";
 import { useLatestList } from "./hooks/useLatestList";
+import { usePopularUpdateList } from "./hooks/usePopularUpdateList";
 import { useRanking } from "./hooks/useRanking";
 
 const HomeScreen = () => {
   const {
     data: rankingData,
     isLoading: isLoadingCarousel,
-    isValidating: isValidatingRanking,
     mutate: mutateRanking,
   } = useRanking();
 
   const {
     data: latestData,
     isLoading: isLoadingLatest,
-    isValidating: isValidatingLatest,
     mutate: mutateLatest,
   } = useLatestList();
 
-  const onRefresh = () => {
-    mutateRanking();
-    mutateLatest();
-  };
+  const [popularType, setPopularType] = useState<
+    "all" | "manga" | "manhwa" | "manhua"
+  >("all");
+  const {
+    data: popularData,
+    isLoading: isLoadingPopular,
+    mutate: mutatePopular,
+  } = usePopularUpdateList(popularType);
 
-  const isRefreshing =
-    (isValidatingRanking || isValidatingLatest) &&
-    !isLoadingCarousel &&
-    !isLoadingLatest;
+  const [isRefreshing, setIsRefreshing] = useState(false);
+
+  const onRefresh = async () => {
+    setIsRefreshing(true);
+    await Promise.all([mutateRanking(), mutateLatest(), mutatePopular()]);
+    setIsRefreshing(false);
+  };
 
   return (
     <View className="flex-1 bg-background-0 ">
@@ -54,6 +62,13 @@ const HomeScreen = () => {
               isLoading={isLoadingLatest}
             />
           </View>
+
+          <PopularCarousel
+            popularType={popularType}
+            setPopularType={setPopularType}
+            popularData={popularData}
+            isLoadingPopular={isLoadingPopular}
+          />
         </View>
         <Footer />
       </ScrollView>
