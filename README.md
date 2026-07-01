@@ -39,3 +39,6 @@ Inside a typical screen folder (e.g., `src/screens/home/`), you will find the fo
 - **Highly Organized**: If there is a bug on the Home page, you know exactly where to look (`src/screens/home/`) without digging through global folders.
 - **Prevents File Bloat**: By extracting logic into `hooks`, data fetching into `repository`, and UI into `components`, the main `index.tsx` file stays clean and short.
 - **Team-Friendly**: Developers can work on different screens simultaneously with minimal risk of merge conflicts.
+
+### 3. TypeScript Conventions
+- **Strictly `type` over `interface`**: In this codebase, we exclusively use `type` for defining types and props (e.g., `type ComponentProps = { ... }`). We do **not** use `interface`. This convention is enforced across the entire repository to maintain consistency.

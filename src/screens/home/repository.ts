@@ -30,9 +30,8 @@ export const HomeRepository = {
   },
 
   getFeaturedGenres: async () => {
-    const { data } = await api.get<ApiResponse<FeaturedGenreGroup[]>>(
-      "/featured-genres",
-    );
+    const { data } =
+      await api.get<ApiResponse<FeaturedGenreGroup[]>>("/featured-genres");
     return data.data;
   },
 };

@@ -1,4 +1,5 @@
 import { Stack } from "expo-router";
+import { StatusBar } from "expo-status-bar";
 import {
   configureReanimatedLogger,
   ReanimatedLogLevel,
@@ -15,6 +16,7 @@ configureReanimatedLogger({
 const RootLayout = () => {
   return (
     <GluestackUIProvider mode="system">
+      <StatusBar hidden />
       <Stack screenOptions={{ headerShown: false }} />
     </GluestackUIProvider>
   );

@@ -14,14 +14,14 @@ export const ComicCarouselSkeleton = () => {
         style={{ width: itemWidth, height: 280 }}
         className="relative overflow-hidden rounded-xl"
       >
-        <Skeleton variant="sharp" className="w-full h-full absolute inset-0" />
+        <Skeleton variant="sharp" className="absolute inset-0 h-full w-full" />
 
         <Box className="absolute inset-0 bg-black/40" />
 
-        <VStack className="absolute bottom-0 w-full p-4 gap-2">
+        <VStack className="absolute bottom-0 w-full gap-2 p-4">
           <HStack className="gap-2">
-            <Skeleton variant="rounded" className="w-20 h-5 rounded-sm" />
-            <Skeleton variant="rounded" className="w-16 h-5 rounded-sm" />
+            <Skeleton variant="rounded" className="h-5 w-20 rounded-sm" />
+            <Skeleton variant="rounded" className="h-5 w-16 rounded-sm" />
           </HStack>
 
           <VStack className="mt-1 gap-2">
@@ -29,7 +29,7 @@ export const ComicCarouselSkeleton = () => {
             <SkeletonText _lines={1} className="h-5 w-1/2" />
           </VStack>
 
-          <HStack className="gap-3 mt-1 items-center">
+          <HStack className="mt-1 items-center gap-3">
             <SkeletonText _lines={1} className="h-3 w-16" />
             <SkeletonText _lines={1} className="h-3 w-20" />
           </HStack>

@@ -1,11 +1,15 @@
 import { useEffect, useRef, useState } from "react";
-import { FlatList, NativeScrollEvent, NativeSyntheticEvent } from "react-native";
+import {
+  FlatList,
+  NativeScrollEvent,
+  NativeSyntheticEvent,
+} from "react-native";
 
 export const useAutoSlide = (
-  dataLength: number, 
-  isLoading: boolean, 
+  dataLength: number,
+  isLoading: boolean,
   autoPlay: boolean,
-  itemWidth: number
+  itemWidth: number,
 ) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const flatListRef = useRef<FlatList>(null);

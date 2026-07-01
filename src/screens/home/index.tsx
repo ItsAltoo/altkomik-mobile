@@ -75,7 +75,7 @@ const HomeScreen = () => {
           />
         }
       >
-        <View className="px-4 pb-6 pt-4 gap-8">
+        <View className="gap-8 px-4 pb-6 pt-4">
           <ComicCarousel data={rankingData} isLoading={isLoadingCarousel} />
 
           <CardCarousel

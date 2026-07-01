@@ -16,8 +16,8 @@ export const Footer = () => {
   };
 
   return (
-    <Box className="w-full bg-background-0 px-4 pt-8 pb-32 mt-6 rounded-t-3xl border-t border-outline-100">
-      <VStack className="gap-6 items-center">
+    <Box className="mt-6 w-full rounded-t-3xl border-t border-outline-100 bg-background-0 px-4 pb-32 pt-8">
+      <VStack className="items-center gap-6">
         <VStack className="items-center gap-2">
           <Image
             source={require("@/assets/images/noBg-altkomik-purple.png")}
@@ -25,16 +25,16 @@ export const Footer = () => {
             contentFit="cover"
             alt="AltKomik Logo"
           />
-          <Text className="text-sm font-medium text-typography-500 text-center px-4">
+          <Text className="px-4 text-center text-sm font-medium text-typography-500">
             Baca komik, manhwa, dan manhua bahasa Indonesia terbaik dan
             terlengkap dengan mudah.
           </Text>
         </VStack>
 
-        <HStack className="gap-6 flex-wrap justify-center mt-2">
+        <HStack className="mt-2 flex-wrap justify-center gap-6">
           <Pressable
             onPress={() => handlePress("https://altkomik.com/about")}
-            className="active:opacity-70 transition-opacity"
+            className="transition-opacity active:opacity-70"
           >
             <Text className="text-sm font-semibold text-typography-700">
               Tentang Kami
@@ -42,7 +42,7 @@ export const Footer = () => {
           </Pressable>
           <Pressable
             onPress={() => handlePress("https://altkomik.com/privacy")}
-            className="active:opacity-70 transition-opacity"
+            className="transition-opacity active:opacity-70"
           >
             <Text className="text-sm font-semibold text-typography-700">
               Kebijakan Privasi
@@ -50,7 +50,7 @@ export const Footer = () => {
           </Pressable>
           <Pressable
             onPress={() => handlePress("https://altkomik.com/tos")}
-            className="active:opacity-70 transition-opacity"
+            className="transition-opacity active:opacity-70"
           >
             <Text className="text-sm font-semibold text-typography-700">
               Ketentuan Layanan
@@ -58,9 +58,9 @@ export const Footer = () => {
           </Pressable>
         </HStack>
 
-        <Box className="w-full h-[1px] bg-outline-100 my-2" />
+        <Box className="my-2 h-[1px] w-full bg-outline-100" />
 
-        <Text className="text-xs font-medium text-typography-400 text-center">
+        <Text className="text-center text-xs font-medium text-typography-400">
           © {currentYear} AltKomik. All rights reserved.
         </Text>
       </VStack>
