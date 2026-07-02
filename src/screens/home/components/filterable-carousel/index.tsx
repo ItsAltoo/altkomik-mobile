@@ -30,8 +30,8 @@ export const FilterableCarousel = ({
 }: FilterableCarouselProps) => {
   return (
     <View>
-      <HStack className="justify-between items-center mb-4">
-        <Text className="text-xl font-bold text-typography-900 border-l-4 border-l-primary-500 pl-2">
+      <HStack className="mb-4 items-center justify-between">
+        <Text className="border-l-4 border-l-primary-500 pl-2 text-xl font-bold text-typography-900">
           {title}
         </Text>
       </HStack>
@@ -49,10 +49,10 @@ export const FilterableCarousel = ({
                   setType(opt.value);
                 });
               }}
-              className={`px-4 py-1.5 rounded-full border ${
+              className={`rounded-full border px-4 py-1.5 ${
                 type === opt.value
-                  ? "bg-primary-500 border-primary-500"
-                  : "bg-background-0 border-outline-200"
+                  ? "border-primary-500 bg-primary-500"
+                  : "border-outline-200 bg-background-0"
               }`}
             >
               <Text

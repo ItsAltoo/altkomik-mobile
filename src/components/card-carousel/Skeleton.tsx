@@ -15,7 +15,7 @@ export const CardCarouselSkeleton = ({ title }: CardCarouselSkeletonProps) => {
   return (
     <Box className="w-full">
       {title && (
-        <Text className="text-xl font-bold text-typography-900 mb-4 border-l-4 border-l-primary-500 pl-2">
+        <Text className="mb-4 border-l-4 border-l-primary-500 pl-2 text-xl font-bold text-typography-900">
           {title}
         </Text>
       )}

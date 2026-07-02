@@ -13,7 +13,9 @@ import {
 } from "lucide-react-native";
 
 const getIcon = (routeName: string, isFocused: boolean) => {
-  const iconClass = isFocused ? "text-typography-0" : "text-background-dark dark:text-typography-500";
+  const iconClass = isFocused
+    ? "text-typography-0"
+    : "text-background-dark dark:text-typography-500";
   switch (routeName) {
     case "index":
       return <Icon as={Home} size="lg" className={iconClass} />;
@@ -50,7 +52,7 @@ const getLabel = (routeName: string) => {
 export const PillBar = ({ state, navigation }: BottomTabBarProps) => {
   return (
     <Box className="absolute bottom-6 left-4 right-4 items-center shadow-soft-4">
-      <HStack className="bg-background-0/90 backdrop-blur-md border border-outline-100 px-2 py-2 rounded-full items-center justify-between min-w-[320px]">
+      <HStack className="min-w-[320px] items-center justify-between rounded-full border border-outline-100 bg-background-0/90 px-2 py-2 backdrop-blur-md">
         {state.routes.map((route, index) => {
           const isFocused = state.index === index;
 
@@ -70,14 +72,16 @@ export const PillBar = ({ state, navigation }: BottomTabBarProps) => {
             <Pressable
               key={route.key}
               onPress={onPress}
-              className={`flex-col items-center justify-center px-4 py-2 rounded-full active:scale-95 transition-all duration-200 min-w-[64px] ${
+              className={`min-w-[64px] flex-col items-center justify-center rounded-full px-4 py-2 transition-all duration-200 active:scale-95 ${
                 isFocused ? "bg-primary-500" : "bg-none"
               }`}
             >
               {getIcon(route.name, isFocused)}
               <Text
-                className={`text-[10px] mt-1 font-bold ${
-                  isFocused ? "text-typography-0" : "text-background-dark dark:text-typography-500"
+                className={`mt-1 text-[10px] font-bold ${
+                  isFocused
+                    ? "text-typography-0"
+                    : "text-background-dark dark:text-typography-500"
                 }`}
               >
                 {getLabel(route.name)}

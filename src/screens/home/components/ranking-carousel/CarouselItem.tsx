@@ -16,13 +16,13 @@ type Props = {
 
 export const CarouselItem = ({ item }: Props) => {
   const { width } = useWindowDimensions();
-  const detailLink = `/detail/${item.slug}` as any;
+  const detailLink = `/detail-comic/${item.slug}` as any;
   const itemWidth = width - 31; // match HomeScreen px-4 container
 
   return (
     <Link href={detailLink} asChild>
       <Pressable
-        className="active:opacity-95 transition-opacity overflow-hidden rounded-xl"
+        className="overflow-hidden rounded-xl transition-opacity active:opacity-95"
         style={{ width: itemWidth, height: 280 }}
       >
         <Image
@@ -38,17 +38,17 @@ export const CarouselItem = ({ item }: Props) => {
           style={StyleSheet.absoluteFill}
         />
 
-        <VStack className="absolute bottom-0 w-full p-4 pt-10 gap-2">
-          <HStack className="gap-2 items-center">
+        <VStack className="absolute bottom-0 w-full gap-2 p-4 pt-10">
+          <HStack className="items-center gap-2">
             {item.rank && (
-              <Badge className="bg-primary-500 border-none rounded-sm px-1.5 py-0.5 shadow-hard-5">
+              <Badge className="rounded-sm border-none bg-primary-500 px-1.5 py-0.5 shadow-hard-5">
                 <BadgeText className="text-[10px] font-bold text-white">
                   #{item.rank} Trending
                 </BadgeText>
               </Badge>
             )}
             {item.status?.genre && (
-              <Badge className="bg-background-0/20 backdrop-blur-md border border-outline-0/20 rounded-sm px-1.5 py-0.5">
+              <Badge className="rounded-sm border border-outline-0/20 bg-background-0/20 px-1.5 py-0.5 backdrop-blur-md">
                 <BadgeText className="text-[10px] font-medium text-white">
                   {item.status.genre}
                 </BadgeText>
@@ -57,7 +57,7 @@ export const CarouselItem = ({ item }: Props) => {
           </HStack>
 
           <Text
-            className="text-xl font-extrabold text-white tracking-tight"
+            className="text-xl font-extrabold tracking-tight text-white"
             numberOfLines={2}
           >
             {item.title}

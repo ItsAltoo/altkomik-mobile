@@ -40,7 +40,7 @@ export const ComicCard = ({
   const finalLatestChapterSlug = latestChapterSlug || chapters?.latest?.slug;
   const initialChapterSlug = chapters?.initial?.slug;
 
-  const apiDetailLink = `/detail/${slug}` as any;
+  const apiDetailLink = `/detail-comic/${slug}` as any;
   const apiChapterLink = finalLatestChapterSlug
     ? (`/read/${finalLatestChapterSlug}` as any)
     : null;
@@ -56,11 +56,11 @@ export const ComicCard = ({
 
   return (
     <Box
-      className={`flex-1 bg-background-0 border border-outline-100 shadow-soft-1 rounded-xl overflow-hidden ${className}`}
+      className={`flex-1 overflow-hidden rounded-xl border border-outline-100 bg-background-0 shadow-soft-1 ${className}`}
       style={style}
     >
       <Link href={apiDetailLink} asChild>
-        <Pressable className="w-full h-[180px] relative overflow-hidden bg-background-50 active:scale-[0.98] transition-transform duration-200">
+        <Pressable className="relative h-[180px] w-full overflow-hidden bg-background-50 transition-transform duration-200 active:scale-[0.98]">
           {isValidImage ? (
             <Image
               source={{ uri: thumbnail }}
@@ -77,7 +77,7 @@ export const ComicCard = ({
           )}
 
           {flag && (
-            <Box className="absolute top-2 right-2 rounded-sm overflow-hidden shadow-hard-5 border border-outline-800/30">
+            <Box className="absolute right-2 top-2 overflow-hidden rounded-sm border border-outline-800/30 shadow-hard-5">
               <Image
                 source={{ uri: flag }}
                 style={{ width: 22, height: 16 }}
@@ -87,7 +87,7 @@ export const ComicCard = ({
           )}
 
           {updateCount && (
-            <Badge className="absolute top-2 left-2 bg-error-500 border-none rounded-sm px-1.5 py-0.5 shadow-hard-5">
+            <Badge className="absolute left-2 top-2 rounded-sm border-none bg-error-500 px-1.5 py-0.5 shadow-hard-5">
               <BadgeText className="text-[10px] font-extrabold tracking-wider text-white">
                 {updateCount}
               </BadgeText>
@@ -96,7 +96,7 @@ export const ComicCard = ({
 
           {isColored && (
             <Badge
-              className={`absolute ${updateCount ? "top-8" : "top-2"} left-2 bg-[#F59E0B] border-none rounded-sm px-1.5 py-0.5 shadow-hard-5`}
+              className={`absolute ${updateCount ? "top-8" : "top-2"} left-2 rounded-sm border-none bg-[#F59E0B] px-1.5 py-0.5 shadow-hard-5`}
             >
               <BadgeText className="text-[9px] font-bold uppercase tracking-wider text-white">
                 Color
@@ -107,7 +107,7 @@ export const ComicCard = ({
           {finalLatestChapter && (
             <Badge
               variant="default"
-              className="absolute bottom-2 left-2 bg-background-0/90 backdrop-blur-md px-2 py-0.5 rounded-sm border border-outline-100 max-w-[120px]"
+              className="absolute bottom-2 left-2 max-w-[120px] rounded-sm border border-outline-100 bg-background-0/90 px-2 py-0.5 backdrop-blur-md"
             >
               <BadgeText
                 className="text-[10px] font-bold text-typography-900"
@@ -121,7 +121,7 @@ export const ComicCard = ({
           {comicType && (
             <Badge
               variant="default"
-              className="absolute bottom-2 right-2 bg-primary-500 border-none rounded-sm px-1.5 py-0.5"
+              className="absolute bottom-2 right-2 rounded-sm border-none bg-primary-500 px-1.5 py-0.5"
             >
               <BadgeText className="text-[9px] font-bold uppercase tracking-wider text-white">
                 {comicType}
@@ -131,19 +131,19 @@ export const ComicCard = ({
         </Pressable>
       </Link>
 
-      <VStack className="p-3 gap-3 flex-1 justify-between bg-background-0">
+      <VStack className="flex-1 justify-between gap-3 bg-background-0 p-3">
         <Link href={apiDetailLink} asChild>
-          <Pressable className="w-full active:opacity-70 transition-opacity">
+          <Pressable className="w-full transition-opacity active:opacity-70">
             <Text
               numberOfLines={2}
-              className="w-full font-extrabold text-sm leading-[18px] text-typography-900 tracking-tight"
+              className="w-full text-sm font-extrabold leading-[18px] tracking-tight text-typography-900"
             >
               {title}
             </Text>
             {description && (
               <Text
                 numberOfLines={2}
-                className="text-[10px] leading-[14px] text-typography-500 mt-1"
+                className="mt-1 text-[10px] leading-[14px] text-typography-500"
               >
                 {description}
               </Text>
@@ -155,7 +155,7 @@ export const ComicCard = ({
           <VStack className="gap-1.5">
             {timeAgo && (
               <HStack className="items-center gap-1.5">
-                <Icon as={Clock} className="text-primary-500 w-3.5 h-3.5" />
+                <Icon as={Clock} className="h-3.5 w-3.5 text-primary-500" />
                 <Text
                   className="text-[11px] font-medium text-typography-500"
                   numberOfLines={1}
@@ -166,7 +166,7 @@ export const ComicCard = ({
             )}
             {views && (
               <HStack className="items-center gap-1.5">
-                <Icon as={Eye} className="text-primary-500 w-3.5 h-3.5" />
+                <Icon as={Eye} className="h-3.5 w-3.5 text-primary-500" />
                 <Text
                   className="text-[11px] text-typography-500"
                   numberOfLines={1}
@@ -177,7 +177,7 @@ export const ComicCard = ({
             )}
             {release && (
               <HStack className="items-center gap-1.5">
-                <Icon as={Calendar} className="text-primary-500 w-3.5 h-3.5" />
+                <Icon as={Calendar} className="h-3.5 w-3.5 text-primary-500" />
                 <Text
                   className="text-[11px] text-typography-500"
                   numberOfLines={1}
@@ -188,7 +188,7 @@ export const ComicCard = ({
             )}
             {genre && (
               <HStack className="items-center gap-1.5">
-                <Icon as={Tag} className="text-primary-500 w-3.5 h-3.5" />
+                <Icon as={Tag} className="h-3.5 w-3.5 text-primary-500" />
                 <Text
                   className="text-[11px] text-typography-500"
                   numberOfLines={1}
@@ -206,7 +206,7 @@ export const ComicCard = ({
                   <Button
                     size="sm"
                     variant="outline"
-                    className="flex-1 h-7 px-1 rounded-md border-outline-200"
+                    className="h-7 flex-1 border-outline-200 px-1"
                   >
                     <ButtonText className="text-[10px] font-bold text-typography-700">
                       Read First
@@ -216,11 +216,7 @@ export const ComicCard = ({
               )}
             {apiChapterLink ? (
               <Link href={apiChapterLink} asChild>
-                <Button
-                  size="sm"
-                  variant="solid"
-                  className="flex-1 h-7 px-1 rounded-md"
-                >
+                <Button size="sm" variant="solid" className="h-7 flex-1 px-1">
                   <ButtonText className="text-[10px] font-bold">
                     {apiInitialChapterLink &&
                     apiInitialChapterLink !== apiChapterLink
@@ -232,11 +228,7 @@ export const ComicCard = ({
             ) : (
               // Fallback if no chapter link
               <Link href={apiDetailLink} asChild>
-                <Button
-                  size="sm"
-                  variant="solid"
-                  className="flex-1 h-7 px-1 rounded-md"
-                >
+                <Button size="sm" variant="solid" className="h-7 flex-1 px-1">
                   <ButtonText className="text-[10px] font-bold">
                     Details
                   </ButtonText>

@@ -8,7 +8,7 @@ export const useLatestList = () => {
   const { data, ...rest } = useSWR(
     "latest-list",
     () => HomeRepository.getLatestList(),
-    { revalidateOnFocus: false }
+    { revalidateOnFocus: false },
   );
 
   return {

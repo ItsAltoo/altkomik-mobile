@@ -40,3 +40,37 @@ export type FeaturedGenreGroup = {
   genre: string;
   items: Comic[];
 };
+
+export type BaseChapter = {
+  title: string;
+  slug: string;
+};
+
+export type ComicDetailChapter = {
+  title: string;
+  slug: string;
+  date: string;
+};
+
+export type ComicDetail = {
+  title: string;
+  thumbnail: string;
+  synopsis: string;
+  description: {
+    genres: string[];
+    [key: string]: string | string[] | undefined;
+  };
+  chapters?: {
+    initial?: BaseChapter;
+    latest?: BaseChapter;
+  };
+  chapterList: ComicDetailChapter[];
+};
+
+export type SimilarComic = {
+  title: string;
+  slug: string;
+  thumbnail: string;
+  views: string;
+  description: string;
+};
