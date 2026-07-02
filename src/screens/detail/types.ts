@@ -35,4 +35,5 @@ export type Chapter = {
 
 export type DetailChapterListProps = {
   chapterList: Chapter[]
+  comicSlug: string
 }

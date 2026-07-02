@@ -39,7 +39,7 @@ export default function DetailScreen({ slug }: { slug: string }) {
       <View className="px-4 pb-8 pt-6">
         <DetailSynopsis synopsis={data.synopsis} description={data.description} />
 
-        <DetailChapterList chapterList={data.chapterList} />
+        <DetailChapterList chapterList={data.chapterList} comicSlug={slug} />
 
         <CardCarousel title="Komik Serupa" data={mappedSimilarComics} isLoading={isLoadingSimilar} />
       </View>
