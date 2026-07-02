@@ -1,16 +1,13 @@
 import { Button, ButtonText } from "@/components/ui/button"
-import { Icon } from "@/components/ui/icon"
-import { Pressable } from "@/components/ui/pressable"
 import { Text } from "@/components/ui/text"
 import { VStack } from "@/components/ui/vstack"
 import { Footer } from "@/src/components/footer"
-import { Motion } from "@legendapp/motion"
 import { FlashList } from "@shopify/flash-list"
 import { useRouter } from "expo-router"
-import { ArrowUp } from "lucide-react-native"
-import { useRef, useState } from "react"
+import { useRef, useState, useEffect } from "react"
 import { ActivityIndicator, Dimensions, View } from "react-native"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
+import { useReadingHistory } from "@/src/libs/store/useReadingHistory"
 import { ComicImage } from "./components/ComicImage"
 import { FloatingNav } from "./components/FloatingNav"
 import { useReadComic } from "./hooks/useReadComic"
@@ -26,6 +23,13 @@ export const ReadScreen = ({ slug }: ReadScreenProps) => {
   const insets = useSafeAreaInsets()
   const { width } = Dimensions.get("window")
   const flashListRef = useRef<any>(null)
+  const markAsRead = useReadingHistory((state) => state.markAsRead)
+
+  useEffect(() => {
+    if (data?.navigation?.list && slug) {
+      markAsRead(data.navigation.list, slug)
+    }
+  }, [data?.navigation?.list, slug, markAsRead])
 
   if (isLoading) {
     return (
