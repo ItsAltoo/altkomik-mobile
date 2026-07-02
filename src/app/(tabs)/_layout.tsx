@@ -1,7 +1,7 @@
-import { Tabs } from "expo-router";
-import { View } from "react-native";
-import { Navbar } from "../../components/navigation/Navbar";
-import { PillBar } from "../../components/navigation/PillBar";
+import { Tabs } from "expo-router"
+import { View } from "react-native"
+import { Navbar } from "../../components/navigation/Navbar"
+import { PillBar } from "../../components/navigation/PillBar"
 
 export default function TabsLayout() {
   return (
@@ -20,5 +20,5 @@ export default function TabsLayout() {
         <Tabs.Screen name="popular" />
       </Tabs>
     </View>
-  );
+  )
 }

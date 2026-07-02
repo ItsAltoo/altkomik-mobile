@@ -1,44 +1,35 @@
-import { Box } from "@/components/ui/box";
-import { FlatList, useWindowDimensions } from "react-native";
+import { Box } from "@/components/ui/box"
+import { FlatList, useWindowDimensions } from "react-native"
 
-import { Comic } from "@/src/libs/types";
-import { CarouselItem } from "./CarouselItem";
-import { PaginationDots } from "./PaginationDots";
-import { ComicCarouselSkeleton } from "./Skeleton";
-import { useAutoSlide } from "./useAutoSlide";
+import { Comic } from "@/src/libs/types"
+import { CarouselItem } from "./CarouselItem"
+import { PaginationDots } from "./PaginationDots"
+import { ComicCarouselSkeleton } from "./Skeleton"
+import { useAutoSlide } from "./useAutoSlide"
 
 type ComicCarouselProps = {
-  data: Comic[];
-  isLoading?: boolean;
-  autoPlay?: boolean;
-};
+  data: Comic[]
+  isLoading?: boolean
+  autoPlay?: boolean
+}
 
-export const ComicCarousel = ({
-  data,
-  isLoading = false,
-  autoPlay = true,
-}: ComicCarouselProps) => {
-  const { width } = useWindowDimensions();
-  const itemWidth = width - 32; // px-4 padding = 32px
+export const ComicCarousel = ({ data, isLoading = false, autoPlay = true }: ComicCarouselProps) => {
+  const { width } = useWindowDimensions()
+  const itemWidth = width - 32 // px-4 padding = 32px
 
-  const { activeIndex, flatListRef, onScroll } = useAutoSlide(
-    data?.length || 0,
-    isLoading,
-    autoPlay,
-    itemWidth,
-  );
+  const { activeIndex, flatListRef, onScroll } = useAutoSlide(data?.length || 0, isLoading, autoPlay, itemWidth)
 
   if (isLoading) {
-    return <ComicCarouselSkeleton />;
+    return <ComicCarouselSkeleton />
   }
 
-  if (!data || data.length === 0) return null;
+  if (!data || data.length === 0) return null
 
   const getItemLayout = (_: any, index: number) => ({
     length: itemWidth,
     offset: itemWidth * index,
     index,
-  });
+  })
 
   return (
     <Box className="w-full bg-background-0">
@@ -60,5 +51,5 @@ export const ComicCarousel = ({
 
       <PaginationDots dataLength={data.length} activeIndex={activeIndex} />
     </Box>
-  );
-};
+  )
+}

@@ -1,66 +1,48 @@
-import { HStack } from "@/components/ui/hstack";
-import { Pressable } from "@/components/ui/pressable";
-import { Text } from "@/components/ui/text";
-import { CardCarousel } from "@/src/components/card-carousel";
-import { Comic } from "@/src/libs/types";
-import { startTransition } from "react";
-import { ScrollView, View } from "react-native";
+import { HStack } from "@/components/ui/hstack"
+import { Pressable } from "@/components/ui/pressable"
+import { Text } from "@/components/ui/text"
+import { CardCarousel } from "@/src/components/card-carousel"
+import { Comic } from "@/src/libs/types"
+import { startTransition } from "react"
+import { ScrollView, View } from "react-native"
 
 type FilterableCarouselProps = {
-  title: string;
-  type: "all" | "manga" | "manhwa" | "manhua";
-  setType: (type: "all" | "manga" | "manhwa" | "manhua") => void;
-  data: Comic[] | undefined;
-  isLoading: boolean;
-};
+  title: string
+  type: "all" | "manga" | "manhwa" | "manhua"
+  setType: (type: "all" | "manga" | "manhwa" | "manhua") => void
+  data: Comic[] | undefined
+  isLoading: boolean
+}
 
 const filterOptions = [
   { label: "Semua", value: "all" },
   { label: "Manga", value: "manga" },
   { label: "Manhwa", value: "manhwa" },
   { label: "Manhua", value: "manhua" },
-] as const;
+] as const
 
-export const FilterableCarousel = ({
-  title,
-  type,
-  setType,
-  data,
-  isLoading,
-}: FilterableCarouselProps) => {
+export const FilterableCarousel = ({ title, type, setType, data, isLoading }: FilterableCarouselProps) => {
   return (
     <View>
       <HStack className="mb-4 items-center justify-between">
-        <Text className="border-l-4 border-l-primary-500 pl-2 text-xl font-bold text-typography-900">
-          {title}
-        </Text>
+        <Text className="border-l-4 border-l-primary-500 pl-2 text-xl font-bold text-typography-900">{title}</Text>
       </HStack>
-      <ScrollView
-        horizontal
-        showsHorizontalScrollIndicator={false}
-        className="mb-4"
-      >
+      <ScrollView horizontal showsHorizontalScrollIndicator={false} className="mb-4">
         <HStack className="gap-2">
           {filterOptions.map((opt) => (
             <Pressable
               key={opt.value}
               onPress={() => {
                 startTransition(() => {
-                  setType(opt.value);
-                });
+                  setType(opt.value)
+                })
               }}
               className={`rounded-full border px-4 py-1.5 ${
-                type === opt.value
-                  ? "border-primary-500 bg-primary-500"
-                  : "border-outline-200 bg-background-0"
+                type === opt.value ? "border-primary-500 bg-primary-500" : "border-outline-200 bg-background-0"
               }`}
             >
               <Text
-                className={`text-sm font-semibold ${
-                  type === opt.value
-                    ? "text-typography-0"
-                    : "text-typography-500"
-                }`}
+                className={`text-sm font-semibold ${type === opt.value ? "text-typography-0" : "text-typography-500"}`}
               >
                 {opt.label}
               </Text>
@@ -71,5 +53,5 @@ export const FilterableCarousel = ({
 
       <CardCarousel data={data || []} isLoading={isLoading} />
     </View>
-  );
-};
+  )
+}

@@ -1,20 +1,17 @@
-import { Box } from "@/components/ui/box";
-import { HStack } from "@/components/ui/hstack";
-import { Skeleton, SkeletonText } from "@/components/ui/skeleton";
-import { VStack } from "@/components/ui/vstack";
-import { useWindowDimensions } from "react-native";
+import { Box } from "@/components/ui/box"
+import { HStack } from "@/components/ui/hstack"
+import { Skeleton, SkeletonText } from "@/components/ui/skeleton"
+import { VStack } from "@/components/ui/vstack"
+import { useWindowDimensions } from "react-native"
 
 export const ComicCarouselSkeleton = () => {
-  const { width } = useWindowDimensions();
-  const itemWidth = width - 32;
+  const { width } = useWindowDimensions()
+  const itemWidth = width - 32
 
   return (
     <Box className="w-full bg-background-0 pb-4">
-      <Box
-        style={{ width: itemWidth, height: 280 }}
-        className="relative overflow-hidden rounded-xl"
-      >
-        <Skeleton variant="sharp" className="absolute inset-0 h-full w-full" />
+      <Box style={{ width: itemWidth, height: 280 }} className="relative overflow-hidden rounded-xl">
+        <Skeleton variant="sharp" className="absolute inset-0 size-full" />
 
         <Box className="absolute inset-0 bg-black/40" />
 
@@ -36,5 +33,5 @@ export const ComicCarouselSkeleton = () => {
         </VStack>
       </Box>
     </Box>
-  );
-};
+  )
+}

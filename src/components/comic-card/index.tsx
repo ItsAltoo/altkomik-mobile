@@ -1,3 +1,3 @@
-export * from "./types";
-export * from "./ComicCard";
-export * from "./Skeleton";
+export * from "./ComicCard"
+export * from "./Skeleton"
+export * from "./types"
