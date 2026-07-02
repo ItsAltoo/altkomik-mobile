@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from "axios"
 
 // eslint-disable-next-line import/no-named-as-default-member
 const api = axios.create({
@@ -6,6 +6,6 @@ const api = axios.create({
   headers: {
     "x-api-key": process.env.EXPO_PUBLIC_API_KEY || "",
   },
-});
+})
 
-export default api;
+export default api

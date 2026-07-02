@@ -1,15 +1,9 @@
-import { Box } from "@/components/ui/box";
-import { HStack } from "@/components/ui/hstack";
-import { Skeleton, SkeletonText } from "@/components/ui/skeleton";
-import { VStack } from "@/components/ui/vstack";
+import { Box } from "@/components/ui/box"
+import { HStack } from "@/components/ui/hstack"
+import { Skeleton, SkeletonText } from "@/components/ui/skeleton"
+import { VStack } from "@/components/ui/vstack"
 
-export const ComicCardSkeleton = ({
-  className = "",
-  style,
-}: {
-  className?: string;
-  style?: any;
-}) => {
+export const ComicCardSkeleton = ({ className = "", style }: { className?: string; style?: any }) => {
   return (
     <Box
       style={style}
@@ -39,5 +33,5 @@ export const ComicCardSkeleton = ({
         </VStack>
       </VStack>
     </Box>
-  );
-};
+  )
+}

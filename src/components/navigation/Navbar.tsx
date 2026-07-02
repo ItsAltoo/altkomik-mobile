@@ -1,35 +1,28 @@
-import { Divider } from "@/components/ui/divider";
-import { HStack } from "@/components/ui/hstack";
-import { Icon } from "@/components/ui/icon";
-import { Input, InputField } from "@/components/ui/input";
-import {
-  Popover,
-  PopoverBackdrop,
-  PopoverBody,
-  PopoverContent,
-} from "@/components/ui/popover";
-import { Pressable } from "@/components/ui/pressable";
-import { Text } from "@/components/ui/text";
-import { VStack } from "@/components/ui/vstack";
-import { Image } from "expo-image";
-import { StatusBar } from "expo-status-bar";
-import { Monitor, Moon, Search, Sun } from "lucide-react-native";
-import { useColorScheme } from "nativewind";
-import { useState } from "react";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { Divider } from "@/components/ui/divider"
+import { HStack } from "@/components/ui/hstack"
+import { Icon } from "@/components/ui/icon"
+import { Input, InputField } from "@/components/ui/input"
+import { Popover, PopoverBackdrop, PopoverBody, PopoverContent } from "@/components/ui/popover"
+import { Pressable } from "@/components/ui/pressable"
+import { Text } from "@/components/ui/text"
+import { VStack } from "@/components/ui/vstack"
+import { Image } from "expo-image"
+import { StatusBar } from "expo-status-bar"
+import { Monitor, Moon, Search, Sun } from "lucide-react-native"
+import { useColorScheme } from "nativewind"
+import { useState } from "react"
+import { useSafeAreaInsets } from "react-native-safe-area-context"
 
 export const Navbar = () => {
-  const [isSearchExpanded, setIsSearchExpanded] = useState(false);
-  const { setColorScheme } = useColorScheme();
-  const [themePref, setThemePref] = useState<"system" | "light" | "dark">(
-    "system",
-  );
-  const insets = useSafeAreaInsets();
+  const [isSearchExpanded, setIsSearchExpanded] = useState(false)
+  const { setColorScheme } = useColorScheme()
+  const [themePref, setThemePref] = useState<"system" | "light" | "dark">("system")
+  const insets = useSafeAreaInsets()
 
   const handleTheme = (val: "system" | "light" | "dark") => {
-    setThemePref(val);
-    setColorScheme(val);
-  };
+    setThemePref(val)
+    setColorScheme(val)
+  }
 
   return (
     <HStack
@@ -52,11 +45,7 @@ export const Navbar = () => {
           }`}
         >
           {isSearchExpanded && (
-            <Input
-              variant="outline"
-              size="sm"
-              className="w-40 border-0 bg-transparent"
-            >
+            <Input variant="outline" size="sm" className="w-40 border-0 bg-transparent">
               <InputField
                 placeholder="Cari komik..."
                 className="px-4 py-2 text-typography-900"
@@ -79,16 +68,13 @@ export const Navbar = () => {
           size="xs"
           trigger={(triggerProps: any) => {
             return (
-              <Pressable
-                {...triggerProps}
-                className="shadow-sm transition-transform duration-200 active:scale-95"
-              >
+              <Pressable {...triggerProps} className="transition-transform duration-200 shadow-sm active:scale-95">
                 <Image
                   source={{ uri: "https://i.pravatar.cc/100" }}
                   style={{ width: 36, height: 36, borderRadius: 18 }}
                 />
               </Pressable>
-            );
+            )
           }}
         >
           <PopoverBackdrop />
@@ -97,9 +83,7 @@ export const Navbar = () => {
               <VStack className="gap-1">
                 {/* User Name (Non-clickable) */}
                 <HStack className="items-center justify-between gap-2 px-3 py-2">
-                  <Text className="text-sm font-bold text-typography-900">
-                    Halo, Malik!
-                  </Text>
+                  <Text className="text-sm font-bold text-typography-900">Halo, Malik!</Text>
                   <HStack className="gap-1 rounded-full border border-outline-100 bg-background-50 p-1">
                     <Pressable
                       onPress={() => handleTheme("system")}
@@ -108,11 +92,7 @@ export const Navbar = () => {
                       <Icon
                         as={Monitor}
                         size="sm"
-                        className={
-                          themePref === "system"
-                            ? "text-typography-0"
-                            : "text-typography-400"
-                        }
+                        className={themePref === "system" ? "text-typography-0" : "text-typography-400"}
                       />
                     </Pressable>
                     <Pressable
@@ -122,11 +102,7 @@ export const Navbar = () => {
                       <Icon
                         as={Sun}
                         size="sm"
-                        className={
-                          themePref === "light"
-                            ? "text-typography-0"
-                            : "text-typography-400"
-                        }
+                        className={themePref === "light" ? "text-typography-0" : "text-typography-400"}
                       />
                     </Pressable>
                     <Pressable
@@ -136,11 +112,7 @@ export const Navbar = () => {
                       <Icon
                         as={Moon}
                         size="sm"
-                        className={
-                          themePref === "dark"
-                            ? "text-typography-0"
-                            : "text-typography-400"
-                        }
+                        className={themePref === "dark" ? "text-typography-0" : "text-typography-400"}
                       />
                     </Pressable>
                   </HStack>
@@ -152,9 +124,7 @@ export const Navbar = () => {
                   <Text className="text-sm text-typography-700">Profil</Text>
                 </Pressable>
                 <Pressable className="rounded-md px-3 py-2 transition-colors active:bg-error-50">
-                  <Text className="text-sm font-bold text-error-500">
-                    Keluar
-                  </Text>
+                  <Text className="text-sm font-bold text-error-500">Keluar</Text>
                 </Pressable>
               </VStack>
             </PopoverBody>
@@ -162,5 +132,5 @@ export const Navbar = () => {
         </Popover>
       </HStack>
     </HStack>
-  );
-};
+  )
+}
