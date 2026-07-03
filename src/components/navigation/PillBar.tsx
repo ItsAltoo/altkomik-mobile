@@ -46,6 +46,8 @@ export const PillBar = ({ state, navigation }: BottomTabBarProps) => {
     <Box className="absolute inset-x-4 bottom-6 items-center shadow-soft-4">
       <HStack className="min-w-[320px] items-center justify-between rounded-full border border-outline-100 bg-background-0/90 p-2 backdrop-blur-md">
         {state.routes.map((route, index) => {
+          if (route.name === "search") return null
+
           const isFocused = state.index === index
 
           const onPress = () => {

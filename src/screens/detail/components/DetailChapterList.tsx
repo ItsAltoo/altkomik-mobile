@@ -35,7 +35,7 @@ const ChapterItem = ({ item, isRead }: { item: Chapter; isRead: boolean }) => (
   </Link>
 )
 
-export function DetailChapterList({ chapterList, comicSlug }: DetailChapterListProps) {
+export const DetailChapterList = ({ chapterList, comicSlug }: DetailChapterListProps) => {
   const [searchQuery, setSearchQuery] = useState("")
   const [sortOrder, setSortOrder] = useState<"desc" | "asc">("desc")
   const [visibleCount, setVisibleCount] = useState(30)

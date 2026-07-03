@@ -33,7 +33,7 @@ type DetailHeroProps = {
   }
 }
 
-export function DetailHero({ thumbnail, title, description, chapters }: DetailHeroProps) {
+export const DetailHero = ({ thumbnail, title, description, chapters }: DetailHeroProps) => {
   const [isImageVisible, setIsImageVisible] = useState(false)
 
   return (
@@ -43,7 +43,7 @@ export function DetailHero({ thumbnail, title, description, chapters }: DetailHe
           <View className="mb-4 rounded bg-background-50 shadow-soft-2">
             <Image
               source={{ uri: thumbnail }}
-              style={{ width: 160, height: 230, borderRadius: 16 }}
+              style={{ width: 160, height: 230, borderRadius: 6 }}
               contentFit="cover"
             />
           </View>

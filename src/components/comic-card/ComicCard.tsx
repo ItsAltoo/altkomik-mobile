@@ -21,6 +21,7 @@ export const ComicCard = ({
   slug,
   flag,
   status,
+  type,
   chapters,
   latestChapter,
   latestChapterSlug,
@@ -29,12 +30,12 @@ export const ComicCard = ({
   className = "",
   style,
 }: ComicCardProps) => {
-  const timeAgo = status?.timeAgo
-  const views = status?.views
-  const isColored = status?.isColored
-  const comicType = status?.type
-  const release = status?.release
-  const genre = status?.genre
+  const timeAgo = typeof status === "string" ? status : status?.timeAgo
+  const views = typeof status !== "string" ? status?.views : undefined
+  const isColored = typeof status !== "string" ? status?.isColored : false
+  const comicType = type || (typeof status !== "string" ? status?.type : undefined)
+  const release = typeof status !== "string" ? status?.release : undefined
+  const genre = typeof status !== "string" ? status?.genre : undefined
 
   const finalLatestChapter = latestChapter || chapters?.latest?.title
   const finalLatestChapterSlug = latestChapterSlug || chapters?.latest?.slug
@@ -161,17 +162,17 @@ export const ComicCard = ({
             )}
           </VStack>
 
-          <HStack className="w-full gap-2">
+          <VStack className="w-full gap-2">
             {apiInitialChapterLink && apiInitialChapterLink !== apiChapterLink && (
               <Link href={apiInitialChapterLink} asChild>
-                <Button size="sm" variant="outline" className="flex-1 border-outline-200">
+                <Button size="sm" variant="outline" className="border-outline-200">
                   <ButtonText className="text-typography-700">Read First</ButtonText>
                 </Button>
               </Link>
             )}
             {apiChapterLink ? (
               <Link href={apiChapterLink} asChild>
-                <Button size="sm" variant="solid" className="flex-1">
+                <Button size="sm" variant="solid">
                   <ButtonText>
                     {apiInitialChapterLink && apiInitialChapterLink !== apiChapterLink ? "Read Latest" : "Read Now"}
                   </ButtonText>
@@ -179,12 +180,12 @@ export const ComicCard = ({
               </Link>
             ) : (
               <Link href={apiDetailLink} asChild>
-                <Button size="sm" variant="solid" className="flex-1">
+                <Button size="sm" variant="solid">
                   <ButtonText>Details</ButtonText>
                 </Button>
               </Link>
             )}
-          </HStack>
+          </VStack>
         </VStack>
       </VStack>
     </Box>
