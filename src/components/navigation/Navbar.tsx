@@ -10,14 +10,25 @@ import { Image } from "expo-image"
 import { StatusBar } from "expo-status-bar"
 import { Monitor, Moon, Search, Sun } from "lucide-react-native"
 import { useColorScheme } from "nativewind"
+import { useRouter } from "expo-router"
 import { useState } from "react"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
 
 export const Navbar = () => {
   const [isSearchExpanded, setIsSearchExpanded] = useState(false)
+  const [searchQuery, setSearchQuery] = useState("")
   const { setColorScheme } = useColorScheme()
   const [themePref, setThemePref] = useState<"system" | "light" | "dark">("system")
   const insets = useSafeAreaInsets()
+  const router = useRouter()
+
+  const handleSearch = () => {
+    if (searchQuery.trim().length > 0) {
+      router.push(`/search?q=${encodeURIComponent(searchQuery)}`)
+      setIsSearchExpanded(false)
+      setSearchQuery("")
+    }
+  }
 
   const handleTheme = (val: "system" | "light" | "dark") => {
     setThemePref(val)
@@ -50,6 +61,10 @@ export const Navbar = () => {
                 placeholder="Cari komik..."
                 className="px-4 py-2 text-typography-900"
                 autoFocus
+                value={searchQuery}
+                onChangeText={setSearchQuery}
+                onSubmitEditing={handleSearch}
+                returnKeyType="search"
                 onBlur={() => setIsSearchExpanded(false)}
               />
             </Input>

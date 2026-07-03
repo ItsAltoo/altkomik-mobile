@@ -87,3 +87,15 @@ export type ReadComicData = {
     headers?: Record<string, string>
   }[]
 }
+
+export type SearchComic = {
+  title: string
+  slug: string
+  thumbnail: string
+  type: string
+  status: string
+  chapters?: {
+    initial?: BaseChapter
+    latest?: BaseChapter
+  }
+}

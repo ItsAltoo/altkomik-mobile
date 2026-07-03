@@ -8,7 +8,7 @@ import { DetailSynopsis } from "./components/DetailSynopsis"
 import { useComicDetail } from "./hooks/useComicDetail"
 import { useSimilarComics } from "./hooks/useSimilarComics"
 
-export default function DetailScreen({ slug }: { slug: string }) {
+const DetailScreen = ({ slug }: { slug: string }) => {
   const { data, isLoading } = useComicDetail(slug || "")
   const { data: similarComics, isLoading: isLoadingSimilar } = useSimilarComics(slug || "")
 
@@ -47,3 +47,5 @@ export default function DetailScreen({ slug }: { slug: string }) {
     </ScrollView>
   )
 }
+
+export default DetailScreen

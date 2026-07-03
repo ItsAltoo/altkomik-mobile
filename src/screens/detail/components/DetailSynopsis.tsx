@@ -23,7 +23,7 @@ const DescriptionRow = ({ label, value }: { label: string; value: any }) => {
   )
 }
 
-export function DetailSynopsis({ synopsis, description }: DetailSynopsisProps) {
+export const DetailSynopsis = ({ synopsis, description }: DetailSynopsisProps) => {
   const [showFullSynopsis, setShowFullSynopsis] = useState(false)
 
   const toggleSynopsis = () => setShowFullSynopsis((prev) => !prev)

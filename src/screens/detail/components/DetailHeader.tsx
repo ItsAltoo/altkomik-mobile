@@ -8,7 +8,7 @@ import { StyleSheet, View } from "react-native"
 
 import { DetailHeaderProps } from "../types"
 
-export function DetailHeader({ thumbnail }: DetailHeaderProps) {
+export const DetailHeader = ({ thumbnail }: DetailHeaderProps) => {
   return (
     <>
       <View className="absolute inset-x-0 top-0 h-[260px] ">
