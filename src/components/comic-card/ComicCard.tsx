@@ -2,6 +2,7 @@ import { Image } from "expo-image"
 import { Link } from "expo-router"
 import { Calendar, Clock, Eye, Tag } from "lucide-react-native"
 import { StyleSheet, View } from "react-native"
+import React, { memo } from "react"
 
 import { Badge, BadgeText } from "@/components/ui/badge"
 import { Box } from "@/components/ui/box"
@@ -14,7 +15,7 @@ import { VStack } from "@/components/ui/vstack"
 
 import { ComicCardProps } from "./types"
 
-export const ComicCard = ({
+export const ComicCard = memo(({
   title,
   description,
   thumbnail,
@@ -190,4 +191,6 @@ export const ComicCard = ({
       </VStack>
     </Box>
   )
-}
+})
+
+ComicCard.displayName = "ComicCard"

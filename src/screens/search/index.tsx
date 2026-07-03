@@ -6,38 +6,42 @@ import { Footer } from "@/src/components/footer"
 import { FlashList } from "@shopify/flash-list"
 import { useLocalSearchParams } from "expo-router"
 import { SearchX } from "lucide-react-native"
-import { Dimensions, View } from "react-native"
-import { useSafeAreaInsets } from "react-native-safe-area-context"
+import { View } from "react-native"
 import { useSearchComics } from "./hooks/useSearchComics"
 
-const { width } = Dimensions.get("window")
+import { getGridItemWidth } from "@/src/libs/utils/layout"
+import { useListContainerStyle } from "@/src/libs/hooks/useListContainerStyle"
+import { useCallback } from "react"
+
 const numColumns = 2
-// Calculating card width considering padding (px-4 = 16px each side) and gap between cards
-const cardWidth = (width - 32 - 16) / numColumns
+const cardWidth = getGridItemWidth(numColumns)
+const cardStyle = { width: cardWidth }
+
+// Extracted skeleton data to prevent re-creation on every render
+const SKELETON_DATA = Array.from({ length: 6 }).map((_, i) => ({ id: `skeleton-${i}` }))
 
 const SearchScreen = () => {
   const { q } = useLocalSearchParams<{ q: string }>()
   const query = q || ""
   const { data, isLoading, error } = useSearchComics(query)
-  const insets = useSafeAreaInsets()
 
-  const renderItem = ({ item }: { item: any }) => {
-    if (isLoading) {
+  const renderItem = useCallback(({ item }: { item: any }) => {
+    if (item.id && typeof item.id === "string" && item.id.startsWith("skeleton-")) {
       return (
         <View className="mb-4">
-          <ComicCardSkeleton style={{ width: cardWidth }} className="h-[360px]" />
+          <ComicCardSkeleton style={cardStyle} className="h-[360px]" />
         </View>
       )
     }
 
     return (
       <View className="mb-4">
-        <ComicCard {...item} style={{ width: cardWidth }} className="h-[360px]" />
+        <ComicCard {...item} style={cardStyle} className="h-[360px]" />
       </View>
     )
-  }
+  }, [])
 
-  const renderEmptyComponent = () => {
+  const renderEmptyComponent = useCallback(() => {
     if (error) {
       return (
         <View className="items-center justify-center py-20">
@@ -60,7 +64,11 @@ const SearchScreen = () => {
     }
 
     return null
-  }
+  }, [error, isLoading, data.length, query])
+
+  const contentContainerStyle = useListContainerStyle()
+
+  const listData = isLoading && data.length === 0 ? SKELETON_DATA : data
 
   return (
     <View className="flex-1 bg-background-0">
@@ -72,13 +80,13 @@ const SearchScreen = () => {
 
       <View className="flex-1 px-4">
         <FlashList
-          data={isLoading ? Array.from({ length: 6 }).map((_, i) => ({ id: i })) : data}
+          data={listData}
           renderItem={renderItem}
           // @ts-ignore: estimatedItemSize is required by FlashList but types are sometimes broken
           estimatedItemSize={360}
           numColumns={numColumns}
           showsVerticalScrollIndicator={false}
-          contentContainerStyle={{ paddingBottom: Math.max(insets.bottom + 100, 100), paddingTop: 8 }}
+          contentContainerStyle={contentContainerStyle}
           ListEmptyComponent={renderEmptyComponent}
           ListFooterComponent={<Footer />}
         />

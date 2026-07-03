@@ -4,7 +4,7 @@ import { VStack } from "@/components/ui/vstack"
 import { Footer } from "@/src/components/footer"
 import { FlashList } from "@shopify/flash-list"
 import { useRouter } from "expo-router"
-import { useRef, useState, useEffect } from "react"
+import { useRef, useState, useEffect, useCallback } from "react"
 import { ActivityIndicator, Dimensions, View } from "react-native"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
 import { useReadingHistory } from "@/src/libs/store/useReadingHistory"
@@ -24,6 +24,8 @@ export const ReadScreen = ({ slug }: ReadScreenProps) => {
   const { width } = Dimensions.get("window")
   const flashListRef = useRef<any>(null)
   const markAsRead = useReadingHistory((state) => state.markAsRead)
+
+  const toggleNav = useCallback(() => setIsNavVisible((prev) => !prev), [])
 
   useEffect(() => {
     if (data?.navigation?.list && slug) {
@@ -78,7 +80,7 @@ export const ReadScreen = ({ slug }: ReadScreenProps) => {
         ref={flashListRef}
         data={data.images}
         keyExtractor={(_, index) => index.toString()}
-        renderItem={({ item }) => <ComicImage source={item} onPress={() => setIsNavVisible((prev) => !prev)} />}
+        renderItem={({ item }) => <ComicImage source={item} onPress={toggleNav} />}
         // @ts-ignore: estimatedItemSize is required by FlashList but types are sometimes broken
         estimatedItemSize={width * 1.5}
         ListHeaderComponent={renderHeader}

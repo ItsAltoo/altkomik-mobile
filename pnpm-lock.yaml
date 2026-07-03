@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      '@expo/html-elements':
+        specifier: ^57.0.0
+        version: 57.0.0(react-native-web@0.21.2(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-native@0.85.3(@babel/core@7.29.7)(@react-native/metro-config@0.85.3(@babel/core@7.29.7))(@types/react@19.2.17)(react@19.2.3))(react@19.2.3)
       '@gluestack-ui/core':
         specifier: ^3.0.25
         version: 3.0.25(dcb46dc567b3a3b0557f5835cfe51e4b)
@@ -661,6 +664,16 @@ packages:
   '@expo/fingerprint@0.19.5':
     resolution: {integrity: sha512-yhojRgdcdpQd6+vYJOPh0VbX6TNrFbrmfiJdG6mF1W2qN2HK/qCg7N7vZU57fKuY/4ZmMdNg6elhTRoggEOHmw==}
     hasBin: true
+
+  '@expo/html-elements@57.0.0':
+    resolution: {integrity: sha512-KseR8RMRo2nKdEoWhXdvMJoCTM4y50cH/+oSev+/T5z77RPEGhqqwLEWg4Jvix2LkB13msGt2FE3bf7g3xozuA==}
+    peerDependencies:
+      react: '*'
+      react-native: '*'
+      react-native-web: '*'
+    peerDependenciesMeta:
+      react-native-web:
+        optional: true
 
   '@expo/image-utils@0.10.1':
     resolution: {integrity: sha512-YDeefvmYdihS7Wp3ESDUVnOgOSWmj2Cczm9lVNDdm4MqQLdAKm/LPYg83HtFQPfefRlAxyHrQR/O9kIXN9C1Wg==}
@@ -5638,6 +5651,13 @@ snapshots:
       semver: 7.8.5
     transitivePeerDependencies:
       - supports-color
+
+  '@expo/html-elements@57.0.0(react-native-web@0.21.2(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react-native@0.85.3(@babel/core@7.29.7)(@react-native/metro-config@0.85.3(@babel/core@7.29.7))(@types/react@19.2.17)(react@19.2.3))(react@19.2.3)':
+    dependencies:
+      react: 19.2.3
+      react-native: 0.85.3(@babel/core@7.29.7)(@react-native/metro-config@0.85.3(@babel/core@7.29.7))(@types/react@19.2.17)(react@19.2.3)
+    optionalDependencies:
+      react-native-web: 0.21.2(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
 
   '@expo/image-utils@0.10.1(typescript@6.0.3)':
     dependencies:
