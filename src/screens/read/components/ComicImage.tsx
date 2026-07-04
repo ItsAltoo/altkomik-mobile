@@ -2,18 +2,17 @@ import { Icon } from "@/components/ui/icon"
 import { Skeleton } from "@/components/ui/skeleton"
 import { Image } from "expo-image"
 import { AlertCircle } from "lucide-react-native"
-import { useState } from "react"
+import { useState, memo } from "react"
 import { Dimensions, TouchableWithoutFeedback, View } from "react-native"
 
 const { width: SCREEN_WIDTH } = Dimensions.get("window")
 
-export const ComicImage = ({
-  source,
-  onPress,
-}: {
+type ComicImageProps = {
   source: { uri: string; headers?: Record<string, string> }
   onPress?: () => void
-}) => {
+}
+
+export const ComicImage = memo(({ source, onPress }: ComicImageProps) => {
   const [height, setHeight] = useState(SCREEN_WIDTH * 1.5)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(false)
@@ -50,4 +49,6 @@ export const ComicImage = ({
       </View>
     </TouchableWithoutFeedback>
   )
-}
+})
+
+ComicImage.displayName = "ComicImage"

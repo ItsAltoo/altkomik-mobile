@@ -1,8 +1,9 @@
 import { Box } from "@/components/ui/box"
 import { Skeleton, SkeletonText } from "@/components/ui/skeleton"
 import { VStack } from "@/components/ui/vstack"
+import React, { memo } from "react"
 
-export const ComicCardSkeleton = ({ className = "", style }: { className?: string; style?: any }) => {
+export const ComicCardSkeleton = memo(({ className = "", style }: { className?: string; style?: any }) => {
   return (
     <Box
       style={style}
@@ -33,4 +34,6 @@ export const ComicCardSkeleton = ({ className = "", style }: { className?: strin
       </VStack>
     </Box>
   )
-}
+})
+
+ComicCardSkeleton.displayName = "ComicCardSkeleton"
