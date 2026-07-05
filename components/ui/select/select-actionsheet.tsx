@@ -92,7 +92,7 @@ cssInterop(UIIcon, {
       fill: true,
       color: 'classNameColor',
       stroke: true,
-    },
+    } as any,
   },
 });
 

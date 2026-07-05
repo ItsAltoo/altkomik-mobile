@@ -99,3 +99,19 @@ export type SearchComic = {
     latest?: BaseChapter
   }
 }
+
+export type ComicListItem = {
+  title: string
+  slug: string
+  thumbnail: string
+  status?: {
+    release?: string
+    type?: string
+    genre?: string
+  }
+}
+
+export type ComicListGroup = {
+  heading: string
+  list: ComicListItem[]
+}

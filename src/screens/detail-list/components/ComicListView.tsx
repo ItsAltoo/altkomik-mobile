@@ -2,31 +2,28 @@ import { VStack } from "@/components/ui/vstack"
 import { COMIC_SKELETON_DATA, MemoizedComicCardWrapper, isComicSkeleton } from "@/src/components/comic-card"
 import { Footer } from "@/src/components/footer"
 import { Pagination } from "@/src/components/pagination/Pagination"
+import { ScrollToTopFab } from "@/src/components/ui/ScrollToTopFab"
+import { useListContainerStyle } from "@/src/libs/hooks/useListContainerStyle"
 import { useScrollToTop } from "@/src/libs/hooks/useScrollToTop"
+import { ListEmptyState } from "@/src/components/empty-state/ListEmptyState"
 import { FlashList } from "@shopify/flash-list"
 import { useCallback, useState } from "react"
 import { RefreshControl, View } from "react-native"
-import { ListEmptyState } from "@/src/components/empty-state/ListEmptyState"
-import { LatestFilters } from "./components/LatestFilters"
-import { useLatestComics } from "./hooks/useLatestComics"
-import { LatestParams } from "./repository"
-import { useListContainerStyle } from "@/src/libs/hooks/useListContainerStyle"
-import { ScrollToTopFab } from "@/src/components/ui/ScrollToTopFab"
+import { useComicList } from "../hooks/useComicList"
+import { ComicListParams } from "../repository"
+import { ComicListFilters } from "./ComicListFilters"
 
 const numColumns = 2
 
-const LatestScreen = () => {
-  const [filters, setFilters] = useState<LatestParams>({
+export const ComicListView = () => {
+  const [filters, setFilters] = useState<ComicListParams>({
     page: 1,
     type: "all",
-    orderBy: "modified",
-    status: "all",
-    genre: "all",
-    genre2: "all",
+    letter: "all",
   })
 
   const { listRef, showScrollTop, handleScroll, scrollToTop } = useScrollToTop()
-  const { data, isLoading, hasMore, error, mutate } = useLatestComics(filters)
+  const { data, isLoading, hasMore, error, mutate } = useComicList(filters)
   const [refreshing, setRefreshing] = useState(false)
 
   const handlePageChange = useCallback(
@@ -42,10 +39,7 @@ const LatestScreen = () => {
     setFilters({
       page: 1,
       type: "all",
-      orderBy: "modified",
-      status: "all",
-      genre: "all",
-      genre2: "all",
+      letter: "all",
     })
     await mutate()
     setRefreshing(false)
@@ -61,8 +55,8 @@ const LatestScreen = () => {
   }, [])
 
   const renderEmptyComponent = useCallback(
-    () => <ListEmptyState error={error} isLoading={isLoading} dataLength={data.length} />,
-    [error, isLoading, data.length],
+    () => <ListEmptyState error={error} isLoading={isLoading} dataLength={data.list.length} />,
+    [error, isLoading, data.list.length],
   )
 
   const renderFooter = useCallback(
@@ -84,12 +78,12 @@ const LatestScreen = () => {
   const contentContainerStyle = useListContainerStyle()
 
   // Use skeleton data if loading and no existing data
-  const isInitialLoading = isLoading && data.length === 0
-  const listData = isInitialLoading ? COMIC_SKELETON_DATA : data
+  const isInitialLoading = isLoading && data.list.length === 0
+  const listData = isInitialLoading ? COMIC_SKELETON_DATA : data.list
 
   return (
     <View className="flex-1 bg-background-0">
-      <LatestFilters filters={filters} setFilters={setFilters} />
+      <ComicListFilters filters={filters} setFilters={setFilters} heading={data.heading} />
       <View className="flex-1">
         <FlashList
           ref={listRef}
@@ -110,10 +104,7 @@ const LatestScreen = () => {
           }
         />
       </View>
-
       <ScrollToTopFab isVisible={showScrollTop} onPress={scrollToTop} />
     </View>
   )
 }
-
-export default LatestScreen

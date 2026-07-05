@@ -12,21 +12,20 @@ import { Icon } from "@/components/ui/icon"
 import { Pressable } from "@/components/ui/pressable"
 import { Text } from "@/components/ui/text"
 import { FilterSection } from "@/src/components/filters/FilterSection"
-import { ORDER_OPTIONS, TYPE_OPTIONS } from "@/src/libs/utils/filters"
+import { LETTER_OPTIONS, TYPE_OPTIONS } from "@/src/libs/utils/filters"
 import { Filter, X } from "lucide-react-native"
 import { useState } from "react"
-import { PopularParams } from "../repository"
+import { ComicListParams } from "../repository"
 
-type PopularFiltersProps = {
-  filters: PopularParams
-  setFilters: (filters: PopularParams) => void
+type ComicListFiltersProps = {
+  filters: ComicListParams
+  setFilters: (filters: ComicListParams) => void
+  heading?: string
 }
 
-export const PopularFilters = ({ filters, setFilters }: PopularFiltersProps) => {
+export const ComicListFilters = ({ filters, setFilters, heading }: ComicListFiltersProps) => {
   const [isOpen, setIsOpen] = useState(false)
-
-  // Local state for the actionsheet so we don't trigger refetches while user is still selecting
-  const [localFilters, setLocalFilters] = useState<PopularParams>(filters)
+  const [localFilters, setLocalFilters] = useState<ComicListParams>(filters)
 
   const handleOpen = () => {
     setLocalFilters(filters)
@@ -39,7 +38,7 @@ export const PopularFilters = ({ filters, setFilters }: PopularFiltersProps) => 
   }
 
   const handleReset = () => {
-    const defaultFilters = { type: "all", orderBy: "modified" }
+    const defaultFilters = { type: "all", letter: "all", page: 1 }
     setLocalFilters(defaultFilters)
     setFilters(defaultFilters)
     setIsOpen(false)
@@ -48,7 +47,9 @@ export const PopularFilters = ({ filters, setFilters }: PopularFiltersProps) => 
   return (
     <>
       <HStack className="items-center justify-between bg-background-0 p-4">
-        <Text className="border-l-4 border-primary-500 pl-2 text-xl font-bold text-typography-900">Komik Populer</Text>
+        <Text className="border-l-4 border-primary-500 pl-2 text-xl font-bold text-typography-900">
+          {heading || "Daftar Komik"}
+        </Text>
         <Button size="sm" variant="outline" action="secondary" onPress={handleOpen} className="gap-2 rounded-full">
           <ButtonIcon as={Filter} size="sm" />
           <ButtonText>Filter</ButtonText>
@@ -73,17 +74,17 @@ export const PopularFilters = ({ filters, setFilters }: PopularFiltersProps) => 
 
           <ActionsheetScrollView className="w-full px-2" showsVerticalScrollIndicator={false}>
             <FilterSection
-              title="Urutkan Berdasarkan"
-              options={ORDER_OPTIONS}
-              selectedValue={localFilters.orderBy || "ranking"}
-              onSelect={(val: string) => setLocalFilters((prev) => ({ ...prev, orderBy: val }))}
-            />
-
-            <FilterSection
               title="Tipe Komik"
               options={TYPE_OPTIONS}
               selectedValue={localFilters.type || "all"}
               onSelect={(val: string) => setLocalFilters((prev) => ({ ...prev, type: val }))}
+            />
+
+            <FilterSection
+              title="Huruf Awal"
+              options={LETTER_OPTIONS}
+              selectedValue={localFilters.letter || "all"}
+              onSelect={(val: string) => setLocalFilters((prev) => ({ ...prev, letter: val }))}
             />
           </ActionsheetScrollView>
 
