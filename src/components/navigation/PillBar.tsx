@@ -3,7 +3,6 @@ import { HStack } from "@/components/ui/hstack"
 import { Icon } from "@/components/ui/icon"
 import { Pressable } from "@/components/ui/pressable"
 import { Text } from "@/components/ui/text"
-import { BottomTabBarProps } from "@react-navigation/bottom-tabs"
 import { BookOpen, Clock, FileText, Home, TrendingUp } from "lucide-react-native"
 
 const getIcon = (routeName: string, isFocused: boolean) => {
@@ -41,11 +40,11 @@ const getLabel = (routeName: string) => {
   }
 }
 
-export const PillBar = ({ state, navigation }: BottomTabBarProps) => {
+export const PillBar = ({ state, navigation }: any) => {
   return (
     <Box className="absolute inset-x-4 bottom-6 items-center shadow-soft-4">
       <HStack className="min-w-[320px] items-center justify-between rounded-full border border-outline-100 bg-background-0/90 p-2 backdrop-blur-md">
-        {state.routes.map((route, index) => {
+        {state.routes.map((route: any, index: number) => {
           if (route.name === "search") return null
 
           const isFocused = state.index === index
