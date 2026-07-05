@@ -1,0 +1,48 @@
+{
+  "id": "3eebd964-d259-43e2-bb75-afea2d3626b3",
+  "status": "ERRORED",
+  "platform": "ANDROID",
+  "error": {
+    "errorCode": "EAS_BUILD_UNKNOWN_GRADLE_ERROR",
+    "message": "Gradle build failed with unknown error. See logs for the \"Run gradlew\" phase for more information."
+  },
+  "artifacts": {},
+  "fingerprint": {
+    "id": "019f316e-7afa-76e2-a2c0-39e27ded74f3",
+    "hash": "a2453cb1d8c1bf209c84ec940a6ef6f12e55d02b"
+  },
+  "initiatingActor": {
+    "id": "276dabcc-96d9-4740-894a-f943db913b6e",
+    "displayName": "itsmalik"
+  },
+  "logFiles": [
+    "https://storage.googleapis.com/eas-workflows-production/logs/41814a11-c1da-4b76-a336-1f624ddf8cff/3eebd964-d259-43e2-bb75-afea2d3626b3/2026-07-05T08%3A39%3A32Z-b2f32fc2-5cec-4f87-90ff-bcdba73e9b01.txt?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=www-production%40exponentjs.iam.gserviceaccount.com%2F20260705%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260705T090814Z&X-Goog-Expires=900&X-Goog-SignedHeaders=host&X-Goog-Signature=019146c3a52d159a17a28541b06f0e332b5eb283ecaf609fe3dacefa7906dae833fd6f014b50b4fe4aa521df3ea5040c6e7b13a03143fff7c370668a98b6783b2153dd8471103a80373d978cb1ed9330accc4410d5c5e17c1ddecc245e685543cb536e15cc60f25f014ca742d678abe578cdda534351d8bc323f99001255682128aed50eb7eead9cb2740ebcf332b37d9418e7ad2dee306c1adfdf65f564bc50194d8f78e4615bcff73eedd4f23dd03281bd72d2e506ecc3abe157033cb52e52bd503d527427eaedfa2224508c5d52702ccfaf406fd0e4ac57612d42875e3e15a9d85501f6f63c49610aa2e6a9553aaea1850c86f222733259bd287f21d62605"
+  ],
+  "project": {
+    "id": "41814a11-c1da-4b76-a336-1f624ddf8cff",
+    "name": "altkomik-mobile",
+    "slug": "altkomik-mobile",
+    "ownerAccount": {
+      "id": "1e3aff88-59d0-4175-b819-e8d845f5b49b",
+      "name": "itsmalik"
+    }
+  },
+  "distribution": "INTERNAL",
+  "buildProfile": "preview",
+  "sdkVersion": "56.0.0",
+  "appVersion": "1.0.0",
+  "appBuildVersion": "1",
+  "gitCommitHash": "70269c95295a9c622206186b4a5e3f8deaf83e04",
+  "gitCommitMessage": "Merge pull request #30 from ItsAltoo/dev\n\nfix: align app.json slug with EAS project configuration",
+  "priority": "NORMAL",
+  "createdAt": "2026-07-05T08:39:26.320Z",
+  "updatedAt": "2026-07-05T08:44:34.272Z",
+  "completedAt": "2026-07-05T08:44:34.085Z",
+  "expirationDate": "2026-07-19T08:39:26.348Z",
+  "isForIosSimulator": false,
+  "metrics": {
+    "buildWaitTime": 5825,
+    "buildQueueTime": 4986,
+    "buildDuration": 296954
+  }
+}

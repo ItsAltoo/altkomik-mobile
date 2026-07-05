@@ -1,0 +1,1157 @@
+AMD, 4 vCPUs, 15.62 GB RAM
+
+Using image "ubuntu-26.04-jdk-17-ndk-r27b" based on "ubuntu-2604-resolute-amd64-v20260505"
+
+Installed software:
+- NDK 27.1.12297006
+- Node.js 22.22.2
+- Bun 1.3.13
+- Yarn 1.22.22
+- pnpm 10.33.3
+- npm 10.9.4
+- Java 17
+- node-gyp 12.3.0
+- Maestro 2.5.1
+
+Project environment variables:
+  EAS_USE_CACHE=1
+  EAS_USE_NPM_CACHE=0
+  __API_SERVER_URL=https://api.expo.dev/
+
+Environment secrets:
+  EXPO_TOKEN=********
+
+EAS Build environment variables:
+  NVM_INC=/home/expo/.nvm/versions/node/v22.22.2/include/node
+  HOSTNAME=turtle-worker-afea2d3626b3
+  JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
+  WORKER_TARBALL_URL=https://storage.googleapis.com/eas-build-worker-tarballs/worker-android-production.tar.gz
+  PWD=/usr/local/eas-build-worker
+  HOME=/home/expo
+  ANDROID_NDK_HOME=/home/expo/Android/Sdk/ndk/27.1.12297006
+  NVM_DIR=/home/expo/.nvm
+  ANDROID_HOME=/home/expo/Android/Sdk
+  SHLVL=1
+  ANDROID_SDK_ROOT=/home/expo/Android/Sdk
+  PATH=/home/expo/workingdir/bin:/home/expo/.nvm/versions/node/v22.22.2/bin:/opt/bundletool:/home/expo/Android/Sdk/build-tools/36.0.0:/home/expo/Android/Sdk/ndk/27.1.12297006:/home/expo/Android/Sdk/cmdline-tools/tools/bin:/home/expo/Android/Sdk/tools:/home/expo/Android/Sdk/tools/bin:/home/expo/Android/Sdk/platform-tools:/home/expo/Android/Sdk/emulator:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin:/home/expo/.bun/bin
+  LOGGER_LEVEL=debug
+  NVM_BIN=/home/expo/.nvm/versions/node/v22.22.2/bin
+  EAS_BUILD_WORKER_DIR=/home/expo/eas-build-worker
+  OLDPWD=/home/expo
+  _=/home/expo/.nvm/versions/node/v22.22.2/bin/node
+  CI=1
+  MAESTRO_DRIVER_STARTUP_TIMEOUT=120000
+  MAESTRO_CLI_NO_ANALYTICS=1
+  HOMEBREW_NO_AUTO_UPDATE=1
+  EAS_BUILD=true
+  EAS_BUILD_RUNNER=eas-build
+  EAS_BUILD_PLATFORM=android
+  EAS_CLI_SENTRY_DSN=https://ca4734dc503543b28d55fdaf0563f61c@o30871.ingest.sentry.io/1837720
+  NVM_NODEJS_ORG_MIRROR=http://nodejs.production.caches.eas-build.internal
+  EAS_BUILD_PROFILE=preview
+  EAS_BUILD_GIT_COMMIT_HASH=70269c95295a9c622206186b4a5e3f8deaf83e04
+  EAS_BUILD_ID=3eebd964-d259-43e2-bb75-afea2d3626b3
+  LANG=en_US.UTF-8
+  EAS_BUILD_WORKINGDIR=/home/expo/workingdir/build
+  EAS_BUILD_PROJECT_ID=41814a11-c1da-4b76-a336-1f624ddf8cff
+  ANDROID_CCACHE=/usr/bin/ccache
+  EAS_BUILD_MAVEN_CACHE_URL=http://maven.production.caches.eas-build.internal
+  GRADLE_OPTS=-Dorg.gradle.jvmargs="-XX:MaxMetaspaceSize=1g -Xmx4g -XX:+HeapDumpOnOutOfMemoryError -Dfile.encoding=UTF-8" -Dorg.gradle.parallel=true -Dorg.gradle.daemon=false
+  __EAS_BUILD_ENVS_DIR=/home/expo/workingdir/env
+
+Builder is ready, starting build
+End phase: SPIN_UP_BUILDER
+Start phase: INSTALL_CUSTOM_TOOLS
+End phase: INSTALL_CUSTOM_TOOLS
+Start phase: PREPARE_PROJECT
+End phase: PREPARE_PROJECT
+Start phase: PRE_INSTALL_HOOK
+End phase: PRE_INSTALL_HOOK
+Start phase: READ_EAS_JSON
+Using eas.json:
+{
+  "cli": {
+    "version": ">= 20.3.0",
+    "appVersionSource": "remote"
+  },
+  "build": {
+    "development": {
+      "developmentClient": true,
+      "distribution": "internal"
+    },
+    "preview": {
+      "distribution": "internal",
+      "android": { "buildType": "apk" }
+    },
+    "production": {
+      "autoIncrement": true
+    }
+  },
+  "submit": {
+    "production": {}
+  }
+}
+
+End phase: READ_EAS_JSON
+Start phase: READ_PACKAGE_JSON
+Using package.json:
+{
+  "name": "altkomik-mobile",
+  "main": "expo-router/entry",
+  "version": "1.0.0",
+  "dependencies": {
+    "@expo/html-elements": "^57.0.0",
+    "@gluestack-ui/core": "^3.0.25",
+    "@gluestack-ui/utils": "^3.0.21",
+    "@legendapp/motion": "^2.4.0",
+    "@react-native-async-storage/async-storage": "2.2.0",
+    "@react-navigation/bottom-tabs": "^7.18.3",
+    "@shopify/flash-list": "2.0.2",
+    "axios": "^1.18.1",
+    "expo": "~56.0.14",
+    "expo-dev-client": "~56.0.22",
+    "expo-font": "~56.0.7",
+    "expo-image": "~56.0.11",
+    "expo-linear-gradient": "~56.0.4",
+    "expo-linking": "~56.0.15",
+    "expo-router": "~56.2.13",
+    "expo-splash-screen": "~56.0.12",
+    "expo-status-bar": "~56.0.4",
+    "lucide-react-native": "^1.21.0",
+    "nativewind": "^4.2.5",
+    "react": "19.2.3",
+    "react-aria": "^3.50.0",
+    "react-dom": "^19.2.3",
+    "react-native": "0.85.3",
+    "react-native-css-interop": "^0.2.5",
+    "react-native-gesture-handler": "~2.31.1",
+    "react-native-image-viewing": "^0.2.2",
+    "react-native-reanimated": "4.3.1",
+    "react-native-safe-area-context": "^5.7.0",
+    "react-native-screens": "4.25.2",
+    "react-native-svg": "^15.15.4",
+    "react-native-web": "^0.21.2",
+    "react-native-worklets": "0.8.3",
+    "react-stately": "^3.48.0",
+    "swr": "^2.4.2",
+    "tailwind-variants": "^0.1.20",
+    "zustand": "^5.0.14"
+  },
+  "devDependencies": {
+    "@types/react": "~19.2.2",
+    "babel-plugin-module-resolver": "^5.0.3",
+    "eslint": "^9.39.4",
+    "eslint-config-expo": "~56.0.4",
+    "eslint-plugin-tailwindcss": "^3.18.3",
+    "prettier": "^3.9.1",
+    "tailwindcss": "^3.4.19",
+    "typescript": "~6.0.3"
+  },
+  "scripts": {
+    "start": "expo start",
+    "reset-project": "node ./scripts/reset-project.js",
+    "android": "expo run:android",
+    "ios": "expo run:ios",
+    "web": "expo start --web",
+    "lint": "expo lint",
+    "format": "eslint --fix \"src/**/*.{ts,tsx}\" && prettier --write \"src/**/*.{ts,tsx}\""
+  },
+  "private": true
+}
+End phase: READ_PACKAGE_JSON
+Start phase: INSTALL_DEPENDENCIES
+Running "pnpm install --frozen-lockfile" in /home/expo/workingdir/build/ directory
+Lockfile is up to date, resolution step is skipped
+Progress: resolved 1, reused 0, downloaded 0, added 0
+Packages: +971
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Progress: resolved 971, reused 0, downloaded 146, added 126
+Progress: resolved 971, reused 0, downloaded 316, added 286
+Progress: resolved 971, reused 0, downloaded 432, added 381
+Progress: resolved 971, reused 0, downloaded 611, added 546
+Progress: resolved 971, reused 0, downloaded 765, added 673
+Progress: resolved 971, reused 0, downloaded 949, added 875
+Progress: resolved 971, reused 0, downloaded 971, added 971, done
+dependencies:
++ @expo/html-elements 57.0.0
++ @gluestack-ui/core 3.0.25
++ @gluestack-ui/utils 3.0.21
++ @legendapp/motion 2.5.3
++ @react-native-async-storage/async-storage 2.2.0
++ @react-navigation/bottom-tabs 7.18.3
++ @shopify/flash-list 2.0.2
++ axios 1.18.1
++ expo 56.0.14
++ expo-dev-client 56.0.22
++ expo-font 56.0.7
++ expo-image 56.0.11
++ expo-linear-gradient 56.0.4
++ expo-linking 56.0.15
++ expo-router 56.2.13
++ expo-splash-screen 56.0.12
++ expo-status-bar 56.0.4
++ lucide-react-native 1.21.0
++ nativewind 4.2.6
++ react 19.2.3
++ react-aria 3.50.0
++ react-dom 19.2.3
++ react-native 0.85.3
++ react-native-css-interop 0.2.6
++ react-native-gesture-handler 2.31.2
++ react-native-image-viewing 0.2.2
++ react-native-reanimated 4.3.1
++ react-native-safe-area-context 5.7.0
++ react-native-screens 4.25.2
++ react-native-svg 15.15.4
++ react-native-web 0.21.2
++ react-native-worklets 0.8.3
++ react-stately 3.48.0
++ swr 2.4.2
++ tailwind-variants 0.1.20
++ zustand 5.0.14
+
+devDependencies:
++ @types/react 19.2.17
++ babel-plugin-module-resolver 5.0.3
++ eslint 9.39.4
++ eslint-config-expo 56.0.4
++ eslint-plugin-tailwindcss 3.18.3
++ prettier 3.9.1
++ tailwindcss 3.4.19
++ typescript 6.0.3
+╭ Warning ─────────────────────────────────────────────────────────────────────╮
+│                                                                              │
+│   Ignored build scripts: unrs-resolver@1.12.2.                               │
+│   Run "pnpm approve-builds" to pick which dependencies should be allowed     │
+│   to run scripts.                                                            │
+│                                                                              │
+╰──────────────────────────────────────────────────────────────────────────────╯
+Done in 7.8s using pnpm v10.33.3
+End phase: INSTALL_DEPENDENCIES
+Start phase: READ_APP_CONFIG
+Using app configuration:
+{
+  "name": "altkomik",
+  "slug": "altkomik-mobile",
+  "version": "1.0.0",
+  "orientation": "portrait",
+  "icon": "./assets/images/noBg-altkomik.png",
+  "scheme": "altkomik",
+  "userInterfaceStyle": "automatic",
+  "ios": {
+    "icon": "./assets/images/noBg-altkomik.png",
+    "bundleIdentifier": "com.itsalto.altkomik"
+  },
+  "android": {
+    "package": "com.itsalto.altkomik",
+    "softwareKeyboardLayoutMode": "pan",
+    "adaptiveIcon": {
+      "backgroundColor": "#F8F9FA",
+      "foregroundImage": "./assets/images/noBg-altkomik-adaptive.png"
+    },
+    "predictiveBackGestureEnabled": false
+  },
+  "web": {
+    "output": "static",
+    "favicon": "./assets/images/noBg-altkomik.png"
+  },
+  "plugins": [
+    "expo-router",
+    [
+      "expo-splash-screen",
+      {
+        "image": "./assets/images/noBg-altkomik.png",
+        "imageWidth": 200,
+        "resizeMode": "contain",
+        "backgroundColor": "#F8F9FA",
+        "dark": {
+          "backgroundColor": "#1A1A1A"
+        }
+      }
+    ]
+  ],
+  "experiments": {
+    "typedRoutes": true,
+    "reactCompiler": true
+  },
+  "extra": {
+    "router": {},
+    "eas": {
+      "projectId": "41814a11-c1da-4b76-a336-1f624ddf8cff"
+    }
+  },
+  "sdkVersion": "56.0.0",
+  "platforms": [
+    "ios",
+    "android",
+    "web"
+  ]
+}
+End phase: READ_APP_CONFIG
+Start phase: EAS_BUILD_INTERNAL
+(node:437) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+Resolved "preview" environment for the build. Learn more: https://docs.expo.dev/eas/environment-variables/#setting-the-environment-for-your-builds
+No environment variables with visibility "Plain text" and "Sensitive" found for the "preview" environment on EAS.
+
+✔ Using remote Android credentials (Expo server)
+✔ Using Keystore from configuration: Build Credentials ot1LBv5E3s (default)
+- Computing project fingerprint
+✔ Computed project fingerprint
+End phase: EAS_BUILD_INTERNAL
+Start phase: RUN_EXPO_DOCTOR
+Running "expo doctor"
+Running 21 checks on your project...
+18/21 checks passed. 3 checks failed. Possible issues detected:
+Use the --verbose flag to see more details about passed checks.
+
+✖ Check that required peer dependencies are installed
+Missing peer dependency: expo-constants
+Required by: expo-router
+Advice:
+Install missing required peer dependency with "npx expo install expo-constants"
+Your app may crash outside of Expo Go without this dependency. Native module peer dependencies must be installed directly.
+✖ Check that @react-navigation packages are not installed alongside expo-router
+As of SDK 56, expo-router is no longer compatible with react-navigation. The following @react-navigation packages are installed as direct dependencies and should be removed: "@react-navigation/bottom-tabs".
+Advice:
+Remove these packages from your package.json and replace any direct `@react-navigation/*` imports in your code with their expo-router equivalents. See https://docs.expo.dev/router/migrate/sdk-55-to-56/ for more information.
+
+✖ Check for overridden dependencies
+An incompatible version of a critical dependency is installed, which is unsupported and may cause unexpected behavior.
+"expo-router" should install "@expo/metro-runtime@^56.0.16", but 56.0.15 is installed.
+Advice:
+Reinstall your dependencies and check that they're not in a corrupted state.
+3 checks failed, indicating possible issues with the project.
+Command "expo doctor" failed.
+End phase: RUN_EXPO_DOCTOR
+Start phase: PREBUILD
+- Creating native directory (./android)
+✔ Created native directory
+- Updating package.json
+› Using expo@~56.0.14 instead of recommended expo@~57.0.2.
+› Using react-native@0.85.3 instead of recommended react-native@0.86.0.
+- Updating package.json
+- Updating package.json
+✔ Updated package.json | no changes
+- Running prebuild
+» android: userInterfaceStyle: Install expo-system-ui in your project to enable this feature.
+- Running prebuild
+✔ Finished prebuild
+Running "pnpm install --no-frozen-lockfile" in /home/expo/workingdir/build directory
+Lockfile is up to date, resolution step is skipped
+Already up to date
+
+╭ Warning ─────────────────────────────────────────────────────────────────────╮
+│                                                                              │
+│   Ignored build scripts: unrs-resolver@1.12.2.                               │
+│   Run "pnpm approve-builds" to pick which dependencies should be allowed     │
+│   to run scripts.                                                            │
+│                                                                              │
+╰──────────────────────────────────────────────────────────────────────────────╯
+Done in 794ms using pnpm v10.33.3
+End phase: PREBUILD
+Start phase: RESTORE_CACHE
+Restoring cache key: android-ccache-b33a48bd51623ef02f75bada205dd8fe1c3bb44d7a4f94d28f3f30697e89fadf
+No cache found for this key
+End phase: RESTORE_CACHE
+Start phase: POST_INSTALL_HOOK
+End phase: POST_INSTALL_HOOK
+Start phase: CALCULATE_EXPO_UPDATES_RUNTIME_VERSION
+End phase: CALCULATE_EXPO_UPDATES_RUNTIME_VERSION
+Start phase: PREPARE_CREDENTIALS
+Writing secrets to the project's directory
+Injecting signing config into build.gradle
+Signing config injected
+End phase: PREPARE_CREDENTIALS
+Start phase: CONFIGURE_ANDROID_VERSION
+Injecting version config into build.gradle
+Version code: 1
+Version config injected
+End phase: CONFIGURE_ANDROID_VERSION
+Start phase: CONFIGURE_EXPO_UPDATES
+End phase: CONFIGURE_EXPO_UPDATES
+Start phase: EAGER_BUNDLE
+Using src/app as the root directory for Expo Router.
+React Compiler enabled
+Starting Metro Bundler
+Android Bundled 27690ms node_modules/.pnpm/expo-router@56.2.13_c4a16e1bed4f83496f3af65e0f690b2c/node_modules/expo-router/entry.js (3921 modules)
+Writing bundle output to: /tmp/nap3lfdy2bm/index.js
+Copying 30 asset files
+Done writing bundle output
+End phase: EAGER_BUNDLE
+Start phase: RUN_GRADLEW
+Running 'gradlew :app:assembleRelease' in /home/expo/workingdir/build/android
+Welcome to Gradle 9.3.1!
+Here are the highlights of this release:
+- Test reporting improvements
+ - Error and warning improvements
+ - Build authoring improvements
+For more details see https://docs.gradle.org/9.3.1/release-notes.html
+To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/9.3.1/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
+Daemon will be stopped at the end of the build
+> Task :expo-gradle-plugin:expo-autolinking-settings-plugin:checkKotlinGradlePluginConfigurationErrors
+SKIPPED
+> Task :gradle-plugin:settings-plugin:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :gradle-plugin:shared:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :expo-gradle-plugin:expo-autolinking-plugin-shared:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :gradle-plugin:settings-plugin:pluginDescriptors
+> Task :expo-gradle-plugin:expo-autolinking-settings-plugin:pluginDescriptors
+> Task :expo-gradle-plugin:expo-autolinking-settings-plugin:processResources
+> Task :gradle-plugin:settings-plugin:processResources
+> Task :gradle-plugin:shared:processResources NO-SOURCE
+> Task :expo-gradle-plugin:expo-autolinking-plugin-shared:processResources NO-SOURCE
+> Task :gradle-plugin:shared:compileKotlin
+> Task :gradle-plugin:shared:compileJava NO-SOURCE
+> Task :gradle-plugin:shared:classes UP-TO-DATE
+> Task :gradle-plugin:shared:jar
+> Task :expo-gradle-plugin:expo-autolinking-plugin-shared:compileKotlin
+> Task :expo-gradle-plugin:expo-autolinking-plugin-shared:compileJava NO-SOURCE
+> Task :expo-gradle-plugin:expo-autolinking-plugin-shared:classes UP-TO-DATE
+> Task :expo-gradle-plugin:expo-autolinking-plugin-shared:jar
+> Task :gradle-plugin:settings-plugin:compileKotlin
+> Task :gradle-plugin:settings-plugin:compileJava NO-SOURCE
+> Task :gradle-plugin:settings-plugin:classes
+> Task :gradle-plugin:settings-plugin:jar
+> Task :expo-gradle-plugin:expo-autolinking-settings-plugin:compileKotlin
+> Task :expo-gradle-plugin:expo-autolinking-settings-plugin:compileJava NO-SOURCE
+> Task :expo-gradle-plugin:expo-autolinking-settings-plugin:classes
+> Task :expo-gradle-plugin:expo-autolinking-settings-plugin:jar
+> Task :expo-gradle-plugin:expo-max-sdk-override-plugin:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :expo-gradle-plugin:expo-autolinking-plugin:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :expo-dev-launcher-gradle-plugin:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :gradle-plugin:react-native-gradle-plugin:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :expo-dev-launcher-gradle-plugin:pluginDescriptors
+> Task :expo-dev-launcher-gradle-plugin:processResources
+> Task :expo-module-gradle-plugin:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :expo-module-gradle-plugin:pluginDescriptors
+> Task :expo-module-gradle-plugin:processResources
+> Task :expo-gradle-plugin:expo-autolinking-plugin:pluginDescriptors
+> Task :expo-gradle-plugin:expo-autolinking-plugin:processResources
+> Task :expo-gradle-plugin:expo-max-sdk-override-plugin:pluginDescriptors
+> Task :expo-gradle-plugin:expo-max-sdk-override-plugin:processResources
+> Task :expo-gradle-plugin:expo-max-sdk-override-plugin:compileKotlin
+> Task :expo-gradle-plugin:expo-max-sdk-override-plugin:compileJava NO-SOURCE
+> Task :expo-gradle-plugin:expo-max-sdk-override-plugin:classes
+> Task :expo-gradle-plugin:expo-max-sdk-override-plugin:jar
+> Task :gradle-plugin:react-native-gradle-plugin:pluginDescriptors
+> Task :gradle-plugin:react-native-gradle-plugin:processResources
+> Task :expo-gradle-plugin:expo-autolinking-plugin:compileKotlin
+> Task :expo-gradle-plugin:expo-autolinking-plugin:compileJava NO-SOURCE
+> Task :expo-gradle-plugin:expo-autolinking-plugin:classes
+> Task :expo-gradle-plugin:expo-autolinking-plugin:jar
+> Task :gradle-plugin:react-native-gradle-plugin:compileKotlin
+> Task :gradle-plugin:react-native-gradle-plugin:compileJava NO-SOURCE
+> Task :gradle-plugin:react-native-gradle-plugin:classes
+> Task :gradle-plugin:react-native-gradle-plugin:jar
+> Task :expo-dev-launcher-gradle-plugin:compileKotlin
+> Task :expo-dev-launcher-gradle-plugin:compileJava NO-SOURCE
+> Task :expo-dev-launcher-gradle-plugin:classes
+> Task :expo-dev-launcher-gradle-plugin:jar
+> Task :expo-module-gradle-plugin:compileKotlin
+w: file:///home/expo/workingdir/build/node_modules/.pnpm/expo-modules-core@56.0.19_react-native-worklets@0.8.3_@babel+core@7.29.7_@react-native+_6a0d82ae64f35890bb13cd42b4c41818/node_modules/expo-modules-core/expo-module-gradle-plugin/src/main/kotlin/expo/modules/plugin/android/AndroidLibraryExtension.kt:9:24 'var targetSdk: Int?' is deprecated. Will be removed from library DSL in v9.0. Use testOptions.targetSdk or/and lint.targetSdk instead.
+> Task :expo-module-gradle-plugin:compileJava NO-SOURCE
+> Task :expo-module-gradle-plugin:classes
+> Task :expo-module-gradle-plugin:jar
+> Configure project :
+[32m[ExpoRootProject][0m Using the following versions:
+  - buildTools:  [32m36.0.0[0m
+  - minSdk:      [32m24[0m
+  - compileSdk:  [32m36[0m
+  - targetSdk:   [32m36[0m
+  - ndk:         [32m27.1.12297006[0m
+  - kotlin:      [32m2.1.20[0m
+  - ksp:         [32m2.1.20-2.0.1[0m
+> Configure project :app
+ ℹ️  [33mApplying gradle plugin[0m '[32mexpo-max-sdk-override-plugin[0m'
+  [expo-max-sdk-override-plugin] This plugin will find all permissions declared with `android:maxSdkVersion`. If there exists a declaration with the `android:maxSdkVersion` annotation and another one without, the plugin will remove the annotation from the final merged manifest. In order to see a log with the changes run a clean build of the app.
+ ℹ️  [33mApplying gradle plugin[0m '[32mexpo-dev-launcher-gradle-plugin[0m'
+> Configure project :expo
+Using expo modules
+  - [32mexpo-log-box[0m (56.0.14)
+  - [32mexpo-constants[0m (56.0.20)
+  - [32mexpo-dev-client[0m (56.0.22)
+- [32mexpo-dev-launcher[0m (56.0.23)
+- [32mexpo-dev-menu[0m (56.0.19)
+- [32mexpo-dev-menu-interface[0m (56.0.1)
+- [32mexpo-json-utils[0m (56.0.0)
+- [32mexpo-manifests[0m (56.0.4)
+> Configure project :expo-modules-core
+Linking react-native-worklets native libs into expo-modules-core build tasks
+task ':react-native-worklets:mergeDebugNativeLibs'
+task ':react-native-worklets:mergeReleaseNativeLibs'
+> Configure project :expo
+  - [32mexpo-modules-core[0m (56.0.19)
+- [32mexpo-updates-interface[0m (56.0.2)
+  - [33m[📦][0m [32mexpo-dom-webview[0m (56.0.5)
+- [33m[📦][0m [32mexpo-ui[0m (56.0.20)
+  - [33m[📦][0m [32mexpo-asset[0m (56.0.18)
+  - [33m[📦][0m [32mexpo-file-system[0m (56.0.8)
+  - [33m[📦][0m [32mexpo-font[0m (56.0.7)
+  - [33m[📦][0m [32mexpo-image[0m (56.0.11)
+  - [33m[📦][0m [32mexpo-keep-awake[0m (56.0.3)
+  - [33m[📦][0m [32mexpo-linear-gradient[0m (56.0.4)
+  - [33m[📦][0m [32mexpo-linking[0m (56.0.15)
+  - [33m[📦][0m [32mexpo-router[0m (56.2.13)
+  - [33m[📦][0m [32mexpo-splash-screen[0m (56.0.12)
+  - [33m[📦][0m [32mexpo-status-bar[0m (56.0.4)
+> Task :expo-dev-client:preBuild UP-TO-DATE
+> Task :expo-dev-launcher:preBuild UP-TO-DATE
+> Task :expo-dev-menu:preBuild UP-TO-DATE
+> Task :expo-dev-menu-interface:preBuild UP-TO-DATE
+> Task :expo-json-utils:preBuild UP-TO-DATE
+> Task :expo-log-box:preBuild UP-TO-DATE
+> Task :expo-manifests:preBuild UP-TO-DATE
+> Task :expo:generatePackagesList
+> Task :expo:preBuild
+> Task :expo-modules-core:preBuild UP-TO-DATE
+> Task :expo-updates-interface:preBuild UP-TO-DATE
+> Task :app:generateAutolinkingNewArchitectureFiles
+> Task :app:generateAutolinkingPackageList
+> Task :app:generateCodegenSchemaFromJavaScript SKIPPED
+> Task :app:generateCodegenArtifactsFromSchema SKIPPED
+> Task :app:generateReactNativeEntryPoint
+> Task :react-native-masked-view_masked-view:preBuild UP-TO-DATE
+> Task :react-native-reanimated:assertMinimalReactNativeVersionTask
+> Task :react-native-reanimated:assertNewArchitectureEnabledTask SKIPPED
+> Task :react-native-async-storage_async-storage:generateCodegenSchemaFromJavaScript
+> Task :react-native-gesture-handler:generateCodegenSchemaFromJavaScript
+> Task :react-native-reanimated:assertWorkletsVersionTask
+> Task :expo-constants:createExpoConfig
+The NODE_ENV environment variable is required but was not specified. Ensure the project is bundled with Expo CLI or NODE_ENV is set. Using only .env.local and .env
+> Task :expo-constants:preBuild
+> Task :react-native-reanimated:generateCodegenSchemaFromJavaScript
+> Task :react-native-gesture-handler:generateCodegenArtifactsFromSchema
+> Task :react-native-gesture-handler:preBuild
+> Task :react-native-async-storage_async-storage:generateCodegenArtifactsFromSchema
+> Task :react-native-async-storage_async-storage:preBuild
+> Task :react-native-safe-area-context:generateCodegenSchemaFromJavaScript
+> Task :react-native-reanimated:generateCodegenArtifactsFromSchema
+> Task :react-native-screens:generateCodegenSchemaFromJavaScript
+> Task :react-native-safe-area-context:generateCodegenArtifactsFromSchema
+> Task :react-native-safe-area-context:preBuild
+> Task :react-native-svg:generateCodegenSchemaFromJavaScript
+> Task :react-native-reanimated:prepareReanimatedHeadersForPrefabs
+> Task :react-native-reanimated:preBuild
+> Task :react-native-reanimated:preReleaseBuild
+> Task :expo:preReleaseBuild
+> Task :react-native-worklets:assertMinimalReactNativeVersionTask
+> Task :react-native-worklets:assertNewArchitectureEnabledTask SKIPPED
+> Task :expo:mergeReleaseJniLibFolders
+> Task :expo:mergeReleaseNativeLibs NO-SOURCE
+> Task :expo:copyReleaseJniLibsProjectOnly
+> Task :expo-constants:preReleaseBuild
+> Task :expo-constants:mergeReleaseJniLibFolders
+> Task :expo-constants:mergeReleaseNativeLibs NO-SOURCE
+> Task :expo-constants:copyReleaseJniLibsProjectOnly
+> Task :expo-dev-client:preReleaseBuild UP-TO-DATE
+> Task :expo-dev-client:mergeReleaseJniLibFolders
+> Task :expo-dev-client:mergeReleaseNativeLibs NO-SOURCE
+> Task :expo-dev-client:copyReleaseJniLibsProjectOnly
+> Task :expo-dev-launcher:preReleaseBuild UP-TO-DATE
+> Task :expo-dev-launcher:mergeReleaseJniLibFolders
+> Task :expo-dev-launcher:mergeReleaseNativeLibs NO-SOURCE
+> Task :expo-dev-launcher:copyReleaseJniLibsProjectOnly
+> Task :expo-dev-menu:preReleaseBuild UP-TO-DATE
+> Task :expo-dev-menu:mergeReleaseJniLibFolders
+> Task :expo-dev-menu:mergeReleaseNativeLibs NO-SOURCE
+> Task :react-native-screens:generateCodegenArtifactsFromSchema
+> Task :react-native-screens:preBuild
+> Task :expo-dev-menu-interface:preReleaseBuild UP-TO-DATE
+> Task :expo-dev-menu:copyReleaseJniLibsProjectOnly
+> Task :expo-json-utils:preReleaseBuild UP-TO-DATE
+> Task :expo-json-utils:mergeReleaseJniLibFolders
+> Task :react-native-worklets:generateCodegenSchemaFromJavaScript
+> Task :expo-dev-menu-interface:mergeReleaseJniLibFolders
+> Task :expo-json-utils:mergeReleaseNativeLibs NO-SOURCE
+> Task :expo-dev-menu-interface:mergeReleaseNativeLibs NO-SOURCE
+> Task :expo-json-utils:copyReleaseJniLibsProjectOnly
+> Task :expo-log-box:preReleaseBuild UP-TO-DATE
+> Task :expo-dev-menu-interface:copyReleaseJniLibsProjectOnly
+> Task :expo-manifests:preReleaseBuild UP-TO-DATE
+> Task :expo-log-box:mergeReleaseJniLibFolders
+> Task :expo-manifests:mergeReleaseJniLibFolders
+> Task :expo-log-box:mergeReleaseNativeLibs NO-SOURCE
+> Task :expo-manifests:mergeReleaseNativeLibs NO-SOURCE
+> Task :expo-log-box:copyReleaseJniLibsProjectOnly
+> Task :expo-modules-core:preReleaseBuild UP-TO-DATE
+> Task :expo-manifests:copyReleaseJniLibsProjectOnly
+> Task :expo-updates-interface:preReleaseBuild UP-TO-DATE
+> Task :expo-modules-core:mergeReleaseJniLibFolders
+> Task :react-native-async-storage_async-storage:preReleaseBuild
+> Task :react-native-async-storage_async-storage:mergeReleaseJniLibFolders
+> Task :expo-updates-interface:mergeReleaseJniLibFolders
+> Task :react-native-async-storage_async-storage:mergeReleaseNativeLibs NO-SOURCE
+> Task :expo-updates-interface:mergeReleaseNativeLibs NO-SOURCE
+> Task :react-native-svg:generateCodegenArtifactsFromSchema
+> Task :react-native-svg:preBuild
+> Task :react-native-gesture-handler:preReleaseBuild
+> Task :react-native-async-storage_async-storage:copyReleaseJniLibsProjectOnly
+> Task :react-native-masked-view_masked-view:preReleaseBuild UP-TO-DATE
+> Task :expo-updates-interface:copyReleaseJniLibsProjectOnly
+> Task :react-native-gesture-handler:mergeReleaseJniLibFolders
+> Task :react-native-safe-area-context:preReleaseBuild
+> Task :react-native-reanimated:mergeReleaseJniLibFolders
+> Task :react-native-screens:preReleaseBuild
+> Task :react-native-masked-view_masked-view:mergeReleaseJniLibFolders
+> Task :react-native-masked-view_masked-view:mergeReleaseNativeLibs NO-SOURCE
+> Task :react-native-safe-area-context:mergeReleaseJniLibFolders
+> Task :react-native-safe-area-context:mergeReleaseNativeLibs NO-SOURCE
+> Task :react-native-masked-view_masked-view:copyReleaseJniLibsProjectOnly
+> Task :react-native-safe-area-context:copyReleaseJniLibsProjectOnly
+> Task :react-native-svg:preReleaseBuild
+> Task :react-native-gesture-handler:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :react-native-svg:mergeReleaseJniLibFolders
+> Task :react-native-svg:mergeReleaseNativeLibs NO-SOURCE
+> Task :react-native-gesture-handler:generateReleaseBuildConfig
+> Task :react-native-svg:copyReleaseJniLibsProjectOnly
+> Task :react-native-gesture-handler:generateReleaseResValues
+> Task :react-native-reanimated:generateReleaseBuildConfig
+> Task :react-native-gesture-handler:generateReleaseResources
+> Task :react-native-reanimated:generateReleaseResValues
+> Task :react-native-reanimated:generateReleaseResources
+> Task :react-native-gesture-handler:packageReleaseResources
+> Task :react-native-reanimated:packageReleaseResources
+> Task :react-native-worklets:generateCodegenArtifactsFromSchema
+> Task :react-native-worklets:prepareWorkletsHeadersForPrefabs
+> Task :react-native-worklets:preBuild
+> Task :app:preBuild
+> Task :app:preReleaseBuild
+> Task :react-native-worklets:preReleaseBuild
+> Task :react-native-reanimated:parseReleaseLocalResources
+> Task :react-native-gesture-handler:parseReleaseLocalResources
+> Task :app:mergeReleaseJniLibFolders
+> Task :react-native-gesture-handler:generateReleaseRFile
+> Task :react-native-reanimated:generateReleaseRFile
+> Task :react-native-svg:generateReleaseBuildConfig
+> Task :react-native-svg:generateReleaseResValues
+> Task :react-native-reanimated:javaPreCompileRelease
+> Task :react-native-svg:generateReleaseResources
+> Task :react-native-gesture-handler:javaPreCompileRelease
+> Task :react-native-safe-area-context:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :react-native-svg:packageReleaseResources
+> Task :react-native-safe-area-context:generateReleaseBuildConfig
+> Task :react-native-safe-area-context:generateReleaseResValues
+> Task :react-native-svg:javaPreCompileRelease
+> Task :react-native-safe-area-context:generateReleaseResources
+> Task :react-native-svg:parseReleaseLocalResources
+> Task :react-native-safe-area-context:packageReleaseResources
+> Task :react-native-svg:generateReleaseRFile
+> Task :react-native-safe-area-context:parseReleaseLocalResources
+> Task :react-native-safe-area-context:generateReleaseRFile
+> Task :react-native-screens:configureCMakeRelWithDebInfo[arm64-v8a]
+Checking the license for package CMake 3.22.1 in /home/expo/Android/Sdk/licenses
+License for package CMake 3.22.1 accepted.
+Preparing "Install CMake 3.22.1 v.3.22.1".
+"Install CMake 3.22.1 v.3.22.1" ready.
+Installing CMake 3.22.1 in /home/expo/Android/Sdk/cmake/3.22.1
+"Install CMake 3.22.1 v.3.22.1" complete.
+"Install CMake 3.22.1 v.3.22.1" finished.
+> Task :react-native-safe-area-context:compileReleaseKotlin
+w: file:///home/expo/workingdir/build/node_modules/.pnpm/react-native-safe-area-context@5.7.0_react-native@0.85.3_@babel+core@7.29.7_@react-nati_c15f3232aabe24b5d664362644601600/node_modules/react-native-safe-area-context/android/src/main/java/com/th3rdwave/safeareacontext/SafeAreaProviderManager.kt:39:19 'fun getEventDispatcherForReactTag(context: ReactContext, reactTag: Int): EventDispatcher?' is deprecated. reactTag is no longer needed.
+w: file:///home/expo/workingdir/build/node_modules/.pnpm/react-native-safe-area-context@5.7.0_react-native@0.85.3_@babel+core@7.29.7_@react-nati_c15f3232aabe24b5d664362644601600/node_modules/react-native-safe-area-context/android/src/main/java/com/th3rdwave/safeareacontext/SafeAreaView.kt:9:8 'class UIManagerModule : ReactContextBaseJavaModule, LifecycleEventListener, UIManager' is deprecated. Deprecated in Java.
+w: file:///home/expo/workingdir/build/node_modules/.pnpm/react-native-safe-area-context@5.7.0_react-native@0.85.3_@babel+core@7.29.7_@react-nati_c15f3232aabe24b5d664362644601600/node_modules/react-native-safe-area-context/android/src/main/java/com/th3rdwave/safeareacontext/SafeAreaView.kt:50:54 'class UIManagerModule : ReactContextBaseJavaModule, LifecycleEventListener, UIManager' is deprecated. Deprecated in Java.
+w: file:///home/expo/workingdir/build/node_modules/.pnpm/react-native-safe-area-context@5.7.0_react-native@0.85.3_@babel+core@7.29.7_@react-nati_c15f3232aabe24b5d664362644601600/node_modules/react-native-safe-area-context/android/src/main/java/com/th3rdwave/safeareacontext/SafeAreaView.kt:59:23 'val uiImplementation: UIImplementation!' is deprecated. Deprecated in Java.
+w: file:///home/expo/workingdir/build/node_modules/.pnpm/react-native-safe-area-context@5.7.0_react-native@0.85.3_@babel+core@7.29.7_@react-nati_c15f3232aabe24b5d664362644601600/node_modules/react-native-safe-area-context/android/src/main/java/com/th3rdwave/safeareacontext/SafeAreaViewShadowNode.kt:9:32 'class LayoutShadowNode : ReactShadowNodeImpl' is deprecated. This class is part of Legacy Architecture and will be removed in a future release.
+w: file:///home/expo/workingdir/build/node_modules/.pnpm/react-native-safe-area-context@5.7.0_react-native@0.85.3_@babel+core@7.29.7_@react-nati_c15f3232aabe24b5d664362644601600/node_modules/react-native-safe-area-context/android/src/main/java/com/th3rdwave/safeareacontext/SafeAreaViewShadowNode.kt:110:61 'class NativeViewHierarchyOptimizer : Any' is deprecated. This class is part of Legacy Architecture and will be removed in a future release.
+> Task :react-native-safe-area-context:javaPreCompileRelease
+> Task :react-native-svg:compileReleaseJavaWithJavac
+Note: Some input files use or override a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+Note: Some input files use unchecked or unsafe operations.
+Note: Recompile with -Xlint:unchecked for details.
+> Task :react-native-safe-area-context:compileReleaseJavaWithJavac
+> Task :react-native-svg:bundleLibCompileToJarRelease
+> Task :expo:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :expo:generateReleaseBuildConfig
+> Task :expo:generateReleaseResValues
+> Task :expo:generateReleaseResources
+> Task :react-native-safe-area-context:bundleLibRuntimeToDirRelease
+> Task :expo:packageReleaseResources
+> Task :expo:parseReleaseLocalResources
+> Task :expo:generateReleaseRFile
+> Task :expo-constants:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :expo-constants:generateReleaseBuildConfig
+> Task :expo-constants:generateReleaseResValues
+> Task :expo-constants:generateReleaseResources
+> Task :expo-constants:packageReleaseResources
+> Task :expo-constants:parseReleaseLocalResources
+> Task :expo-constants:generateReleaseRFile
+> Task :expo-modules-core:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :expo-modules-core:generateReleaseBuildConfig
+> Task :expo-modules-core:generateReleaseResValues
+> Task :expo-modules-core:generateReleaseResources
+> Task :expo-modules-core:packageReleaseResources
+> Task :expo-modules-core:parseReleaseLocalResources
+> Task :expo-modules-core:generateReleaseRFile
+> Task :expo-modules-core:javaPreCompileRelease
+> Task :expo-constants:javaPreCompileRelease
+> Task :expo-dev-client:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :expo-dev-client:dataBindingMergeDependencyArtifactsRelease
+> Task :expo-dev-client:generateReleaseResValues
+> Task :expo-dev-client:generateReleaseResources
+> Task :expo-dev-client:packageReleaseResources
+> Task :expo-dev-client:parseReleaseLocalResources
+> Task :expo-dev-client:dataBindingGenBaseClassesRelease
+> Task :expo-dev-client:generateReleaseBuildConfig
+> Task :expo-dev-client:generateReleaseRFile
+> Task :expo-dev-client:javaPreCompileRelease
+> Task :expo-dev-launcher:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :react-native-worklets:configureCMakeRelWithDebInfo[arm64-v8a]
+> Task :expo-dev-menu:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :expo-dev-menu:generateReleaseBuildConfig
+> Task :expo-dev-menu:generateReleaseResValues
+> Task :expo-dev-menu:generateReleaseResources
+> Task :expo-dev-menu:packageReleaseResources
+> Task :expo-dev-menu:parseReleaseLocalResources
+> Task :expo-dev-menu:generateReleaseRFile
+> Task :expo-dev-menu:javaPreCompileRelease
+> Task :expo-dev-menu-interface:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :expo-dev-menu-interface:generateReleaseBuildConfig
+> Task :expo-dev-menu-interface:generateReleaseResValues
+> Task :expo-dev-menu-interface:generateReleaseResources
+> Task :expo-dev-menu-interface:packageReleaseResources
+> Task :expo-dev-menu-interface:parseReleaseLocalResources
+> Task :expo-dev-launcher:dataBindingMergeDependencyArtifactsRelease
+> Task :expo-dev-menu-interface:generateReleaseRFile
+> Task :expo-dev-launcher:generateReleaseResValues
+> Task :expo-dev-menu-interface:javaPreCompileRelease
+> Task :expo-json-utils:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :expo-dev-launcher:generateReleaseResources
+> Task :expo-json-utils:generateReleaseBuildConfig
+> Task :expo-json-utils:generateReleaseResValues
+> Task :expo-json-utils:generateReleaseResources
+> Task :expo-dev-launcher:packageReleaseResources
+> Task :expo-dev-launcher:parseReleaseLocalResources
+> Task :expo-json-utils:packageReleaseResources
+> Task :expo-json-utils:parseReleaseLocalResources
+> Task :expo-json-utils:generateReleaseRFile
+> Task :expo-json-utils:javaPreCompileRelease
+> Task :expo-log-box:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :expo-log-box:generateReleaseBuildConfig
+> Task :expo-log-box:generateReleaseResValues
+> Task :expo-log-box:generateReleaseResources
+> Task :expo-dev-launcher:dataBindingGenBaseClassesRelease
+> Task :expo-log-box:packageReleaseResources
+> Task :expo-dev-launcher:generateReleaseBuildConfig
+> Task :expo-log-box:parseReleaseLocalResources
+> Task :expo-dev-launcher:generateReleaseRFile
+> Task :expo-dev-launcher:javaPreCompileRelease
+> Task :expo-manifests:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :expo-log-box:generateReleaseRFile
+> Task :expo-manifests:generateReleaseBuildConfig
+> Task :expo-log-box:javaPreCompileRelease
+> Task :expo-updates-interface:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :expo-manifests:generateReleaseResValues
+> Task :expo-updates-interface:generateReleaseBuildConfig
+> Task :expo-updates-interface:generateReleaseResValues
+> Task :expo-manifests:generateReleaseResources
+> Task :expo-updates-interface:generateReleaseResources
+> Task :expo-manifests:packageReleaseResources
+> Task :expo-updates-interface:packageReleaseResources
+> Task :expo-manifests:javaPreCompileRelease
+> Task :expo-manifests:parseReleaseLocalResources
+> Task :expo-manifests:generateReleaseRFile
+> Task :expo-updates-interface:parseReleaseLocalResources
+> Task :expo-updates-interface:javaPreCompileRelease
+> Task :expo:javaPreCompileRelease
+> Task :expo-updates-interface:generateReleaseRFile
+> Task :react-native-async-storage_async-storage:generateReleaseBuildConfig
+> Task :react-native-async-storage_async-storage:generateReleaseResValues
+> Task :react-native-async-storage_async-storage:generateReleaseResources
+> Task :react-native-async-storage_async-storage:packageReleaseResources
+> Task :react-native-async-storage_async-storage:parseReleaseLocalResources
+> Task :react-native-async-storage_async-storage:generateReleaseRFile
+> Task :react-native-async-storage_async-storage:javaPreCompileRelease
+> Task :react-native-svg:bundleLibRuntimeToDirRelease
+> Task :react-native-async-storage_async-storage:compileReleaseJavaWithJavac
+Note: Some input files use or override a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+Note: /home/expo/workingdir/build/node_modules/.pnpm/@react-native-async-storage+async-storage@2.2.0_react-native@0.85.3_@babel+core@7.29.7__f97d24b713e6e4b3dbbb44585d16df59/node_modules/@react-native-async-storage/async-storage/android/src/javaPackage/java/com/reactnativecommunity/asyncstorage/AsyncStoragePackage.java uses unchecked or unsafe operations.
+Note: Recompile with -Xlint:unchecked for details.
+> Task :react-native-async-storage_async-storage:bundleLibRuntimeToDirRelease
+> Task :react-native-masked-view_masked-view:generateReleaseBuildConfig
+> Task :react-native-masked-view_masked-view:generateReleaseResValues
+> Task :react-native-masked-view_masked-view:generateReleaseResources
+> Task :react-native-masked-view_masked-view:packageReleaseResources
+> Task :react-native-masked-view_masked-view:parseReleaseLocalResources
+> Task :react-native-masked-view_masked-view:generateReleaseRFile
+> Task :react-native-masked-view_masked-view:javaPreCompileRelease
+> Task :react-native-masked-view_masked-view:compileReleaseJavaWithJavac
+> Task :react-native-masked-view_masked-view:bundleLibRuntimeToDirRelease
+Note: /home/expo/workingdir/build/node_modules/.pnpm/@react-native-masked-view+masked-view@0.3.2_react-native@0.85.3_@babel+core@7.29.7_@rea_5346cc0585bf7ee658dd27909f795ace/node_modules/@react-native-masked-view/masked-view/android/src/main/java/org/reactnative/maskedview/RNCMaskedViewPackage.java uses or overrides a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+> Task :react-native-screens:buildCMakeRelWithDebInfo[arm64-v8a]
+> Task :expo:writeReleaseAarMetadata
+> Task :expo-constants:writeReleaseAarMetadata
+> Task :expo-dev-client:writeReleaseAarMetadata
+> Task :expo-dev-launcher:writeReleaseAarMetadata
+> Task :expo-dev-menu:writeReleaseAarMetadata
+> Task :expo-dev-menu-interface:writeReleaseAarMetadata
+> Task :expo-json-utils:writeReleaseAarMetadata
+> Task :expo-log-box:writeReleaseAarMetadata
+> Task :expo-manifests:writeReleaseAarMetadata
+> Task :app:checkReleaseDuplicateClasses
+> Task :expo-modules-core:writeReleaseAarMetadata
+> Task :expo-updates-interface:writeReleaseAarMetadata
+> Task :react-native-async-storage_async-storage:writeReleaseAarMetadata
+> Task :app:buildKotlinToolingMetadata
+> Task :app:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :react-native-gesture-handler:writeReleaseAarMetadata
+> Task :app:generateReleaseBuildConfig
+> Task :react-native-masked-view_masked-view:writeReleaseAarMetadata
+> Task :react-native-reanimated:writeReleaseAarMetadata
+> Task :react-native-safe-area-context:writeReleaseAarMetadata
+> Task :react-native-svg:writeReleaseAarMetadata
+> Task :expo:extractDeepLinksRelease
+> Task :expo:processReleaseManifest
+> Task :expo-constants:extractDeepLinksRelease
+> Task :expo-constants:processReleaseManifest
+> Task :expo-dev-client:extractDeepLinksRelease
+> Task :expo-dev-client:processReleaseManifest
+> Task :expo-dev-launcher:extractDeepLinksRelease
+> Task :expo-dev-launcher:processReleaseManifest
+> Task :expo-dev-menu:extractDeepLinksRelease
+> Task :react-native-screens:configureCMakeRelWithDebInfo[armeabi-v7a]
+> Task :expo-dev-menu:processReleaseManifest
+> Task :expo-dev-menu-interface:extractDeepLinksRelease
+> Task :expo-dev-menu-interface:processReleaseManifest
+> Task :expo-json-utils:extractDeepLinksRelease
+> Task :expo-json-utils:processReleaseManifest
+> Task :expo-log-box:extractDeepLinksRelease
+> Task :expo-log-box:processReleaseManifest
+> Task :expo-manifests:extractDeepLinksRelease
+> Task :expo-manifests:processReleaseManifest
+> Task :expo-modules-core:extractDeepLinksRelease
+> Task :expo-modules-core:processReleaseManifest
+/home/expo/workingdir/build/node_modules/.pnpm/expo-modules-core@56.0.19_react-native-worklets@0.8.3_@babel+core@7.29.7_@react-native+_6a0d82ae64f35890bb13cd42b4c41818/node_modules/expo-modules-core/android/src/main/AndroidManifest.xml:8:9-11:45 Warning:
+	meta-data#com.facebook.soloader.enabled@android:value was tagged at AndroidManifest.xml:8 to replace other declarations but no other declaration present
+> Task :expo-updates-interface:extractDeepLinksRelease
+> Task :expo-updates-interface:processReleaseManifest
+> Task :react-native-async-storage_async-storage:extractDeepLinksRelease
+> Task :react-native-async-storage_async-storage:processReleaseManifest
+package="com.reactnativecommunity.asyncstorage" found in source AndroidManifest.xml: /home/expo/workingdir/build/node_modules/.pnpm/@react-native-async-storage+async-storage@2.2.0_react-native@0.85.3_@babel+core@7.29.7__f97d24b713e6e4b3dbbb44585d16df59/node_modules/@react-native-async-storage/async-storage/android/src/main/AndroidManifest.xml.
+Setting the namespace via the package attribute in the source AndroidManifest.xml is no longer supported, and the value is ignored.
+Recommendation: remove package="com.reactnativecommunity.asyncstorage" from the source AndroidManifest.xml: /home/expo/workingdir/build/node_modules/.pnpm/@react-native-async-storage+async-storage@2.2.0_react-native@0.85.3_@babel+core@7.29.7__f97d24b713e6e4b3dbbb44585d16df59/node_modules/@react-native-async-storage/async-storage/android/src/main/AndroidManifest.xml.
+> Task :react-native-gesture-handler:extractDeepLinksRelease
+> Task :react-native-gesture-handler:processReleaseManifest
+> Task :react-native-masked-view_masked-view:extractDeepLinksRelease
+> Task :react-native-masked-view_masked-view:processReleaseManifest
+> Task :react-native-reanimated:extractDeepLinksRelease
+> Task :react-native-reanimated:processReleaseManifest
+> Task :react-native-safe-area-context:extractDeepLinksRelease
+> Task :react-native-safe-area-context:processReleaseManifest
+package="com.th3rdwave.safeareacontext" found in source AndroidManifest.xml: /home/expo/workingdir/build/node_modules/.pnpm/react-native-safe-area-context@5.7.0_react-native@0.85.3_@babel+core@7.29.7_@react-nati_c15f3232aabe24b5d664362644601600/node_modules/react-native-safe-area-context/android/src/main/AndroidManifest.xml.
+Setting the namespace via the package attribute in the source AndroidManifest.xml is no longer supported, and the value is ignored.
+Recommendation: remove package="com.th3rdwave.safeareacontext" from the source AndroidManifest.xml: /home/expo/workingdir/build/node_modules/.pnpm/react-native-safe-area-context@5.7.0_react-native@0.85.3_@babel+core@7.29.7_@react-nati_c15f3232aabe24b5d664362644601600/node_modules/react-native-safe-area-context/android/src/main/AndroidManifest.xml.
+> Task :react-native-svg:extractDeepLinksRelease
+> Task :react-native-svg:processReleaseManifest
+> Task :expo:compileReleaseLibraryResources
+> Task :expo-constants:compileReleaseLibraryResources
+> Task :expo-dev-client:compileReleaseLibraryResources
+> Task :expo-dev-launcher:compileReleaseLibraryResources
+> Task :expo-dev-menu:compileReleaseLibraryResources
+> Task :expo-dev-menu-interface:compileReleaseLibraryResources
+> Task :expo-json-utils:compileReleaseLibraryResources
+> Task :expo-log-box:compileReleaseLibraryResources
+> Task :expo-manifests:compileReleaseLibraryResources
+> Task :expo-modules-core:compileReleaseLibraryResources
+> Task :expo-updates-interface:compileReleaseLibraryResources
+> Task :react-native-async-storage_async-storage:compileReleaseLibraryResources
+> Task :react-native-gesture-handler:compileReleaseLibraryResources
+> Task :react-native-masked-view_masked-view:compileReleaseLibraryResources
+> Task :app:createBundleReleaseJsAndAssets
+Using src/app as the root directory for Expo Router.
+> Task :react-native-reanimated:compileReleaseLibraryResources
+> Task :react-native-safe-area-context:compileReleaseLibraryResources
+> Task :react-native-svg:compileReleaseLibraryResources
+> Task :react-native-async-storage_async-storage:bundleLibCompileToJarRelease
+> Task :react-native-masked-view_masked-view:bundleLibCompileToJarRelease
+> Task :react-native-safe-area-context:bundleLibCompileToJarRelease
+> Task :expo:prepareReleaseArtProfile
+> Task :expo-constants:prepareReleaseArtProfile
+> Task :expo-dev-client:prepareReleaseArtProfile
+> Task :expo-dev-launcher:prepareReleaseArtProfile
+> Task :expo-dev-menu:prepareReleaseArtProfile
+> Task :expo-dev-menu-interface:prepareReleaseArtProfile
+> Task :expo-json-utils:prepareReleaseArtProfile
+> Task :expo-log-box:prepareReleaseArtProfile
+> Task :expo-manifests:prepareReleaseArtProfile
+> Task :expo-modules-core:prepareReleaseArtProfile
+> Task :expo-updates-interface:prepareReleaseArtProfile
+> Task :react-native-async-storage_async-storage:prepareReleaseArtProfile
+> Task :react-native-gesture-handler:prepareReleaseArtProfile
+> Task :react-native-masked-view_masked-view:prepareReleaseArtProfile
+> Task :react-native-reanimated:prepareReleaseArtProfile
+> Task :react-native-safe-area-context:prepareReleaseArtProfile
+> Task :react-native-svg:prepareReleaseArtProfile
+> Task :react-native-safe-area-context:bundleLibRuntimeToJarRelease
+> Task :react-native-async-storage_async-storage:bundleLibRuntimeToJarRelease
+> Task :react-native-svg:bundleLibRuntimeToJarRelease
+> Task :app:createBundleReleaseJsAndAssets
+React Compiler enabled
+Starting Metro Bundler
+Failed to construct transformer:  Error: Cannot find module 'babel-preset-expo'
+Require stack:
+- /home/expo/workingdir/build/node_modules/.pnpm/@babel+core@7.29.7/node_modules/@babel/core/lib/config/files/plugins.js
+- /home/expo/workingdir/build/node_modules/.pnpm/@babel+core@7.29.7/node_modules/@babel/core/lib/config/files/index.js
+- /home/expo/workingdir/build/node_modules/.pnpm/@babel+core@7.29.7/node_modules/@babel/core/lib/index.js
+- /home/expo/workingdir/build/node_modules/.pnpm/@expo+metro-config@56.0.16_expo@56.0.14_typescript@6.0.3/node_modules/@expo/metro-config/build/serializer/treeShakeSerializerPlugin.js
+- /home/expo/workingdir/build/node_modules/.pnpm/@expo+metro-config@56.0.16_expo@56.0.14_typescript@6.0.3/node_modules/@expo/metro-config/build/serializer/withExpoSerializers.js
+- /home/expo/workingdir/build/node_modules/.pnpm/@expo+metro-config@56.0.16_expo@56.0.14_typescript@6.0.3/node_modules/@expo/metro-config/build/ExpoMetroConfig.js
+- /home/expo/workingdir/build/node_modules/.pnpm/@expo+metro-config@56.0.16_expo@56.0.14_typescript@6.0.3/node_modules/@expo/metro-config/build/config/loadUserConfig.js
+- /home/expo/workingdir/build/node_modules/.pnpm/@expo+metro-config@56.0.16_expo@56.0.14_typescript@6.0.3/node_modules/@expo/metro-config/build/index.js
+- /home/expo/workingdir/build/node_modules/.pnpm/@expo+cli@56.1.18_@expo+dom-webview@56.0.5_@expo+metro-runtime@56.0.15_expo-constants@5_f540351013780786caa1b8b4a4980c12/node_modules/@expo/cli/build/src/start/server/metro/instantiateMetro.js
+- /home/expo/workingdir/build/node_modules/.pnpm/@expo+cli@56.1.18_@expo+dom-webview@56.0.5_@expo+metro-runtime@56.0.15_expo-constants@5_f540351013780786caa1b8b4a4980c12/node_modules/@expo/cli/build/src/start/server/metro/MetroBundlerDevServer.js
+- /home/expo/workingdir/build/node_modules/.pnpm/@expo+cli@56.1.18_@expo+dom-webview@56.0.5_@expo+metro-runtime@56.0.15_expo-constants@5_f540351013780786caa1b8b4a4980c12/node_modules/@expo/cli/build/src/export/embed/exportEmbedAsync.js
+- /home/expo/workingdir/build/node_modules/.pnpm/@expo+cli@56.1.18_@expo+dom-webview@56.0.5_@expo+metro-runtime@56.0.15_expo-constants@5_f540351013780786caa1b8b4a4980c12/node_modules/@expo/cli/build/src/export/embed/index.js
+- /home/expo/workingdir/build/node_modules/.pnpm/@expo+cli@56.1.18_@expo+dom-webview@56.0.5_@expo+metro-runtime@56.0.15_expo-constants@5_f540351013780786caa1b8b4a4980c12/node_modules/@expo/cli/build/bin/cli
+Make sure that all the Babel plugins and presets you are using
+are defined as dependencies or devDependencies in your package.json
+file. It's possible that the missing plugin is loaded by a preset
+you are using that forgot to add the plugin to its dependencies: you
+can workaround this problem by explicitly adding the missing package
+to your top-level package.json.
+    at Function._resolveFilename (node:internal/modules/cjs/loader:1383:15)
+    at resolve (node:internal/modules/helpers:157:19)
+    at tryRequireResolve (/home/expo/workingdir/build/node_modules/.pnpm/@babel+core@7.29.7/node_modules/@babel/core/lib/config/files/plugins.js:128:11)
+    at resolveStandardizedNameForRequire (/home/expo/workingdir/build/node_modules/.pnpm/@babel+core@7.29.7/node_modules/@babel/core/lib/config/files/plugins.js:162:19)
+    at resolveStandardizedName (/home/expo/workingdir/build/node_modules/.pnpm/@babel+core@7.29.7/node_modules/@babel/core/lib/config/files/plugins.js:183:12)
+    at loadPreset (/home/expo/workingdir/build/node_modules/.pnpm/@babel+core@7.29.7/node_modules/@babel/core/lib/config/files/plugins.js:68:7)
+    at loadPreset.next (<anonymous>)
+    at createDescriptor (/home/expo/workingdir/build/node_modules/.pnpm/@babel+core@7.29.7/node_modules/@babel/core/lib/config/config-descriptors.js:140:16)
+    at createDescriptor.next (<anonymous>)
+    at evaluateSync (/home/expo/workingdir/build/node_modules/.pnpm/gensync@1.0.0-beta.2/node_modules/gensync/index.js:251:28)
+    at /home/expo/workingdir/build/node_modules/.pnpm/gensync@1.0.0-beta.2/node_modules/gensync/index.js:31:34
+    at Array.map (<anonymous>)
+    at Function.sync (/home/expo/workingdir/build/node_modules/.pnpm/gensync@1.0.0-beta.2/node_modules/gensync/index.js:31:22)
+    at Function.all (/home/expo/workingdir/build/node_modules/.pnpm/gensync@1.0.0-beta.2/node_modules/gensync/index.js:210:24)
+    at Generator.next (<anonymous>)
+    at createDescriptors (/home/expo/workingdir/build/node_modules/.pnpm/@babel+core@7.29.7/node_modules/@babel/core/lib/config/config-descriptors.js:102:41)
+    at createDescriptors.next (<anonymous>)
+    at createPresetDescriptors (/home/expo/workingdir/build/node_modules/.pnpm/@babel+core@7.29.7/node_modules/@babel/core/lib/config/config-descriptors.js:96:17)
+    at createPresetDescriptors.next (<anonymous>)
+    at /home/expo/workingdir/build/node_modules/.pnpm/@babel+core@7.29.7/node_modules/@babel/core/lib/gensync-utils/functional.js:22:27
+    at Generator.next (<anonymous>)
+    at mergeChainOpts (/home/expo/workingdir/build/node_modules/.pnpm/@babel+core@7.29.7/node_modules/@babel/core/lib/config/config-chain.js:350:34)
+    at mergeChainOpts.next (<anonymous>)
+    at chainWalker (/home/expo/workingdir/build/node_modules/.pnpm/@babel+core@7.29.7/node_modules/@babel/core/lib/config/config-chain.js:316:14)
+    at chainWalker.next (<anonymous>)
+    at loadFileChain (/home/expo/workingdir/build/node_modules/.pnpm/@babel+core@7.29.7/node_modules/@babel/core/lib/config/config-chain.js:191:24)
+    at loadFileChain.next (<anonymous>)
+    at mergeExtendsChain (/home/expo/workingdir/build/node_modules/.pnpm/@babel+core@7.29.7/node_modules/@babel/core/lib/config/config-chain.js:328:28)
+    at mergeExtendsChain.next (<anonymous>)
+    at chainWalker (/home/expo/workingdir/build/node_modules/.pnpm/@babel+core@7.29.7/node_modules/@babel/core/lib/config/config-chain.js:312:20)
+    at chainWalker.next (<anonymous>)
+    at buildRootChain (/home/expo/workingdir/build/node_modules/.pnpm/@babel+core@7.29.7/node_modules/@babel/core/lib/config/config-chain.js:56:36)
+    at buildRootChain.next (<anonymous>)
+    at loadPrivatePartialConfig (/home/expo/workingdir/build/node_modules/.pnpm/@babel+core@7.29.7/node_modules/@babel/core/lib/config/partial.js:72:62)
+    at loadPrivatePartialConfig.next (<anonymous>)
+    at loadPartialConfig (/home/expo/workingdir/build/node_modules/.pnpm/@babel+core@7.29.7/node_modules/@babel/core/lib/config/partial.js:115:25)
+    at loadPartialConfig.next (<anonymous>)
+    at evaluateSync (/home/expo/workingdir/build/node_modules/.pnpm/gensync@1.0.0-beta.2/node_modules/gensync/index.js:251:28)
+    at sync (/home/expo/workingdir/build/node_modules/.pnpm/gensync@1.0.0-beta.2/node_modules/gensync/index.js:89:14)
+    at stopHiding - secret - don't use this - v1 (/home/expo/workingdir/build/node_modules/.pnpm/@babel+core@7.29.7/node_modules/@babel/core/lib/errors/rewrite-stack-trace.js:47:12)
+    at loadPartialConfigSync (/home/expo/workingdir/build/node_modules/.pnpm/@babel+core@7.29.7/node_modules/@babel/core/lib/config/index.js:37:84)
+    at Object.getCacheKey (/home/expo/workingdir/build/node_modules/.pnpm/@expo+metro-config@56.0.16_expo@56.0.14_typescript@6.0.3/node_modules/@expo/metro-config/build/babel-transformer.js:190:66)
+    at Object.getCacheKey (/home/expo/workingdir/build/node_modules/.pnpm/@expo+metro-config@56.0.16_expo@56.0.14_typescript@6.0.3/node_modules/@expo/metro-config/build/transform-worker/metro-transform-worker.js:643:28)
+    at getTransformCacheKey (/home/expo/workingdir/build/node_modules/.pnpm/metro@0.84.4/node_modules/metro/src/DeltaBundler/getTransformCacheKey.js:17:19)
+    at new Transformer (/home/expo/workingdir/build/node_modules/.pnpm/metro@0.84.4/node_modules/metro/src/DeltaBundler/Transformer.js:40:43)
+    at /home/expo/workingdir/build/node_modules/.pnpm/metro@0.84.4/node_modules/metro/src/Bundler.js:25:29 {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: [
+    '/home/expo/workingdir/build/node_modules/.pnpm/@babel+core@7.29.7/node_modules/@babel/core/lib/config/files/plugins.js',
+    '/home/expo/workingdir/build/node_modules/.pnpm/@babel+core@7.29.7/node_modules/@babel/core/lib/config/files/index.js',
+    '/home/expo/workingdir/build/node_modules/.pnpm/@babel+core@7.29.7/node_modules/@babel/core/lib/index.js',
+    '/home/expo/workingdir/build/node_modules/.pnpm/@expo+metro-config@56.0.16_expo@56.0.14_typescript@6.0.3/node_modules/@expo/metro-config/build/serializer/treeShakeSerializerPlugin.js',
+    '/home/expo/workingdir/build/node_modules/.pnpm/@expo+metro-config@56.0.16_expo@56.0.14_typescript@6.0.3/node_modules/@expo/metro-config/build/serializer/withExpoSerializers.js',
+    '/home/expo/workingdir/build/node_modules/.pnpm/@expo+metro-config@56.0.16_expo@56.0.14_typescript@6.0.3/node_modules/@expo/metro-config/build/ExpoMetroConfig.js',
+    '/home/expo/workingdir/build/node_modules/.pnpm/@expo+metro-config@56.0.16_expo@56.0.14_typescript@6.0.3/node_modules/@expo/metro-config/build/config/loadUserConfig.js',
+    '/home/expo/workingdir/build/node_modules/.pnpm/@expo+metro-config@56.0.16_expo@56.0.14_typescript@6.0.3/node_modules/@expo/metro-config/build/index.js',
+    '/home/expo/workingdir/build/node_modules/.pnpm/@expo+cli@56.1.18_@expo+dom-webview@56.0.5_@expo+metro-runtime@56.0.15_expo-constants@5_f540351013780786caa1b8b4a4980c12/node_modules/@expo/cli/build/src/start/server/metro/instantiateMetro.js',
+    '/home/expo/workingdir/build/node_modules/.pnpm/@expo+cli@56.1.18_@expo+dom-webview@56.0.5_@expo+metro-runtime@56.0.15_expo-constants@5_f540351013780786caa1b8b4a4980c12/node_modules/@expo/cli/build/src/start/server/metro/MetroBundlerDevServer.js',
+    '/home/expo/workingdir/build/node_modules/.pnpm/@expo+cli@56.1.18_@expo+dom-webview@56.0.5_@expo+metro-runtime@56.0.15_expo-constants@5_f540351013780786caa1b8b4a4980c12/node_modules/@expo/cli/build/src/export/embed/exportEmbedAsync.js',
+    '/home/expo/workingdir/build/node_modules/.pnpm/@expo+cli@56.1.18_@expo+dom-webview@56.0.5_@expo+metro-runtime@56.0.15_expo-constants@5_f540351013780786caa1b8b4a4980c12/node_modules/@expo/cli/build/src/export/embed/index.js',
+'/home/expo/workingdir/build/node_modules/.pnpm/@expo+cli@56.1.18_@expo+dom-webview@56.0.5_@expo+metro-runtime@56.0.15_expo-constants@5_f540351013780786caa1b8b4a4980c12/node_modules/@expo/cli/build/bin/cli'
+  ]
+}
+> Task :react-native-masked-view_masked-view:bundleLibRuntimeToJarRelease
+> Task :expo:mergeReleaseShaders
+> Task :expo:compileReleaseShaders NO-SOURCE
+> Task :expo:generateReleaseAssets UP-TO-DATE
+> Task :expo:mergeReleaseAssets
+> Task :expo-constants:mergeReleaseShaders
+> Task :expo-constants:compileReleaseShaders NO-SOURCE
+> Task :expo-constants:generateReleaseAssets UP-TO-DATE
+> Task :expo-constants:mergeReleaseAssets
+> Task :expo-dev-client:mergeReleaseShaders
+> Task :expo-dev-client:compileReleaseShaders NO-SOURCE
+> Task :expo-dev-client:generateReleaseAssets UP-TO-DATE
+> Task :expo-dev-client:mergeReleaseAssets
+> Task :expo-dev-launcher:mergeReleaseShaders
+> Task :expo-dev-launcher:compileReleaseShaders NO-SOURCE
+> Task :expo-dev-launcher:generateReleaseAssets UP-TO-DATE
+> Task :expo-dev-launcher:mergeReleaseAssets
+> Task :expo-dev-menu:mergeReleaseShaders
+> Task :expo-dev-menu:compileReleaseShaders
+NO-SOURCE
+> Task :expo-dev-menu:generateReleaseAssets UP-TO-DATE
+> Task :expo-dev-menu:mergeReleaseAssets
+> Task :expo-dev-menu-interface:mergeReleaseShaders
+> Task :expo-dev-menu-interface:compileReleaseShaders NO-SOURCE
+> Task :expo-dev-menu-interface:generateReleaseAssets UP-TO-DATE
+> Task :expo-dev-menu-interface:mergeReleaseAssets
+> Task :expo-json-utils:mergeReleaseShaders
+> Task :expo-json-utils:compileReleaseShaders NO-SOURCE
+> Task :expo-json-utils:generateReleaseAssets UP-TO-DATE
+> Task :expo-json-utils:mergeReleaseAssets
+> Task :expo-log-box:mergeReleaseShaders
+> Task :expo-log-box:compileReleaseShaders NO-SOURCE
+> Task :expo-log-box:generateReleaseAssets UP-TO-DATE
+> Task :expo-log-box:mergeReleaseAssets
+> Task :expo-manifests:mergeReleaseShaders
+> Task :expo-manifests:compileReleaseShaders NO-SOURCE
+> Task :expo-manifests:generateReleaseAssets UP-TO-DATE
+> Task :expo-manifests:mergeReleaseAssets
+> Task :expo-modules-core:mergeReleaseShaders
+> Task :expo-modules-core:compileReleaseShaders NO-SOURCE
+> Task :expo-modules-core:generateReleaseAssets UP-TO-DATE
+> Task :expo-modules-core:mergeReleaseAssets
+> Task :react-native-worklets:buildCMakeRelWithDebInfo[arm64-v8a][worklets]
+> Task :expo-updates-interface:mergeReleaseShaders
+> Task :expo-updates-interface:compileReleaseShaders NO-SOURCE
+> Task :expo-updates-interface:generateReleaseAssets UP-TO-DATE
+> Task :expo-updates-interface:mergeReleaseAssets
+> Task :react-native-async-storage_async-storage:mergeReleaseShaders
+> Task :react-native-async-storage_async-storage:compileReleaseShaders NO-SOURCE
+> Task :react-native-async-storage_async-storage:generateReleaseAssets UP-TO-DATE
+> Task :react-native-async-storage_async-storage:mergeReleaseAssets
+> Task :react-native-gesture-handler:mergeReleaseShaders
+> Task :react-native-gesture-handler:compileReleaseShaders NO-SOURCE
+> Task :react-native-gesture-handler:generateReleaseAssets UP-TO-DATE
+> Task :react-native-gesture-handler:mergeReleaseAssets
+> Task :react-native-masked-view_masked-view:mergeReleaseShaders
+> Task :react-native-masked-view_masked-view:compileReleaseShaders NO-SOURCE
+> Task :react-native-masked-view_masked-view:generateReleaseAssets UP-TO-DATE
+> Task :react-native-masked-view_masked-view:mergeReleaseAssets
+> Task :react-native-reanimated:mergeReleaseShaders
+> Task :react-native-reanimated:compileReleaseShaders NO-SOURCE
+> Task :react-native-reanimated:generateReleaseAssets UP-TO-DATE
+> Task :react-native-reanimated:mergeReleaseAssets
+> Task :react-native-safe-area-context:mergeReleaseShaders
+> Task :react-native-safe-area-context:compileReleaseShaders NO-SOURCE
+> Task :react-native-safe-area-context:generateReleaseAssets UP-TO-DATE
+> Task :react-native-safe-area-context:mergeReleaseAssets
+> Task :react-native-svg:mergeReleaseShaders
+> Task :react-native-svg:compileReleaseShaders NO-SOURCE
+> Task :react-native-svg:generateReleaseAssets UP-TO-DATE
+> Task :react-native-svg:mergeReleaseAssets
+> Task :expo:extractProguardFiles
+> Task :expo-constants:extractProguardFiles
+> Task :expo-modules-core:extractProguardFiles
+> Task :expo-modules-core:prepareLintJarForPublish
+> Task :expo-constants:prepareLintJarForPublish
+> Task :expo-dev-client:extractProguardFiles
+> Task :expo-dev-client:prepareLintJarForPublish
+> Task :expo-dev-launcher:extractProguardFiles
+> Task :expo-dev-launcher:prepareLintJarForPublish
+> Task :expo-dev-menu:extractProguardFiles
+> Task :expo-dev-menu:prepareLintJarForPublish
+> Task :expo-dev-menu-interface:extractProguardFiles
+> Task :expo-dev-menu-interface:prepareLintJarForPublish
+> Task :expo-json-utils:extractProguardFiles
+> Task :expo-json-utils:prepareLintJarForPublish
+> Task :expo-log-box:extractProguardFiles
+> Task :expo-log-box:prepareLintJarForPublish
+> Task :expo-manifests:extractProguardFiles
+> Task :expo-manifests:prepareLintJarForPublish
+> Task :expo-updates-interface:extractProguardFiles
+> Task :expo-updates-interface:prepareLintJarForPublish
+> Task :expo:prepareLintJarForPublish
+> Task :react-native-async-storage_async-storage:processReleaseJavaRes NO-SOURCE
+> Task :react-native-async-storage_async-storage:createFullJarRelease
+> Task :react-native-async-storage_async-storage:extractProguardFiles
+> Task :react-native-screens:buildCMakeRelWithDebInfo[armeabi-v7a]
+> Task :react-native-screens:configureCMakeRelWithDebInfo[x86]
+> Task :react-native-async-storage_async-storage:generateReleaseLintModel
+> Task :react-native-async-storage_async-storage:prepareLintJarForPublish
+> Task :react-native-gesture-handler:extractProguardFiles
+> Task :react-native-reanimated:processReleaseJavaRes NO-SOURCE
+> Task :react-native-reanimated:extractProguardFiles
+> Task :react-native-reanimated:prepareLintJarForPublish
+> Task :react-native-svg:processReleaseJavaRes NO-SOURCE
+> Task :react-native-svg:createFullJarRelease
+> Task :react-native-svg:extractProguardFiles
+> Task :react-native-svg:generateReleaseLintModel
+> Task :react-native-svg:prepareLintJarForPublish
+> Task :react-native-gesture-handler:prepareLintJarForPublish
+> Task :react-native-masked-view_masked-view:processReleaseJavaRes NO-SOURCE
+> Task :react-native-masked-view_masked-view:createFullJarRelease
+> Task :react-native-masked-view_masked-view:extractProguardFiles
+> Task :react-native-masked-view_masked-view:generateReleaseLintModel
+> Task :react-native-masked-view_masked-view:prepareLintJarForPublish
+> Task :react-native-safe-area-context:processReleaseJavaRes
+> Task :react-native-safe-area-context:createFullJarRelease
+> Task :react-native-safe-area-context:extractProguardFiles
+> Task :react-native-safe-area-context:generateReleaseLintModel
+> Task :react-native-safe-area-context:prepareLintJarForPublish
+> Task :react-native-gesture-handler:extractDeepLinksForAarRelease
+> Task :react-native-safe-area-context:stripReleaseDebugSymbols NO-SOURCE
+> Task :react-native-safe-area-context:copyReleaseJniLibsProjectAndLocalJars
+> Task :react-native-safe-area-context:extractDeepLinksForAarRelease
+> Task :app:createBundleReleaseJsAndAssets
+Android Bundling failed 22622ms node_modules/.pnpm/expo-router@56.2.13_c4a16e1bed4f83496f3af65e0f690b2c/node_modules/expo-router/entry.js (1 module)
+TypeError: Cannot read properties of undefined (reading 'transformFile')
+TypeError: Cannot read properties of undefined (reading 'transformFile')
+    at Bundler.transformFile (/home/expo/workingdir/build/node_modules/.pnpm/metro@0.84.4/node_modules/metro/src/Bundler.js:55:30)
+    at async bundler.transformFile (/home/expo/workingdir/build/node_modules/.pnpm/@expo+metro-config@56.0.16_expo@56.0.14_typescript@6.0.3/node_modules/@expo/metro-config/build/serializer/packedMap.js:172:41)
+    at async Object.transform (/home/expo/workingdir/build/node_modules/.pnpm/metro@0.84.4/node_modules/metro/src/lib/transformHelpers.js:139:12)
+    at async transform (/home/expo/workingdir/build/node_modules/.pnpm/metro@0.84.4/node_modules/metro/src/DeltaBundler/Graph.js:176:26)
+    at async visit (/home/expo/workingdir/build/node_modules/.pnpm/metro@0.84.4/node_modules/metro/src/DeltaBundler/buildSubgraph.js:80:29)
+    at async Promise.all (index 0)
+    at async buildSubgraph (/home/expo/workingdir/build/node_modules/.pnpm/metro@0.84.4/node_modules/metro/src/DeltaBundler/buildSubgraph.js:105:3)
+    at async Graph._buildDelta (/home/expo/workingdir/build/node_modules/.pnpm/metro@0.84.4/node_modules/metro/src/DeltaBundler/Graph.js:163:22)
+    at async Graph.initialTraverseDependencies (/home/expo/workingdir/build/node_modules/.pnpm/metro@0.84.4/node_modules/metro/src/DeltaBundler/Graph.js:146:19)
+    at async DeltaCalculator._getChangedDependencies (/home/expo/workingdir/build/node_modules/.pnpm/metro@0.84.4/node_modules/metro/src/DeltaBundler/DeltaCalculator.js:164:25)
+    at async DeltaCalculator.getDelta (/home/expo/workingdir/build/node_modules/.pnpm/metro@0.84.4/node_modules/metro/src/DeltaBundler/DeltaCalculator.js:74:16)
+    at async DeltaBundler.buildGraph (/home/expo/workingdir/build/node_modules/.pnpm/metro@0.84.4/node_modules/metro/src/DeltaBundler.js:42:5)
+    at async IncrementalBundler.buildGraphForEntries (/home/expo/workingdir/build/node_modules/.pnpm/metro@0.84.4/node_modules/metro/src/IncrementalBundler.js:94:19)
+    at async IncrementalBundler.buildGraph (/home/expo/workingdir/build/node_modules/.pnpm/metro@0.84.4/node_modules/metro/src/IncrementalBundler.js:178:19)
+    at async /home/expo/workingdir/build/node_modules/.pnpm/metro@0.84.4/node_modules/metro/src/IncrementalBundler.js:216:34
+    at async IncrementalBundler.initializeGraph (/home/expo/workingdir/build/node_modules/.pnpm/metro@0.84.4/node_modules/metro/src/IncrementalBundler.js:233:24)
+    at async MetroBundlerDevServer._bundleDirectAsync (/home/expo/workingdir/build/node_modules/.pnpm/@expo+cli@56.1.18_@expo+dom-webview@56.0.5_@expo+metro-runtime@56.0.15_expo-constants@5_f540351013780786caa1b8b4a4980c12/node_modules/@expo/cli/build/src/start/server/metro/MetroBundlerDevServer.js:1575:35)
+    at async MetroBundlerDevServer.metroLoadModuleContents (/home/expo/workingdir/build/node_modules/.pnpm/@expo+cli@56.1.18_@expo+dom-webview@56.0.5_@expo+metro-runtime@56.0.15_expo-constants@5_f540351013780786caa1b8b4a4980c12/node_modules/@expo/cli/build/src/start/server/metro/MetroBundlerDevServer.js:654:25)
+    at async MetroBundlerDevServer.legacySinglePageExportBundleAsync (/home/expo/workingdir/build/node_modules/.pnpm/@expo+cli@56.1.18_@expo+dom-webview@56.0.5_@expo+metro-runtime@56.0.15_expo-constants@5_f540351013780786caa1b8b4a4980c12/node_modules/@expo/cli/build/src/start/server/metro/MetroBundlerDevServer.js:841:24)
+    at async exportEmbedBundleAndAssetsAsync (/home/expo/workingdir/build/node_modules/.pnpm/@expo+cli@56.1.18_@expo+dom-webview@56.0.5_@expo+metro-runtime@56.0.15_expo-constants@5_f540351013780786caa1b8b4a4980c12/node_modules/@expo/cli/build/src/export/embed/exportEmbedAsync.js:302:25)
+    at async exportEmbedInternalAsync (/home/expo/workingdir/build/node_modules/.pnpm/@expo+cli@56.1.18_@expo+dom-webview@56.0.5_@expo+metro-runtime@56.0.15_expo-constants@5_f540351013780786caa1b8b4a4980c12/node_modules/@expo/cli/build/src/export/embed/exportEmbedAsync.js:254:39)
+    at async exportEmbedAsync (/home/expo/workingdir/build/node_modules/.pnpm/@expo+cli@56.1.18_@expo+dom-webview@56.0.5_@expo+metro-runtime@56.0.15_expo-constants@5_f540351013780786caa1b8b4a4980c12/node_modules/@expo/cli/build/src/export/embed/exportEmbedAsync.js:235:5)
+> Task :app:createBundleReleaseJsAndAssets FAILED
+> Task :react-native-screens:buildCMakeRelWithDebInfo[x86]
+> Task :react-native-safe-area-context:extractReleaseAnnotations
+[Incubating] Problems report is available at: file:///home/expo/workingdir/build/android/build/reports/problems/problems-report.html
+Deprecated Gradle features were used in this build, making it incompatible with Gradle 10.
+You can use '--warning-mode all' to show the individual deprecation warnings and determine if they come from your own scripts or plugins.
+For more on this, please refer to https://docs.gradle.org/9.3.1/userguide/command_line_interface.html#sec:command_line_warnings in the Gradle documentation.
+406 actionable tasks: 406 executed
+FAILURE: Build failed with an exception.
+* What went wrong:
+Execution failed for task ':app:createBundleReleaseJsAndAssets'.
+> Process 'command 'node'' finished with non-zero exit value 1
+* Try:
+> Run with --stacktrace option to get the stack trace.
+> Run with --info or --debug option to get more log output.
+> Run with --scan to get full insights from a Build Scan (powered by Develocity).
+> Get more help at https://help.gradle.org.
+BUILD FAILED in 3m 22s
+See the profiling report at: file:///home/expo/workingdir/build/android/build/reports/profile/profile-2026-07-05-08-42-12.html
+A fine-grained performance profile is available: use the --scan option.
+Error: Gradle build failed with unknown error. See logs for the "Run gradlew" phase for more information.
+End phase: RUN_GRADLEW
+Start phase: ON_BUILD_ERROR_HOOK
+End phase: ON_BUILD_ERROR_HOOK
+Start phase: ON_BUILD_COMPLETE_HOOK
+End phase: ON_BUILD_COMPLETE_HOOK
+Start phase: UPLOAD_BUILD_ARTIFACTS
+End phase: UPLOAD_BUILD_ARTIFACTS
+Start phase: FAIL_BUILD
+Build failed: Gradle build failed with unknown error. See logs for the "Run gradlew" phase for more information.
+End phase: FAIL_BUILD
