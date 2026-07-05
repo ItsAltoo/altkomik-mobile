@@ -5,13 +5,13 @@ import { Frown } from "lucide-react-native"
 import { View } from "react-native"
 import React, { memo } from "react"
 
-type LatestEmptyStateProps = {
+type ListEmptyStateProps = {
   error: any
   isLoading: boolean
   dataLength: number
 }
 
-const EmptyStateComponent = ({ error, isLoading, dataLength }: LatestEmptyStateProps) => {
+const EmptyStateComponent = ({ error, isLoading, dataLength }: ListEmptyStateProps) => {
   if (error) {
     return (
       <View className="items-center justify-center py-20">
@@ -36,4 +36,4 @@ const EmptyStateComponent = ({ error, isLoading, dataLength }: LatestEmptyStateP
   return null
 }
 
-export const LatestEmptyState = memo(EmptyStateComponent)
+export const ListEmptyState = memo(EmptyStateComponent)

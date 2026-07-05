@@ -3,7 +3,7 @@ import { COMIC_SKELETON_DATA, MemoizedComicCardWrapper, isComicSkeleton } from "
 import { Footer } from "@/src/components/footer"
 import { Pagination } from "@/src/components/pagination/Pagination"
 import { useScrollToTop } from "@/src/libs/hooks/useScrollToTop"
-import { LatestEmptyState } from "@/src/screens/latest/components/LatestEmptyState"
+import { ListEmptyState } from "@/src/components/empty-state/ListEmptyState"
 import { ScrollToTopFab } from "@/src/components/ui/ScrollToTopFab"
 import { useListContainerStyle } from "@/src/libs/hooks/useListContainerStyle"
 import { FlashList } from "@shopify/flash-list"
@@ -55,7 +55,7 @@ const PopularScreen = () => {
   }, [])
 
   const renderEmptyComponent = useCallback(
-    () => <LatestEmptyState error={error} isLoading={isLoading} dataLength={data.length} />,
+    () => <ListEmptyState error={error} isLoading={isLoading} dataLength={data.length} />,
     [error, isLoading, data.length],
   )
 

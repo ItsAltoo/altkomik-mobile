@@ -13,11 +13,11 @@ import { Pressable } from "@/components/ui/pressable"
 import { Text } from "@/components/ui/text"
 import { Filter, X } from "lucide-react-native"
 import { useState } from "react"
-import { ORDER_OPTIONS, STATUS_OPTIONS, TYPE_OPTIONS } from "../utils"
-import { useGenres } from "../hooks/useGenres"
+import { ORDER_OPTIONS, STATUS_OPTIONS, TYPE_OPTIONS } from "@/src/libs/utils/filters"
+import { useGenres } from "@/src/libs/hooks/useGenres"
 import { LatestParams } from "../repository"
-import { FilterSection } from "./FilterSection"
-import { GenreSelectSection } from "./GenreSelectSection"
+import { FilterSection } from "@/src/components/filters/FilterSection"
+import { GenreSelectSection } from "@/src/components/filters/GenreSelectSection"
 
 type LatestFiltersProps = {
   filters: LatestParams

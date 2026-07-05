@@ -3,30 +3,28 @@ import { COMIC_SKELETON_DATA, MemoizedComicCardWrapper, isComicSkeleton } from "
 import { Footer } from "@/src/components/footer"
 import { Pagination } from "@/src/components/pagination/Pagination"
 import { useScrollToTop } from "@/src/libs/hooks/useScrollToTop"
-import { FlashList } from "@shopify/flash-list"
-import { useCallback, useState } from "react"
-import { RefreshControl, View } from "react-native"
 import { ListEmptyState } from "@/src/components/empty-state/ListEmptyState"
-import { LatestFilters } from "./components/LatestFilters"
-import { useLatestComics } from "./hooks/useLatestComics"
-import { LatestParams } from "./repository"
-import { useListContainerStyle } from "@/src/libs/hooks/useListContainerStyle"
 import { ScrollToTopFab } from "@/src/components/ui/ScrollToTopFab"
+import { useListContainerStyle } from "@/src/libs/hooks/useListContainerStyle"
+import { FlashList } from "@shopify/flash-list"
+import React, { useCallback, useState } from "react"
+import { RefreshControl, View } from "react-native"
+import { GenreFilters } from "./GenreFilters"
+import { useGenreComics } from "../hooks/useGenreComics"
+import { LatestParams } from "@/src/screens/latest/repository"
 
 const numColumns = 2
 
-const LatestScreen = () => {
+export const GenreView = () => {
   const [filters, setFilters] = useState<LatestParams>({
     page: 1,
     type: "all",
-    orderBy: "modified",
-    status: "all",
     genre: "all",
     genre2: "all",
   })
 
   const { listRef, showScrollTop, handleScroll, scrollToTop } = useScrollToTop()
-  const { data, isLoading, hasMore, error, mutate } = useLatestComics(filters)
+  const { data, isLoading, hasMore, error, mutate } = useGenreComics(filters)
   const [refreshing, setRefreshing] = useState(false)
 
   const handlePageChange = useCallback(
@@ -42,10 +40,7 @@ const LatestScreen = () => {
     setFilters({
       page: 1,
       type: "all",
-      orderBy: "modified",
-      status: "all",
       genre: "all",
-      genre2: "all",
     })
     await mutate()
     setRefreshing(false)
@@ -89,7 +84,7 @@ const LatestScreen = () => {
 
   return (
     <View className="flex-1 bg-background-0">
-      <LatestFilters filters={filters} setFilters={setFilters} />
+      <GenreFilters filters={filters} setFilters={setFilters} />
       <View className="flex-1">
         <FlashList
           ref={listRef}
@@ -110,10 +105,7 @@ const LatestScreen = () => {
           }
         />
       </View>
-
       <ScrollToTopFab isVisible={showScrollTop} onPress={scrollToTop} />
     </View>
   )
 }
-
-export default LatestScreen

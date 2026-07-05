@@ -559,8 +559,8 @@ GET /api/comic-list
 | Name     | Type      | Required | Default | Allowed Values                      |
 | -------- | --------- | -------- | ------- | ----------------------------------- |
 | `page`   | number    | No       | `1`     | Any positive integer                |
-| `type`   | KomikType | No       | -       | `manga`, `manhwa`, `manhua`         |
-| `letter` | string    | No       | -       | `A` – `Z` (single uppercase letter) |
+| `type`   | string    | No       | -       | empty (all), `manga`, `manhwa`, `manhua` |
+| `letter` | string    | No       | -       | empty (all), `A`-`Z`, `#`, `+`, `-`, `.`, `[`, `"` |
 
 ### Example Request
 
@@ -578,7 +578,7 @@ GET /api/comic-list?page=1&type=manga&letter=S
   "meta": null,
   "data": [
     {
-      "heading": "Daftar Manga",
+      "heading": "Total 10200 Komik",
       "list": [
         {
           "title": "Solo Leveling",
@@ -602,7 +602,7 @@ GET /api/comic-list?page=1&type=manga&letter=S
 
 | Field     | Type            | Description       |
 | --------- | --------------- | ----------------- |
-| `heading` | string          | Page heading text |
+| `heading` | string          | Total count of comics text (e.g. "Total 10200 Komik") |
 | `list`    | ComicListItem[] | Array of comics   |
 
 **ComicListItem:**

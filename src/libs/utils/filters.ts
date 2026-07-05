@@ -17,3 +17,17 @@ export const STATUS_OPTIONS = [
   { label: "Ongoing", value: "ongoing" },
   { label: "Tamat", value: "end" },
 ]
+
+export const LETTER_OPTIONS = [
+  { label: "Semua", value: "all" },
+  ...Array.from({ length: 26 }, (_, i) => ({
+    label: String.fromCharCode(65 + i),
+    value: String.fromCharCode(65 + i),
+  })),
+  { label: "#", value: "#" },
+  { label: "+", value: "+" },
+  { label: "-", value: "-" },
+  { label: ".", value: "." },
+  { label: "[", value: "[" },
+  { label: "“", value: "“" },
+]

@@ -11,22 +11,22 @@ import { HStack } from "@/components/ui/hstack"
 import { Icon } from "@/components/ui/icon"
 import { Pressable } from "@/components/ui/pressable"
 import { Text } from "@/components/ui/text"
-import { FilterSection } from "@/src/components/filters/FilterSection"
-import { ORDER_OPTIONS, TYPE_OPTIONS } from "@/src/libs/utils/filters"
+import { GenreSelectSection } from "@/src/components/filters/GenreSelectSection"
+import { useGenres } from "@/src/libs/hooks/useGenres"
 import { Filter, X } from "lucide-react-native"
 import { useState } from "react"
-import { PopularParams } from "../repository"
+import { LatestParams } from "@/src/screens/latest/repository"
 
-type PopularFiltersProps = {
-  filters: PopularParams
-  setFilters: (filters: PopularParams) => void
+type GenreFiltersProps = {
+  filters: LatestParams
+  setFilters: (filters: LatestParams) => void
 }
 
-export const PopularFilters = ({ filters, setFilters }: PopularFiltersProps) => {
+export const GenreFilters = ({ filters, setFilters }: GenreFiltersProps) => {
   const [isOpen, setIsOpen] = useState(false)
+  const { data: genres } = useGenres()
 
-  // Local state for the actionsheet so we don't trigger refetches while user is still selecting
-  const [localFilters, setLocalFilters] = useState<PopularParams>(filters)
+  const [localFilters, setLocalFilters] = useState<LatestParams>(filters)
 
   const handleOpen = () => {
     setLocalFilters(filters)
@@ -39,16 +39,18 @@ export const PopularFilters = ({ filters, setFilters }: PopularFiltersProps) => 
   }
 
   const handleReset = () => {
-    const defaultFilters = { type: "all", orderBy: "modified" }
+    const defaultFilters = { genre: "all", genre2: "all", page: 1 }
     setLocalFilters(defaultFilters)
     setFilters(defaultFilters)
     setIsOpen(false)
   }
 
+  const genreOptions = [{ value: "all", text: "Semua" }, ...(genres || [])]
+
   return (
     <>
       <HStack className="items-center justify-between bg-background-0 p-4">
-        <Text className="border-l-4 border-primary-500 pl-2 text-xl font-bold text-typography-900">Komik Populer</Text>
+        <Text className="border-l-4 border-primary-500 pl-2 text-xl font-bold text-typography-900">Filter Genre</Text>
         <Button size="sm" variant="outline" action="secondary" onPress={handleOpen} className="gap-2 rounded-full">
           <ButtonIcon as={Filter} size="sm" />
           <ButtonText>Filter</ButtonText>
@@ -64,7 +66,7 @@ export const PopularFilters = ({ filters, setFilters }: PopularFiltersProps) => 
 
           <HStack className="mb-4 w-full items-center justify-between px-2 pt-2">
             <Text className="border-l-4 border-primary-500 pl-2 text-lg font-bold text-typography-900">
-              Filter Komik
+              Filter Genre
             </Text>
             <Pressable onPress={() => setIsOpen(false)} className="p-2">
               <Icon as={X} size="md" className="text-typography-500" />
@@ -72,18 +74,18 @@ export const PopularFilters = ({ filters, setFilters }: PopularFiltersProps) => 
           </HStack>
 
           <ActionsheetScrollView className="w-full px-2" showsVerticalScrollIndicator={false}>
-            <FilterSection
-              title="Urutkan Berdasarkan"
-              options={ORDER_OPTIONS}
-              selectedValue={localFilters.orderBy || "ranking"}
-              onSelect={(val: string) => setLocalFilters((prev) => ({ ...prev, orderBy: val }))}
+            <GenreSelectSection
+              title="Genre Utama"
+              options={genreOptions}
+              selectedValue={localFilters.genre || "all"}
+              onSelect={(val: string) => setLocalFilters((prev) => ({ ...prev, genre: val }))}
             />
 
-            <FilterSection
-              title="Tipe Komik"
-              options={TYPE_OPTIONS}
-              selectedValue={localFilters.type || "all"}
-              onSelect={(val: string) => setLocalFilters((prev) => ({ ...prev, type: val }))}
+            <GenreSelectSection
+              title="Genre Tambahan"
+              options={genreOptions}
+              selectedValue={localFilters.genre2 || "all"}
+              onSelect={(val: string) => setLocalFilters((prev) => ({ ...prev, genre2: val }))}
             />
           </ActionsheetScrollView>
 

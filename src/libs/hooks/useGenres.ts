@@ -1,5 +1,5 @@
 import useSWR from "swr"
-import { GenreItem, LatestRepository } from "../repository"
+import { GenreItem, LatestRepository } from "@/src/screens/latest/repository"
 
 const EMPTY_ARRAY: GenreItem[] = []
 
