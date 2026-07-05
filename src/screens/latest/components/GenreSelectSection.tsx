@@ -9,7 +9,7 @@ import {
   SelectInput,
   SelectItem,
   SelectPortal,
-  SelectScrollView,
+  SelectFlatList,
   SelectTrigger,
 } from "@/components/ui/select"
 import { Text } from "@/components/ui/text"
@@ -70,17 +70,20 @@ export const GenreSelectSection = ({ title, options, selectedValue, onSelect }: 
               </Input>
             </View>
 
-            <SelectScrollView className="h-[400px] w-full" showsVerticalScrollIndicator={false}>
-              {filteredOptions.length > 0 ? (
-                filteredOptions.map((opt) => (
-                  <SelectItem key={opt.value} label={opt.label || opt.text!} value={opt.value} />
-                ))
-              ) : (
+            <SelectFlatList
+              className="h-[400px] w-full"
+              showsVerticalScrollIndicator={false}
+              data={filteredOptions}
+              keyExtractor={(opt: any) => opt.value}
+              renderItem={({ item: opt }: any) => (
+                <SelectItem label={opt.label || opt.text!} value={opt.value} />
+              )}
+              ListEmptyComponent={
                 <View className="items-center py-6">
                   <Text className="text-typography-500">Genre tidak ditemukan</Text>
                 </View>
-              )}
-            </SelectScrollView>
+              }
+            />
           </SelectContent>
         </SelectPortal>
       </Select>

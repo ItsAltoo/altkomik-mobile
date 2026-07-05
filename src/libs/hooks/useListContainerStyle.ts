@@ -10,14 +10,20 @@ import { useSafeAreaInsets } from "react-native-safe-area-context"
  * @param minBottomPadding The absolute minimum bottom padding (default: 100)
  * @returns A memoized style object for contentContainerStyle
  */
-export const useListContainerStyle = (paddingTop = 8, bottomPaddingOffset = 100, minBottomPadding = 100) => {
+export const useListContainerStyle = (
+  paddingTop = 8,
+  bottomPaddingOffset = 100,
+  minBottomPadding = 100,
+  paddingHorizontal = 16,
+) => {
   const insets = useSafeAreaInsets()
 
   return useMemo(
     () => ({
       paddingBottom: Math.max(insets.bottom + bottomPaddingOffset, minBottomPadding),
       paddingTop,
+      paddingHorizontal,
     }),
-    [insets.bottom, paddingTop, bottomPaddingOffset, minBottomPadding],
+    [insets.bottom, paddingTop, bottomPaddingOffset, minBottomPadding, paddingHorizontal],
   )
 }

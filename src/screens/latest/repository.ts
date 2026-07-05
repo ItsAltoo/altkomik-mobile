@@ -17,7 +17,6 @@ export type GenreItem = {
 
 export const LatestRepository = {
   getLatestComics: async (params: LatestParams = {}) => {
-    // Membangun query string secara dinamis dengan mengabaikan parameter yang nilainya 'all' atau undefined
     const searchParams = new URLSearchParams()
 
     if (params.page) searchParams.append("page", params.page.toString())

@@ -17,12 +17,12 @@ type Props = {
 export const CarouselItem = ({ item }: Props) => {
   const { width } = useWindowDimensions()
   const detailLink = `/detail-comic/${item.slug}` as any
-  const itemWidth = width - 31 // match HomeScreen px-4 container
+  const itemWidth = width - 45
 
   return (
     <Link href={detailLink} asChild>
       <Pressable
-        className="overflow-hidden rounded-xl transition-opacity active:opacity-95"
+        className="mx-2 overflow-hidden rounded-xl transition-opacity active:opacity-95"
         style={{ width: itemWidth, height: 280 }}
       >
         <Image source={{ uri: item.thumbnail }} style={StyleSheet.absoluteFill} contentFit="cover" priority="high" />

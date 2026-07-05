@@ -1,7 +1,7 @@
 import { Icon } from "@/components/ui/icon"
 import { Text } from "@/components/ui/text"
 import { VStack } from "@/components/ui/vstack"
-import { ComicCard, ComicCardSkeleton } from "@/src/components/comic-card"
+import { ComicCard, ComicCardSkeleton, COMIC_SKELETON_DATA, isComicSkeleton } from "@/src/components/comic-card"
 import { Footer } from "@/src/components/footer"
 import { FlashList } from "@shopify/flash-list"
 import { useLocalSearchParams } from "expo-router"
@@ -17,25 +17,25 @@ const numColumns = 2
 const cardWidth = getGridItemWidth(numColumns)
 const cardStyle = { width: cardWidth }
 
-// Extracted skeleton data to prevent re-creation on every render
-const SKELETON_DATA = Array.from({ length: 6 }).map((_, i) => ({ id: `skeleton-${i}` }))
-
 const SearchScreen = () => {
   const { q } = useLocalSearchParams<{ q: string }>()
   const query = q || ""
   const { data, isLoading, error } = useSearchComics(query)
 
-  const renderItem = useCallback(({ item }: { item: any }) => {
-    if (item.id && typeof item.id === "string" && item.id.startsWith("skeleton-")) {
+  const renderItem = useCallback(({ item, index }: { item: any; index: number }) => {
+    const isEven = index % numColumns === 0
+    const marginClass = isEven ? "mr-2" : "ml-2"
+
+    if (isComicSkeleton(item)) {
       return (
-        <View className="mb-4">
+        <View className={`mb-4 ${marginClass}`}>
           <ComicCardSkeleton style={cardStyle} className="h-[360px]" />
         </View>
       )
     }
 
     return (
-      <View className="mb-4">
+      <View className={`mb-4 ${marginClass}`}>
         <ComicCard {...item} style={cardStyle} className="h-[360px]" />
       </View>
     )
@@ -68,7 +68,7 @@ const SearchScreen = () => {
 
   const contentContainerStyle = useListContainerStyle()
 
-  const listData = isLoading && data.length === 0 ? SKELETON_DATA : data
+  const listData = isLoading && data.length === 0 ? COMIC_SKELETON_DATA : data
 
   return (
     <View className="flex-1 bg-background-0">
@@ -78,7 +78,7 @@ const SearchScreen = () => {
         </Text>
       </View>
 
-      <View className="flex-1 px-4">
+      <View className="flex-1">
         <FlashList
           data={listData}
           renderItem={renderItem}
