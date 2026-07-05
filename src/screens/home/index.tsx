@@ -2,6 +2,8 @@ import { CardCarousel } from "@/src/components/card-carousel"
 import { Footer } from "@/src/components/footer"
 import { useState } from "react"
 import { RefreshControl, ScrollView, View } from "react-native"
+import { ScrollToTopFab } from "@/src/components/ui/ScrollToTopFab"
+import { useScrollToTop } from "@/src/libs/hooks/useScrollToTop"
 import { FilterableCarousel } from "./components/filterable-carousel"
 import { ComicCarousel } from "./components/ranking-carousel"
 import { useFeaturedGenres } from "./hooks/useFeaturedGenres"
@@ -11,6 +13,7 @@ import { usePopularUpdateList } from "./hooks/usePopularUpdateList"
 import { useRanking } from "./hooks/useRanking"
 
 const HomeScreen = () => {
+  const { listRef, showScrollTop, handleScroll, scrollToTop } = useScrollToTop()
   const { data: rankingData, isLoading: isLoadingCarousel, mutate: mutateRanking } = useRanking()
 
   const { data: latestData, isLoading: isLoadingLatest, mutate: mutateLatest } = useLatestList()
@@ -42,8 +45,11 @@ const HomeScreen = () => {
   return (
     <View className="flex-1 bg-background-0">
       <ScrollView
+        ref={listRef}
         className="flex-1"
         showsVerticalScrollIndicator={false}
+        onScroll={handleScroll}
+        scrollEventThrottle={16}
         refreshControl={
           <RefreshControl refreshing={isRefreshing} onRefresh={onRefresh} colors={["#B331F1"]} tintColor="#B331F1" />
         }
@@ -82,6 +88,8 @@ const HomeScreen = () => {
           <Footer />
         </View>
       </ScrollView>
+
+      <ScrollToTopFab isVisible={showScrollTop} onPress={scrollToTop} />
     </View>
   )
 }

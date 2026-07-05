@@ -1,16 +1,15 @@
-import useSWRInfinite from "swr/infinite"
+import { Comic } from "@/src/libs/types"
+import useSWR from "swr"
 import { LatestParams, LatestRepository } from "../repository"
 
-export const useLatestComics = (filters: LatestParams) => {
-  const getKey = (pageIndex: number, previousPageData: any) => {
-    // End of pagination detection
-    if (previousPageData && !previousPageData.length) return null
+const EMPTY_ARRAY: Comic[] = []
 
-    // Create a key using the page index and all filter values.
-    // When any filter changes, this key changes, triggering a fresh fetch from page 1.
+export const useLatestComics = (filters: LatestParams) => {
+  const getKey = () => {
+    // Create a key using all filter values.
     return [
       "latest-comics",
-      pageIndex + 1, // API pages are 1-indexed
+      filters.page || 1,
       filters.orderBy,
       filters.type,
       filters.genre,
@@ -19,36 +18,23 @@ export const useLatestComics = (filters: LatestParams) => {
     ]
   }
 
-  const fetcher = ([, page, orderBy, type, genre, genre2, status]: any) => {
-    return LatestRepository.getLatestComics({
-      page,
-      orderBy,
-      type,
-      genre,
-      genre2,
-      status,
-    })
+  const fetcher = () => {
+    return LatestRepository.getLatestComics(filters)
   }
 
-  const { data, size, setSize, isLoading, isValidating, error, mutate } = useSWRInfinite(getKey, fetcher, {
+  const { data, isLoading, isValidating, error, mutate } = useSWR(getKey, fetcher, {
     revalidateOnFocus: false,
-    revalidateFirstPage: false,
   })
 
-  const flatData = data ? data.flat() : []
-  const hasMore = data && data[data.length - 1]?.length > 0
+  // Assuming the API returns 10 items per page. If it's less than 10, there's no next page.
+  const hasMore = data ? data.length >= 10 : true
 
   return {
-    data: flatData,
-    isLoading: isLoading || (isValidating && size === 1),
-    isLoadingMore: isValidating && size > 1,
+    data: data ?? EMPTY_ARRAY,
+    isLoading: isLoading,
+    isValidating: isValidating,
     hasMore,
     error,
     mutate,
-    loadMore: () => {
-      if (hasMore && !isValidating && !isLoading) {
-        setSize(size + 1)
-      }
-    },
   }
 }
