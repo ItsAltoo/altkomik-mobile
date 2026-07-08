@@ -3,7 +3,7 @@ import { HStack } from "@/components/ui/hstack"
 import { Icon } from "@/components/ui/icon"
 import { Pressable } from "@/components/ui/pressable"
 import { Text } from "@/components/ui/text"
-import { BookOpen, Clock, FileText, Home, TrendingUp } from "lucide-react-native"
+import { BookOpen, Clock, FileText, Home, TrendingUp, User } from "lucide-react-native"
 
 const getIcon = (routeName: string, isFocused: boolean) => {
   const iconClass = isFocused ? "text-typography-0" : "text-background-dark dark:text-typography-500"
@@ -18,6 +18,8 @@ const getIcon = (routeName: string, isFocused: boolean) => {
       return <Icon as={FileText} size="lg" className={iconClass} />
     case "popular":
       return <Icon as={TrendingUp} size="lg" className={iconClass} />
+    case "profile":
+      return <Icon as={User} size="lg" className={iconClass} />
     default:
       return <Icon as={Home} size="lg" className={iconClass} />
   }
@@ -35,6 +37,8 @@ const getLabel = (routeName: string) => {
       return "Detail"
     case "popular":
       return "Populer"
+    case "profile":
+      return "Profil"
     default:
       return routeName
   }
@@ -45,7 +49,7 @@ export const PillBar = ({ state, navigation }: any) => {
     <Box className="absolute inset-x-4 bottom-6 items-center shadow-soft-4">
       <HStack className="min-w-[320px] items-center justify-between rounded-full border border-outline-100 bg-background-0/90 p-2 backdrop-blur-md">
         {state.routes.map((route: any, index: number) => {
-          if (route.name === "search") return null
+          if (route.name === "search" || route.name === "profile") return null
 
           const isFocused = state.index === index
 
