@@ -18,6 +18,7 @@ export default function TabsLayout() {
         <Tabs.Screen name="latest" />
         <Tabs.Screen name="detail" />
         <Tabs.Screen name="popular" />
+        <Tabs.Screen name="profile" />
         <Tabs.Screen name="search" />
       </Tabs>
     </View>

@@ -1,3 +1,4 @@
+import { Box } from "@/components/ui/box"
 import { Divider } from "@/components/ui/divider"
 import { HStack } from "@/components/ui/hstack"
 import { Icon } from "@/components/ui/icon"
@@ -6,12 +7,13 @@ import { Popover, PopoverBackdrop, PopoverBody, PopoverContent } from "@/compone
 import { Pressable } from "@/components/ui/pressable"
 import { Text } from "@/components/ui/text"
 import { VStack } from "@/components/ui/vstack"
+import { useAuth } from "@/src/screens/profile/hooks/useAuth"
 import { Image } from "expo-image"
-import { StatusBar } from "expo-status-bar"
-import { Monitor, Moon, Search, Sun } from "lucide-react-native"
-import { useColorScheme } from "nativewind"
 import { useRouter } from "expo-router"
-import { useState } from "react"
+import { StatusBar } from "expo-status-bar"
+import { LogIn, LogOut, Monitor, Moon, Search, Sun, User as UserIcon } from "lucide-react-native"
+import { useColorScheme } from "nativewind"
+import { useEffect, useState } from "react"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
 
 export const Navbar = () => {
@@ -21,6 +23,11 @@ export const Navbar = () => {
   const [themePref, setThemePref] = useState<"system" | "light" | "dark">("system")
   const insets = useSafeAreaInsets()
   const router = useRouter()
+  const { token, handleLogout, userProfile, loadSession } = useAuth()
+
+  useEffect(() => {
+    loadSession()
+  }, [loadSession])
 
   const handleSearch = () => {
     if (searchQuery.trim().length > 0) {
@@ -84,10 +91,13 @@ export const Navbar = () => {
           trigger={(triggerProps: any) => {
             return (
               <Pressable {...triggerProps} className="transition-transform duration-200 shadow-sm active:scale-95">
-                <Image
-                  source={{ uri: "https://i.pravatar.cc/100" }}
-                  style={{ width: 36, height: 36, borderRadius: 18 }}
-                />
+                {userProfile?.photo ? (
+                  <Image source={{ uri: userProfile.photo }} style={{ width: 36, height: 36, borderRadius: 18 }} />
+                ) : (
+                  <Box className="size-11 items-center justify-center rounded-full border border-outline-100 bg-background-100">
+                    <Icon as={UserIcon} size="md" className="text-typography-500" />
+                  </Box>
+                )}
               </Pressable>
             )
           }}
@@ -98,7 +108,9 @@ export const Navbar = () => {
               <VStack className="gap-1">
                 {/* User Name (Non-clickable) */}
                 <HStack className="items-center justify-between gap-2 px-3 py-2">
-                  <Text className="text-sm font-bold text-typography-900">Halo, Malik!</Text>
+                  <Text className="text-sm font-bold text-typography-900" numberOfLines={1} style={{ maxWidth: 120 }}>
+                    {token ? `Halo, ${userProfile?.name || "User"}!` : "Halo, Tamu!"}
+                  </Text>
                   <HStack className="gap-1 rounded-full border border-outline-100 bg-background-50 p-1">
                     <Pressable
                       onPress={() => handleTheme("system")}
@@ -135,12 +147,32 @@ export const Navbar = () => {
 
                 <Divider className="my-1" />
 
-                <Pressable className="rounded-md px-3 py-2 transition-colors active:bg-background-50">
-                  <Text className="text-sm text-typography-700">Profil</Text>
-                </Pressable>
-                <Pressable className="rounded-md px-3 py-2 transition-colors active:bg-error-50">
-                  <Text className="text-sm font-bold text-error-500">Keluar</Text>
-                </Pressable>
+                {token ? (
+                  <>
+                    <Pressable
+                      onPress={() => router.push("/profile")}
+                      className="rounded-md px-3 py-2 transition-colors active:bg-background-50 flex-row items-center gap-2"
+                    >
+                      <Icon as={UserIcon} size="sm" className="text-typography-500" />
+                      <Text className="text-sm text-typography-700">Profil</Text>
+                    </Pressable>
+                    <Pressable
+                      onPress={handleLogout}
+                      className="rounded-md px-3 py-2 transition-colors active:bg-error-50 flex-row items-center gap-2"
+                    >
+                      <Icon as={LogOut} size="sm" className="text-error-500" />
+                      <Text className="text-sm font-bold text-error-500">Sign Out</Text>
+                    </Pressable>
+                  </>
+                ) : (
+                  <Pressable
+                    onPress={() => router.push("/profile")}
+                    className="rounded-md px-3 py-2 transition-colors active:bg-success-50 flex-row items-center gap-2"
+                  >
+                    <Icon as={LogIn} size="sm" className="text-success-500" />
+                    <Text className="text-sm font-bold text-success-500">Sign In</Text>
+                  </Pressable>
+                )}
               </VStack>
             </PopoverBody>
           </PopoverContent>
