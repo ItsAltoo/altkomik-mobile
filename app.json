@@ -1,14 +1,14 @@
 {
   "expo": {
-    "name": "altkomik",
+    "name": "AltKomik",
     "slug": "altkomik-mobile",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/noBg-altkomik.png",
+    "icon": "./assets/images/altkomik-icon-final.png",
     "scheme": "altkomik",
     "userInterfaceStyle": "automatic",
     "ios": {
-      "icon": "./assets/images/noBg-altkomik.png",
+      "icon": "./assets/images/altkomik-icon-final.png",
       "bundleIdentifier": "com.itsalto.altkomik"
     },
     "android": {
@@ -16,20 +16,20 @@
       "softwareKeyboardLayoutMode": "pan",
       "adaptiveIcon": {
         "backgroundColor": "#F8F9FA",
-        "foregroundImage": "./assets/images/noBg-altkomik-adaptive.png"
+        "foregroundImage": "./assets/images/altkomik-icon-final.png"
       },
       "predictiveBackGestureEnabled": false
     },
     "web": {
       "output": "static",
-      "favicon": "./assets/images/noBg-altkomik.png"
+      "favicon": "./assets/images/altkomik-icon-final.png"
     },
     "plugins": [
       "expo-router",
       [
         "expo-splash-screen",
         {
-          "image": "./assets/images/noBg-altkomik.png",
+          "image": "./assets/images/altkomik-icon-final.png",
           "imageWidth": 200,
           "resizeMode": "contain",
           "backgroundColor": "#F8F9FA",

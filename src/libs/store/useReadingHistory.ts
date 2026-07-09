@@ -5,11 +5,15 @@ import { createJSONStorage, persist } from "zustand/middleware"
 type ReadingProgress = {
   lastReadChapter: string
   readChapters: string[] // List of chapter slugs that have been read
+  title?: string
+  thumbnail?: string
+  updatedAt?: number
 }
 
 type ReadingHistoryState = {
   history: Record<string, ReadingProgress>
   markAsRead: (comicSlug: string, chapterSlug: string) => void
+  updateComicMeta: (comicSlug: string, title: string, thumbnail: string) => void
   getComicProgress: (comicSlug: string) => ReadingProgress | undefined
 }
 
@@ -21,7 +25,6 @@ export const useReadingHistory = create<ReadingHistoryState>()(
         set((state) => {
           const currentProgress = state.history[comicSlug] || { lastReadChapter: "", readChapters: [] }
 
-          // Add chapter to readChapters array if it's not already there
           const updatedReadChapters = currentProgress.readChapters.includes(chapterSlug)
             ? currentProgress.readChapters
             : [...currentProgress.readChapters, chapterSlug]
@@ -30,8 +33,27 @@ export const useReadingHistory = create<ReadingHistoryState>()(
             history: {
               ...state.history,
               [comicSlug]: {
+                ...currentProgress,
                 lastReadChapter: chapterSlug,
                 readChapters: updatedReadChapters,
+                updatedAt: Date.now(),
+              },
+            },
+          }
+        }),
+      updateComicMeta: (comicSlug, title, thumbnail) =>
+        set((state) => {
+          const currentProgress = state.history[comicSlug]
+
+          if (!currentProgress) return state // Do nothing if history doesn't exist yet
+
+          return {
+            history: {
+              ...state.history,
+              [comicSlug]: {
+                ...currentProgress,
+                title,
+                thumbnail,
               },
             },
           }
