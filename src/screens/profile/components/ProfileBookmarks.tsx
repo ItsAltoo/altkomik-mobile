@@ -8,6 +8,7 @@ import { VStack } from "@/components/ui/vstack"
 import { Image } from "expo-image"
 import { useRouter } from "expo-router"
 import { ChevronRight } from "lucide-react-native"
+import { ListRowSkeleton } from "@/src/components/skeleton/ListRowSkeleton"
 
 type ProfileBookmarksProps = {
   isLoading: boolean
@@ -28,9 +29,7 @@ export const ProfileBookmarks = ({ isLoading, bookmarksList, bookmarksCount }: P
       </HStack>
 
       {isLoading ? (
-        <Box className="items-center justify-center py-8">
-          <Spinner size="small" color="#B331F1" />
-        </Box>
+        <ListRowSkeleton count={5} gap="sm" />
       ) : bookmarksList.length > 0 ? (
         <VStack space="sm">
           {bookmarksList.slice(0, 5).map((bookmark: any) => (

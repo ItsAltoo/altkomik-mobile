@@ -4,35 +4,33 @@
     "slug": "altkomik-mobile",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/altkomik-icon-final.png",
+    "icon": "./assets/images/icon-app.png",
     "scheme": "altkomik",
     "userInterfaceStyle": "automatic",
     "ios": {
-      "icon": "./assets/images/altkomik-icon-final.png",
+      "icon": "./assets/images/icon-app.png",
       "bundleIdentifier": "com.itsalto.altkomik"
     },
     "android": {
       "package": "com.itsalto.altkomik",
       "softwareKeyboardLayoutMode": "pan",
       "adaptiveIcon": {
-        "backgroundColor": "#F8F9FA",
-        "foregroundImage": "./assets/images/altkomik-icon-final.png"
+        "foregroundImage": "./assets/images/icon-app.png"
       },
       "predictiveBackGestureEnabled": false
     },
     "web": {
       "output": "static",
-      "favicon": "./assets/images/altkomik-icon-final.png"
+      "favicon": "./assets/images/icon-app.png"
     },
     "plugins": [
       "expo-router",
       [
         "expo-splash-screen",
         {
-          "image": "./assets/images/altkomik-icon-final.png",
+          "image": "./assets/images/icon-app.png",
           "imageWidth": 200,
           "resizeMode": "contain",
-          "backgroundColor": "#F8F9FA",
           "dark": {
             "backgroundColor": "#1A1A1A"
           }

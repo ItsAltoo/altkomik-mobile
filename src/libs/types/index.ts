@@ -115,3 +115,19 @@ export type ComicListGroup = {
   heading: string
   list: ComicListItem[]
 }
+
+export type BookmarkItem = {
+  slug: string
+  title: string
+  thumbnail: string
+  type: string
+  status: string
+  chapters?: {
+    latest?: BaseChapter
+  } | null
+}
+
+export type BookmarkResponse = {
+  meta: Meta
+  result: BookmarkItem[]
+}

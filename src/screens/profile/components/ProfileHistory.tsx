@@ -7,6 +7,8 @@ import { VStack } from "@/components/ui/vstack"
 import { Image } from "expo-image"
 import { useRouter } from "expo-router"
 import { BookOpen, Play } from "lucide-react-native"
+import { useHydration } from "@/src/libs/store/useReadingHistory"
+import { ListRowSkeleton } from "@/src/components/skeleton/ListRowSkeleton"
 
 type ProfileHistoryProps = {
   recentHistory: [string, any][]
@@ -15,6 +17,7 @@ type ProfileHistoryProps = {
 
 export const ProfileHistory = ({ recentHistory, historyCount }: ProfileHistoryProps) => {
   const router = useRouter()
+  const isHydrated = useHydration()
 
   return (
     <VStack space="md" className="mt-4">
@@ -25,7 +28,9 @@ export const ProfileHistory = ({ recentHistory, historyCount }: ProfileHistoryPr
         </Pressable>
       </HStack>
 
-      {recentHistory.length > 0 ? (
+      {!isHydrated ? (
+        <ListRowSkeleton count={3} gap="sm" />
+      ) : recentHistory.length > 0 ? (
         <VStack space="sm">
           {recentHistory.map(([comicSlug, progress]) => {
             const displayTitle = progress.title || comicSlug

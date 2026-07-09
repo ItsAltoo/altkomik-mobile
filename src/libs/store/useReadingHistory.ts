@@ -1,6 +1,7 @@
 import AsyncStorage from "@react-native-async-storage/async-storage"
 import { create } from "zustand"
 import { createJSONStorage, persist } from "zustand/middleware"
+import { useEffect, useState } from "react"
 
 type ReadingProgress = {
   lastReadChapter: string
@@ -15,6 +16,7 @@ type ReadingHistoryState = {
   markAsRead: (comicSlug: string, chapterSlug: string) => void
   updateComicMeta: (comicSlug: string, title: string, thumbnail: string) => void
   getComicProgress: (comicSlug: string) => ReadingProgress | undefined
+  deleteHistory: (comicSlug: string) => void
 }
 
 export const useReadingHistory = create<ReadingHistoryState>()(
@@ -59,6 +61,12 @@ export const useReadingHistory = create<ReadingHistoryState>()(
           }
         }),
       getComicProgress: (comicSlug) => get().history[comicSlug],
+      deleteHistory: (comicSlug) =>
+        set((state) => {
+          const newHistory = { ...state.history }
+          delete newHistory[comicSlug]
+          return { history: newHistory }
+        }),
     }),
     {
       name: "reading-history-storage",
@@ -66,3 +74,18 @@ export const useReadingHistory = create<ReadingHistoryState>()(
     },
   ),
 )
+
+export const useHydration = () => {
+  const [hydrated, setHydrated] = useState(useReadingHistory.persist.hasHydrated())
+  
+  useEffect(() => {
+    const unsub = useReadingHistory.persist.onFinishHydration(() => setHydrated(true))
+    setHydrated(useReadingHistory.persist.hasHydrated())
+    
+    return () => {
+      unsub()
+    }
+  }, [])
+  
+  return hydrated
+}
