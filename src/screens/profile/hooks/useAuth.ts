@@ -7,7 +7,7 @@ interface AuthState {
   isLoading: boolean
   isInitializing: boolean
   token: string | null
-  userProfile: { name: string; photo: string | null } | null
+  userProfile: { name: string; email: string | null; photo: string | null } | null
   loadSession: () => Promise<void>
   handleGoogleLogin: () => Promise<void>
   handleLogout: () => Promise<void>
@@ -57,7 +57,7 @@ export const useAuth = create<AuthState>((set) => ({
       if (data.success && data.token) {
         await SecureStore.setItemAsync("session_token", data.token)
         
-        const profile = { name: user?.name || "User", photo: user?.photo || null }
+        const profile = { name: user?.name || "User", email: user?.email || null, photo: user?.photo || null }
         await SecureStore.setItemAsync("user_profile", JSON.stringify(profile))
         
         set({ token: data.token, userProfile: profile })

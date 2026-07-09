@@ -11,16 +11,16 @@ import { useAuth } from "@/src/screens/profile/hooks/useAuth"
 import { Image } from "expo-image"
 import { useRouter } from "expo-router"
 import { StatusBar } from "expo-status-bar"
-import { LogIn, LogOut, Monitor, Moon, Search, Sun, User as UserIcon } from "lucide-react-native"
-import { useColorScheme } from "nativewind"
+import { LogIn, LogOut, Search, User as UserIcon } from "lucide-react-native"
 import { useEffect, useState } from "react"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
+import { LogoutDialog } from "@/src/components/dialogs/LogoutDialog"
 
 export const Navbar = () => {
   const [isSearchExpanded, setIsSearchExpanded] = useState(false)
   const [searchQuery, setSearchQuery] = useState("")
-  const { setColorScheme } = useColorScheme()
-  const [themePref, setThemePref] = useState<"system" | "light" | "dark">("system")
+  const [showLogoutDialog, setShowLogoutDialog] = useState(false)
+
   const insets = useSafeAreaInsets()
   const router = useRouter()
   const { token, handleLogout, userProfile, loadSession } = useAuth()
@@ -35,11 +35,6 @@ export const Navbar = () => {
       setIsSearchExpanded(false)
       setSearchQuery("")
     }
-  }
-
-  const handleTheme = (val: "system" | "light" | "dark") => {
-    setThemePref(val)
-    setColorScheme(val)
   }
 
   return (
@@ -107,42 +102,10 @@ export const Navbar = () => {
             <PopoverBody contentContainerClassName="p-0">
               <VStack className="gap-1">
                 {/* User Name (Non-clickable) */}
-                <HStack className="items-center justify-between gap-2 px-3 py-2">
-                  <Text className="text-sm font-bold text-typography-900" numberOfLines={1} style={{ maxWidth: 120 }}>
-                    {token ? `Halo, ${userProfile?.name || "User"}!` : "Halo, Tamu!"}
+                <HStack className="items-center gap-2 px-3 py-2">
+                  <Text className="text-sm font-bold text-typography-900" numberOfLines={1}>
+                    {token ? (userProfile?.name || "User") : "Tamu"}
                   </Text>
-                  <HStack className="gap-1 rounded-full border border-outline-100 bg-background-50 p-1">
-                    <Pressable
-                      onPress={() => handleTheme("system")}
-                      className={`rounded-full p-1 transition-colors ${themePref === "system" ? "bg-primary-500 shadow-soft-1" : "active:bg-background-100"}`}
-                    >
-                      <Icon
-                        as={Monitor}
-                        size="sm"
-                        className={themePref === "system" ? "text-typography-0" : "text-typography-400"}
-                      />
-                    </Pressable>
-                    <Pressable
-                      onPress={() => handleTheme("light")}
-                      className={`rounded-full p-1 transition-colors ${themePref === "light" ? "bg-primary-500 shadow-soft-1" : "active:bg-background-100"}`}
-                    >
-                      <Icon
-                        as={Sun}
-                        size="sm"
-                        className={themePref === "light" ? "text-typography-0" : "text-typography-400"}
-                      />
-                    </Pressable>
-                    <Pressable
-                      onPress={() => handleTheme("dark")}
-                      className={`rounded-full p-1 transition-colors ${themePref === "dark" ? "bg-primary-500 shadow-soft-1" : "active:bg-background-100"}`}
-                    >
-                      <Icon
-                        as={Moon}
-                        size="sm"
-                        className={themePref === "dark" ? "text-typography-0" : "text-typography-400"}
-                      />
-                    </Pressable>
-                  </HStack>
                 </HStack>
 
                 <Divider className="my-1" />
@@ -151,26 +114,26 @@ export const Navbar = () => {
                   <>
                     <Pressable
                       onPress={() => router.push("/profile")}
-                      className="rounded-md px-3 py-2 transition-colors active:bg-background-50 flex-row items-center gap-2"
+                      className="flex-row items-center gap-2 rounded-md px-3 py-2 transition-colors active:bg-background-50"
                     >
                       <Icon as={UserIcon} size="sm" className="text-typography-500" />
                       <Text className="text-sm text-typography-700">Profil</Text>
                     </Pressable>
                     <Pressable
-                      onPress={handleLogout}
-                      className="rounded-md px-3 py-2 transition-colors active:bg-error-50 flex-row items-center gap-2"
+                      onPress={() => setShowLogoutDialog(true)}
+                      className="flex-row items-center gap-2 rounded-md px-3 py-2 transition-colors active:bg-error-50"
                     >
                       <Icon as={LogOut} size="sm" className="text-error-500" />
-                      <Text className="text-sm font-bold text-error-500">Sign Out</Text>
+                      <Text className="text-sm font-bold text-error-500">Keluar</Text>
                     </Pressable>
                   </>
                 ) : (
                   <Pressable
                     onPress={() => router.push("/profile")}
-                    className="rounded-md px-3 py-2 transition-colors active:bg-success-50 flex-row items-center gap-2"
+                    className="flex-row items-center gap-2 rounded-md px-3 py-2 transition-colors active:bg-success-50"
                   >
                     <Icon as={LogIn} size="sm" className="text-success-500" />
-                    <Text className="text-sm font-bold text-success-500">Sign In</Text>
+                    <Text className="text-sm font-bold text-success-500">Masuk</Text>
                   </Pressable>
                 )}
               </VStack>
@@ -178,6 +141,12 @@ export const Navbar = () => {
           </PopoverContent>
         </Popover>
       </HStack>
+
+      <LogoutDialog
+        isOpen={showLogoutDialog}
+        onClose={() => setShowLogoutDialog(false)}
+        onConfirm={handleLogout}
+      />
     </HStack>
   )
 }

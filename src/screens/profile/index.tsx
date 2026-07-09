@@ -1,87 +1,99 @@
+import { useColorScheme } from "nativewind"
+import React, { useState } from "react"
+import { ScrollView } from "react-native"
+import { useSafeAreaInsets } from "react-native-safe-area-context"
+
 import { Box } from "@/components/ui/box"
-import { Button, ButtonText, ButtonSpinner, ButtonIcon } from "@/components/ui/button"
-import { Text } from "@/components/ui/text"
+import { Spinner } from "@/components/ui/spinner"
 import { VStack } from "@/components/ui/vstack"
+
+import { useReadingHistory } from "@/src/libs/store/useReadingHistory"
 import { useAuth } from "./hooks/useAuth"
 import { useBookmarks } from "./hooks/useBookmarks"
-import { useSafeAreaInsets } from "react-native-safe-area-context"
-import React from "react"
-import { ScrollView } from "react-native"
-import { Spinner } from "@/components/ui/spinner"
-import { Image } from "expo-image"
-import { LogOut } from "lucide-react-native"
+
+import { Footer } from "@/src/components/footer"
+import { ProfileBookmarks } from "./components/ProfileBookmarks"
+import { ProfileHeader } from "./components/ProfileHeader"
+import { ProfileHistory } from "./components/ProfileHistory"
+import { ProfileLogin } from "./components/ProfileLogin"
+import { ProfileMenu } from "./components/ProfileMenu"
+import { ProfileStats } from "./components/ProfileStats"
 
 export const ProfileScreen = () => {
-  const { handleLogout, handleGoogleLogin, isLoading, token, isInitializing } = useAuth()
+  const { handleLogout, handleGoogleLogin, isLoading, token, isInitializing, userProfile } = useAuth()
   const { data: bookmarksData, isLoading: isLoadingBookmarks } = useBookmarks(token)
+  const history = useReadingHistory((state) => state.history)
   const insets = useSafeAreaInsets()
+  const { setColorScheme } = useColorScheme()
+  const [themePref, setThemePref] = useState<"system" | "light" | "dark">("system")
+
+  const handleTheme = (val: "system" | "light" | "dark") => {
+    setThemePref(val)
+    setColorScheme(val)
+  }
+
+  // Calculate stats from bookmark API response
+  const rawData = bookmarksData || {}
+  let bookmarksList: any[] = []
+  if (Array.isArray(rawData)) {
+    bookmarksList = rawData
+  } else if (Array.isArray(rawData.result)) {
+    bookmarksList = rawData.result
+  } else if (Array.isArray(rawData.data)) {
+    bookmarksList = rawData.data
+  }
+  const bookmarksCount = rawData.meta?.total || bookmarksList.length
+  const historyEntries = Object.entries(history || {})
+  const historyCount = historyEntries.length
+  const readChaptersCount = Object.values(history || {}).reduce(
+    (acc, curr) => acc + (curr.readChapters?.length || 0),
+    0,
+  )
+
+  // Get recent reading history (sorted by updatedAt)
+  const recentHistory = historyEntries
+    .filter(([, progress]) => progress.lastReadChapter)
+    .sort(([, a], [, b]) => (b.updatedAt || 0) - (a.updatedAt || 0))
+    .slice(0, 5)
 
   if (isInitializing) {
     return (
-      <Box className="flex-1 items-center justify-center bg-background-0" style={{ paddingTop: insets.top }}>
-        <Spinner size="large" />
+      <Box className="flex-1 items-center justify-center bg-background-0">
+        <Spinner size="large" color="#B331F1" />
       </Box>
     )
   }
 
   return (
-    <Box className="flex-1 bg-background-0" style={{ paddingTop: insets.top }}>
-      <VStack space="xl" className="flex-1 items-center p-6">
-        <Text className="text-3xl font-bold text-typography-900 mt-10">Profil</Text>
-        
-        {token ? (
-          <VStack space="lg" className="items-center w-full flex-1">
-          <Text className="text-center text-typography-500">
-            Anda telah berhasil masuk!
-          </Text>
-          
-          <Box className="w-full mt-4 flex-1">
-            <Text className="font-bold text-lg mb-2">Bookmarks Anda:</Text>
-            {isLoadingBookmarks ? (
-              <Text>Memuat bookmarks...</Text>
-            ) : (
-              <ScrollView className="w-full" contentContainerStyle={{ paddingBottom: 100 }} showsVerticalScrollIndicator={false}>
-                {bookmarksData?.result?.map((bookmark: any) => (
-                  <Box key={bookmark.id} className="p-3 mb-2 bg-background-50 rounded-md border border-outline-100">
-                    <Text className="font-medium">{bookmark.title}</Text>
-                  </Box>
-                ))}
-                {(!bookmarksData?.result || bookmarksData.result.length === 0) && (
-                  <Text className="text-typography-400 italic">Belum ada komik yang di-bookmark.</Text>
-                )}
-              </ScrollView>
-            )}
-          </Box>
+    <Box className="flex-1 bg-background-0">
+      <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{ paddingBottom: 100 }}>
+        <VStack space="2xl" className="flex-1 px-4 pt-6 pb-12">
+          {token ? (
+            <>
+              <ProfileHeader userProfile={userProfile} />
 
-          <Button size="lg" variant="outline" action="negative" onPress={handleLogout} className="mb-4">
-            <ButtonIcon as={LogOut} />
-            <ButtonText>Sign Out</ButtonText>
-          </Button>
+              <ProfileStats
+                bookmarksCount={bookmarksCount}
+                readChaptersCount={readChaptersCount}
+                historyCount={historyCount}
+              />
+
+              <ProfileBookmarks
+                isLoading={isLoadingBookmarks}
+                bookmarksList={bookmarksList}
+                bookmarksCount={bookmarksCount}
+              />
+
+              <ProfileHistory recentHistory={recentHistory} historyCount={historyCount} />
+
+              <ProfileMenu themePref={themePref} handleTheme={handleTheme} handleLogout={handleLogout} />
+            </>
+          ) : (
+            <ProfileLogin isLoading={isLoading} handleGoogleLogin={handleGoogleLogin} />
+          )}
         </VStack>
-        ) : (
-          <VStack space="lg" className="items-center justify-center flex-1 w-full px-4">
-            <Text className="text-center text-typography-500 mb-2">
-              Anda perlu masuk untuk melihat halaman profil dan daftar komik yang di-bookmark.
-            </Text>
-            <Button 
-              size="lg" 
-              onPress={handleGoogleLogin} 
-              disabled={isLoading} 
-              className="mt-2 w-[240px] flex-row items-center justify-center bg-background-0 border border-outline-200"
-            >
-              {isLoading ? (
-                <ButtonSpinner />
-              ) : (
-                <>
-                  <Image source={{ uri: "https://img.icons8.com/color/48/000000/google-logo.png" }} style={{ width: 24, height: 24, marginRight: 12 }} />
-                  <ButtonText className="text-typography-900 font-semibold">Google</ButtonText>
-                </>
-              )}
-            </Button>
-          </VStack>
-        )}
-      </VStack>
+        <Footer />
+      </ScrollView>
     </Box>
   )
 }
-
