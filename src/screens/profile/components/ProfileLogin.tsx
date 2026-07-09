@@ -93,11 +93,11 @@ export const ProfileLogin = ({ isLoading, handleGoogleLogin }: ProfileLoginProps
           className="h-14 w-full flex-row items-center justify-center rounded-xl border border-outline-200 bg-white shadow-soft-2 active:opacity-80"
         >
           {isLoading ? (
-            <ButtonSpinner className="text-black" />
+            <ButtonSpinner />
           ) : (
             <HStack space="sm" className="items-center">
               <ButtonIcon as={GoogleIcon} size="lg" />
-              <ButtonText className="font-bold text-black">Lanjutkan dengan Google</ButtonText>
+              <ButtonText className="font-bold text-black">Google</ButtonText>
             </HStack>
           )}
         </Button>
