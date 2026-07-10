@@ -1,5 +1,7 @@
 export type DetailHeaderProps = {
   thumbnail: string
+  title: string
+  slug: string
 }
 
 export type ChapterRef = {
