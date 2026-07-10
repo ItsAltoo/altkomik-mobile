@@ -9,9 +9,11 @@ import { Image } from "expo-image"
 import { Href, Link } from "expo-router"
 import { BookOpen, X } from "lucide-react-native"
 import { useState } from "react"
-import { View } from "react-native"
+import { ActivityIndicator, View } from "react-native"
 import ImageViewing from "react-native-image-viewing"
 import { SafeAreaView } from "react-native-safe-area-context"
+import { useBookmarkCheck } from "../hooks/useBookmarkCheck"
+import { useToggleBookmark } from "../hooks/useToggleBookmark"
 
 type ChapterRef = {
   slug: string
@@ -21,6 +23,14 @@ type ChapterRef = {
 type DetailHeroProps = {
   thumbnail: string
   title: string
+  slug: string
+  comicData: {
+    slug: string
+    title: string
+    thumbnail: string
+    type: string
+    status: string
+  }
   description?: {
     alternativeTitle?: string
     status?: string
@@ -33,8 +43,10 @@ type DetailHeroProps = {
   }
 }
 
-export const DetailHero = ({ thumbnail, title, description, chapters }: DetailHeroProps) => {
+export const DetailHero = ({ thumbnail, title, description, chapters, slug, comicData }: DetailHeroProps) => {
   const [isImageVisible, setIsImageVisible] = useState(false)
+  const { isBookmarked, isLoading } = useBookmarkCheck(slug)
+  const { toggleBookmark, isToggling } = useToggleBookmark(slug)
 
   return (
     <VStack className="z-10 mt-2 items-center border-b border-outline-100 px-4 pb-6">
@@ -49,9 +61,18 @@ export const DetailHero = ({ thumbnail, title, description, chapters }: DetailHe
           </View>
         </Pressable>
 
-        <Button size="sm" className="mb-6 mt-2">
-          <Icon as={BookOpen} className="mr-2 size-4 text-typography-white" />
-          <ButtonText className=" text-typography-white">Bookmark</ButtonText>
+        <Button
+          size="sm"
+          className={`mb-6 mt-2 ${isBookmarked ? "bg-success-500" : ""}`}
+          onPress={() => toggleBookmark(comicData)}
+          disabled={isLoading || isToggling}
+        >
+          {isLoading || isToggling ? (
+            <ActivityIndicator size="small" color="#FFFFFF" className="mr-2" />
+          ) : (
+            <Icon as={BookOpen} className="mr-2 size-4 text-typography-white" />
+          )}
+          <ButtonText className=" text-typography-white">{isBookmarked ? "Bookmarked" : "Bookmark"}</ButtonText>
         </Button>
       </View>
 

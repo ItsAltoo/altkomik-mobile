@@ -21,7 +21,7 @@ export const LogoutDialog = ({ isOpen, onClose, onConfirm }: LogoutDialogProps) 
       <AlertDialogBackdrop />
       <AlertDialogContent className="p-4">
         <AlertDialogHeader>
-          <Text className="text-typography-950 font-semibold text-lg">Keluar dari Akun</Text>
+          <Text className="text-lg font-semibold text-typography-950">Keluar dari Akun</Text>
         </AlertDialogHeader>
         <AlertDialogBody className="mb-4 mt-3" contentContainerClassName="mb-4">
           <Text size="sm" className="text-typography-500">

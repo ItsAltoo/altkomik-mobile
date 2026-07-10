@@ -33,10 +33,12 @@ export const ProfileHistory = ({ recentHistory, historyCount }: ProfileHistoryPr
       ) : recentHistory.length > 0 ? (
         <VStack space="sm">
           {recentHistory.map(([comicSlug, progress]) => {
-            const displayTitle = progress.title || comicSlug
-              .split("-")
-              .map((word: string) => word.charAt(0).toUpperCase() + word.slice(1))
-              .join(" ")
+            const displayTitle =
+              progress.title ||
+              comicSlug
+                .split("-")
+                .map((word: string) => word.charAt(0).toUpperCase() + word.slice(1))
+                .join(" ")
 
             const lastChapterSlug = progress.lastReadChapter
             const chapterMatch = lastChapterSlug.match(/chapter[- ](.+)$/i)
@@ -46,7 +48,7 @@ export const ProfileHistory = ({ recentHistory, historyCount }: ProfileHistoryPr
               <Pressable
                 key={comicSlug}
                 onPress={() => router.push(`/detail-comic/${comicSlug}`)}
-                className="flex-row items-center justify-between rounded-lg border border-outline-100 bg-background-0 p-3 shadow-soft-1 transition-colors active:bg-background-50"
+                className="flex-row items-center justify-between rounded-lg border border-outline-100 bg-background-0 p-3 transition-colors shadow-soft-1 active:bg-background-50"
               >
                 <HStack space="md" className="flex-1 items-center">
                   {progress.thumbnail ? (

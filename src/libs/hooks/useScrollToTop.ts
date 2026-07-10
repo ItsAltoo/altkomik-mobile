@@ -21,7 +21,7 @@ export const useScrollToTop = (threshold = 400) => {
     // For FlashList and FlatList
     if (listRef.current?.scrollToOffset) {
       listRef.current.scrollToOffset({ offset: 0, animated: true })
-    } 
+    }
     // Fallback for standard ScrollView
     else if (listRef.current?.scrollTo) {
       listRef.current.scrollTo({ y: 0, animated: true })

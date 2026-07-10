@@ -45,7 +45,7 @@ export const ComicCarousel = ({ data, isLoading = false, autoPlay = true }: Comi
         showsHorizontalScrollIndicator={false}
         onScroll={onScroll}
         scrollEventThrottle={16}
-        renderItem={({ item }) => <CarouselItem item={item}/>}
+        renderItem={({ item }) => <CarouselItem item={item} />}
         getItemLayout={getItemLayout}
       />
 
