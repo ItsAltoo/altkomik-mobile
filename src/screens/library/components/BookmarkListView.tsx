@@ -16,6 +16,7 @@ import { ScrollToTopFab } from "@/src/components/ui/ScrollToTopFab"
 import { useListContainerStyle } from "@/src/libs/hooks/useListContainerStyle"
 import { useScrollToTop } from "@/src/libs/hooks/useScrollToTop"
 import { ListEmptyState } from "@/src/components/empty-state/ListEmptyState"
+import { MascotEmptyState } from "@/src/components/empty-state/MascotEmptyState"
 import { useBookmarks } from "../hooks/useBookmarks"
 import { useAuth } from "@/src/screens/profile/hooks/useAuth"
 import { ListRowSkeleton } from "@/src/components/skeleton/ListRowSkeleton"
@@ -85,17 +86,12 @@ export const BookmarkListView = () => {
     if (isInitializing) return null
     if (!token) {
       return (
-        <View className="items-center justify-center px-6 py-20">
-          <VStack className="items-center gap-4">
-            <Box className="size-16 items-center justify-center rounded-full bg-primary-50">
-              <Icon as={LogIn} size="xl" className="text-primary-500" />
-            </Box>
-            <Text className="text-center text-lg font-medium text-typography-900">Masuk untuk melihat Bookmark</Text>
-            <Text className="text-center text-sm text-typography-500">
-              Silakan login melalui menu profil untuk mengakses daftar bookmark Anda.
-            </Text>
-          </VStack>
-        </View>
+        <MascotEmptyState
+          mascot="nijika"
+          title="Masuk untuk melihat Bookmark"
+          description="Silakan login melalui menu profil untuk mengakses daftar bookmark Anda."
+          size="md"
+        />
       )
     }
     if (isLoading) {
@@ -105,7 +101,7 @@ export const BookmarkListView = () => {
         </View>
       )
     }
-    return <ListEmptyState error={error} isLoading={isLoading} dataLength={data.result.length} />
+    return <ListEmptyState error={error} isLoading={isLoading} dataLength={data.result.length} mascot="nijika" />
   }, [error, isLoading, data.result.length, token, isInitializing])
 
   const renderFooter = useCallback(

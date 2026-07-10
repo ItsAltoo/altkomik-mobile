@@ -8,6 +8,7 @@ import { Image } from "expo-image"
 import { useRouter } from "expo-router"
 import { BookOpen, Play } from "lucide-react-native"
 import { useHydration } from "@/src/libs/store/useReadingHistory"
+import { MascotEmptyState } from "@/src/components/empty-state/MascotEmptyState"
 import { ListRowSkeleton } from "@/src/components/skeleton/ListRowSkeleton"
 
 type ProfileHistoryProps = {
@@ -88,11 +89,12 @@ export const ProfileHistory = ({ recentHistory, historyCount }: ProfileHistoryPr
           )}
         </VStack>
       ) : (
-        <Box className="items-center justify-center rounded-lg border border-dashed border-outline-100 bg-background-50 py-6">
-          <Text className="text-center text-sm text-typography-500">
-            Belum ada riwayat bacaan. Mulai baca komik untuk melihat riwayat di sini.
-          </Text>
-        </Box>
+        <MascotEmptyState
+          mascot="ryo"
+          title="Belum ada Riwayat"
+          description="Mulai baca komik untuk melihat riwayat di sini."
+          size="sm"
+        />
       )}
     </VStack>
   )

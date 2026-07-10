@@ -7,6 +7,7 @@ import { FlashList } from "@shopify/flash-list"
 import { useLocalSearchParams } from "expo-router"
 import { SearchX } from "lucide-react-native"
 import { View } from "react-native"
+import { MascotEmptyState } from "@/src/components/empty-state/MascotEmptyState"
 import { useSearchComics } from "./hooks/useSearchComics"
 
 import { getGridItemWidth } from "@/src/libs/utils/layout"
@@ -44,22 +45,23 @@ const SearchScreen = () => {
   const renderEmptyComponent = useCallback(() => {
     if (error) {
       return (
-        <View className="items-center justify-center py-20">
-          <Text className="text-center text-error-500">Terjadi kesalahan saat memuat data pencarian.</Text>
-        </View>
+        <MascotEmptyState
+          mascot="kita"
+          title="Terjadi Kesalahan"
+          description="Terjadi kesalahan saat memuat data pencarian."
+          size="md"
+        />
       )
     }
 
     if (!isLoading && data.length === 0) {
       return (
-        <View className="items-center justify-center py-20">
-          <VStack className="items-center gap-4">
-            <Icon as={SearchX} size="xl" className="text-typography-400" />
-            <Text className="text-center text-lg font-medium text-typography-500">
-              {query ? `Tidak ada komik yang cocok dengan "${query}"` : "Ketik judul komik untuk mencari"}
-            </Text>
-          </VStack>
-        </View>
+        <MascotEmptyState
+          mascot="kita"
+          title={query ? "Tidak Ditemukan" : "Cari Komik"}
+          description={query ? `Tidak ada komik yang cocok dengan "${query}"` : "Ketik judul komik untuk mencari"}
+          size="md"
+        />
       )
     }
 
