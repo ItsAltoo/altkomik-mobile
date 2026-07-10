@@ -69,7 +69,7 @@ export const ProfileScreen = () => {
       <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{ paddingBottom: 100 }}>
         <VStack space="2xl" className="flex-1 px-4">
           {token ? (
-            <View className="pt-4 gap-6">
+            <View className="gap-6 pt-4">
               <ProfileHeader userProfile={userProfile} />
 
               <ProfileStats

@@ -67,7 +67,10 @@ export const ProfileMenu = ({ themePref, handleTheme, handleLogout }: ProfileMen
         </HStack>
 
         {/* About App */}
-        <Pressable onPress={() => router.push("/about")} className="flex-row items-center justify-between border-b border-outline-100 p-4 transition-colors active:bg-background-50">
+        <Pressable
+          onPress={() => router.push("/about")}
+          className="flex-row items-center justify-between border-b border-outline-100 p-4 transition-colors active:bg-background-50"
+        >
           <HStack space="md" className="items-center">
             <Icon as={Info} size="md" className="text-typography-700" />
             <Text className="font-medium text-typography-900">Tentang Aplikasi</Text>

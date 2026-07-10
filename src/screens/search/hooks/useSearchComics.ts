@@ -14,7 +14,11 @@ export const useSearchComics = (query: string) => {
       }
       return await SearchRepository.searchComics(q)
     },
-    { revalidateOnFocus: false },
+    {
+      revalidateOnFocus: false,
+      dedupingInterval: 500,
+      keepPreviousData: true,
+    },
   )
 
   return {

@@ -36,7 +36,7 @@ const DetailScreen = ({ slug }: { slug: string }) => {
 
   return (
     <ScrollView className="flex-1 bg-background-0" showsVerticalScrollIndicator={false}>
-      <DetailHeader thumbnail={data.thumbnail} />
+      <DetailHeader thumbnail={data.thumbnail} title={data.title} slug={slug} />
 
       <DetailHero
         thumbnail={data.thumbnail}
