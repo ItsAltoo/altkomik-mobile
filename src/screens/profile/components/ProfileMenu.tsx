@@ -6,6 +6,7 @@ import { Text } from "@/components/ui/text"
 import { VStack } from "@/components/ui/vstack"
 import { ChevronRight, Info, LogOut, Monitor, Moon, Sun } from "lucide-react-native"
 import { LogoutDialog } from "@/src/components/dialogs/LogoutDialog"
+import { useRouter } from "expo-router"
 
 type ProfileMenuProps = {
   themePref: "system" | "light" | "dark"
@@ -15,6 +16,7 @@ type ProfileMenuProps = {
 
 export const ProfileMenu = ({ themePref, handleTheme, handleLogout }: ProfileMenuProps) => {
   const [showLogoutDialog, setShowLogoutDialog] = useState(false)
+  const router = useRouter()
 
   return (
     <VStack space="md" className="mt-4">
@@ -65,7 +67,7 @@ export const ProfileMenu = ({ themePref, handleTheme, handleLogout }: ProfileMen
         </HStack>
 
         {/* About App */}
-        <Pressable className="flex-row items-center justify-between border-b border-outline-100 p-4 transition-colors active:bg-background-50">
+        <Pressable onPress={() => router.push("/about")} className="flex-row items-center justify-between border-b border-outline-100 p-4 transition-colors active:bg-background-50">
           <HStack space="md" className="items-center">
             <Icon as={Info} size="md" className="text-typography-700" />
             <Text className="font-medium text-typography-900">Tentang Aplikasi</Text>

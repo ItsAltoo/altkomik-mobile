@@ -1,13 +1,12 @@
-import { Box } from "@/components/ui/box"
 import { Button, ButtonIcon, ButtonSpinner, ButtonText } from "@/components/ui/button"
 import { HStack } from "@/components/ui/hstack"
-import { Icon } from "@/components/ui/icon"
 import { Text } from "@/components/ui/text"
 import { VStack } from "@/components/ui/vstack"
+import { DiscordIcon } from "@/src/components/icons/DiscordIcon"
 import { createIcon } from "@gluestack-ui/core/icon/creator"
-import { User as UserIcon } from "lucide-react-native"
-import { Path, Svg } from "react-native-svg"
 import { Image } from "expo-image"
+import { Link } from "expo-router"
+import { Path, Svg } from "react-native-svg"
 
 const gotouMascot = require("@/assets/mascot/Gotou.png")
 
@@ -48,17 +47,6 @@ const GoogleIcon = createIcon({
   ),
 })
 
-const DiscordIcon = createIcon({
-  Root: Svg,
-  viewBox: "0 0 127.14 96.36",
-  path: (
-    <Path
-      fill="#5865F2"
-      d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.79,32.65-1.71,56.6.54,80.21h0A105.73,105.73,0,0,0,32.71,96.36,77.7,77.7,0,0,0,39.6,85.25a68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.71,1.76,1.39,2.66,2a68.68,68.68,0,0,1-10.87,5.19,77,77,0,0,0,6.89,11.1,105.25,105.25,0,0,0,32.19-16.14c2.64-27.38-4.51-51.11-19.32-72.1ZM42.56,65.3c-5.36,0-9.76-4.83-9.76-10.74s4.36-10.74,9.76-10.74,9.81,4.83,9.76,10.74C52.32,60.47,48,65.3,42.56,65.3Zm42,0c-5.36,0-9.76-4.83-9.76-10.74s4.36-10.74,9.76-10.74,9.81,4.83,9.76,10.74C94.32,60.47,90,65.3,84.56,65.3Z"
-    />
-  ),
-})
-
 const TwitterIcon = createIcon({
   Root: Svg,
   viewBox: "0 0 24 24",
@@ -77,7 +65,7 @@ type ProfileLoginProps = {
 
 export const ProfileLogin = ({ isLoading, handleGoogleLogin }: ProfileLoginProps) => {
   return (
-    <VStack space="xl" className="h-screen flex-1 items-center justify-center px-4 py-12">
+    <VStack space="xl" className="h-screen flex-1 items-center justify-center px-4">
       <Image source={gotouMascot} style={{ width: 150, height: 150, marginBottom: -16 }} contentFit="contain" />
       <VStack space="sm" className="items-center">
         <Text className="text-center text-xl font-bold text-typography-900">Masuk ke Akun Anda</Text>
@@ -106,7 +94,7 @@ export const ProfileLogin = ({ isLoading, handleGoogleLogin }: ProfileLoginProps
         <Button
           size="xl"
           disabled={true}
-          className="h-14 w-full flex-row items-center justify-center rounded-xl border border-outline-200 bg-white shadow-soft-2 active:opacity-80"
+          className="h-14 w-full flex-row items-center justify-center rounded-xl border border-outline-200 bg-white/80 shadow-soft-2 active:opacity-80"
         >
           <HStack space="sm" className="items-center">
             <ButtonIcon as={DiscordIcon} size="lg" />
@@ -117,7 +105,7 @@ export const ProfileLogin = ({ isLoading, handleGoogleLogin }: ProfileLoginProps
         <Button
           size="xl"
           disabled={true}
-          className="h-14 w-full flex-row items-center justify-center rounded-xl border border-outline-200 bg-white shadow-soft-2 active:opacity-80"
+          className="h-14 w-full flex-row items-center justify-center rounded-xl border border-outline-200 bg-white/80 shadow-soft-2 active:opacity-80"
         >
           <HStack space="sm" className="items-center">
             <ButtonIcon as={TwitterIcon} size="lg" />
@@ -125,6 +113,18 @@ export const ProfileLogin = ({ isLoading, handleGoogleLogin }: ProfileLoginProps
           </HStack>
         </Button>
       </VStack>
+
+      <Text className="mt-8 text-center text-sm text-typography-500">
+        Dengan masuk, Anda menyetujui{" "}
+        <Link href="/terms" asChild>
+          <Text className="font-semibold text-primary-500 underline">Ketentuan Layanan</Text>
+        </Link>{" "}
+        dan{" "}
+        <Link href="/privacy" asChild>
+          <Text className="font-semibold text-primary-500 underline">Kebijakan Privasi</Text>
+        </Link>{" "}
+        kami.
+      </Text>
     </VStack>
   )
 }
