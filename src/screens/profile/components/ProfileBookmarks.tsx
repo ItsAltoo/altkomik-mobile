@@ -8,6 +8,7 @@ import { VStack } from "@/components/ui/vstack"
 import { Image } from "expo-image"
 import { useRouter } from "expo-router"
 import { ChevronRight } from "lucide-react-native"
+import { MascotEmptyState } from "@/src/components/empty-state/MascotEmptyState"
 import { ListRowSkeleton } from "@/src/components/skeleton/ListRowSkeleton"
 
 type ProfileBookmarksProps = {
@@ -66,9 +67,12 @@ export const ProfileBookmarks = ({ isLoading, bookmarksList, bookmarksCount }: P
           )}
         </VStack>
       ) : (
-        <Box className="items-center justify-center rounded-lg border border-dashed border-outline-100 bg-background-50 py-6">
-          <Text className="text-center text-sm text-typography-500">Belum ada komik yang di-bookmark.</Text>
-        </Box>
+        <MascotEmptyState
+          mascot="nijika"
+          title="Belum ada Bookmark"
+          description="Komik yang kamu simpan akan muncul di sini."
+          size="sm"
+        />
       )}
     </VStack>
   )

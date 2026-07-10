@@ -123,7 +123,7 @@ export const HistoryListView = () => {
         </View>
       )
     }
-    return <ListEmptyState error={null} isLoading={false} dataLength={totalCount} />
+    return <ListEmptyState error={null} isLoading={false} dataLength={totalCount} mascot="ryo" />
   }, [totalCount, isHydrated])
 
   const renderFooter = useCallback(

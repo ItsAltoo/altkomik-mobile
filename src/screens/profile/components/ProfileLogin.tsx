@@ -7,6 +7,9 @@ import { VStack } from "@/components/ui/vstack"
 import { createIcon } from "@gluestack-ui/core/icon/creator"
 import { User as UserIcon } from "lucide-react-native"
 import { Path, Svg } from "react-native-svg"
+import { Image } from "expo-image"
+
+const gotouMascot = require("@/assets/mascot/Gotou.png")
 
 const GoogleIcon = createIcon({
   Root: Svg,
@@ -75,9 +78,7 @@ type ProfileLoginProps = {
 export const ProfileLogin = ({ isLoading, handleGoogleLogin }: ProfileLoginProps) => {
   return (
     <VStack space="xl" className="h-screen flex-1 items-center justify-center px-4 py-12">
-      <Box className="size-24 items-center justify-center rounded-full border-4 border-primary-50 bg-primary-100">
-        <Icon as={UserIcon} size="xl" className="text-primary-500" style={{ width: 40, height: 40 }} />
-      </Box>
+      <Image source={gotouMascot} style={{ width: 150, height: 150, marginBottom: -16 }} contentFit="contain" />
       <VStack space="sm" className="items-center">
         <Text className="text-center text-xl font-bold text-typography-900">Masuk ke Akun Anda</Text>
         <Text className="text-center text-typography-500">
