@@ -1,20 +1,28 @@
 import { Box } from "@/components/ui/box"
 import { HStack } from "@/components/ui/hstack"
+import { Icon } from "@/components/ui/icon"
 import { Pressable } from "@/components/ui/pressable"
 import { Text } from "@/components/ui/text"
 import { VStack } from "@/components/ui/vstack"
+import { DiscordIcon } from "@/src/components/icons/DiscordIcon"
 import { Image } from "expo-image"
 import * as Linking from "expo-linking"
+import { useRouter } from "expo-router"
 
 export const Footer = () => {
   const currentYear = new Date().getFullYear()
+  const router = useRouter()
 
-  const handlePress = (url: string) => {
+  const handleExternalPress = (url: string) => {
     Linking.openURL(url).catch((err) => console.error("Couldn't load page", err))
   }
 
+  const handleInternalPress = (path: any) => {
+    router.push(path)
+  }
+
   return (
-    <Box className="mt-6 w-full rounded-t-3xl border-t border-outline-100 bg-background-0 px-4 pt-8">
+    <Box className="mt-6 w-full rounded-t-3xl border-t border-outline-100 bg-background-0 px-4 py-8">
       <VStack className="items-center gap-6">
         <VStack className="items-center gap-2">
           <Image
@@ -29,23 +37,23 @@ export const Footer = () => {
         </VStack>
 
         <HStack className="mt-2 flex-wrap justify-center gap-6">
-          <Pressable
-            onPress={() => handlePress("https://altkomik.com/about")}
-            className="transition-opacity active:opacity-70"
-          >
+          <Pressable onPress={() => handleInternalPress("/about")} className="transition-opacity active:opacity-70">
             <Text className="text-sm font-semibold text-typography-700">Tentang Kami</Text>
           </Pressable>
-          <Pressable
-            onPress={() => handlePress("https://altkomik.com/privacy")}
-            className="transition-opacity active:opacity-70"
-          >
+          <Pressable onPress={() => handleInternalPress("/privacy")} className="transition-opacity active:opacity-70">
             <Text className="text-sm font-semibold text-typography-700">Kebijakan Privasi</Text>
           </Pressable>
-          <Pressable
-            onPress={() => handlePress("https://altkomik.com/tos")}
-            className="transition-opacity active:opacity-70"
-          >
+          <Pressable onPress={() => handleInternalPress("/terms")} className="transition-opacity active:opacity-70">
             <Text className="text-sm font-semibold text-typography-700">Ketentuan Layanan</Text>
+          </Pressable>
+        </HStack>
+
+        <HStack className="mt-2 justify-center">
+          <Pressable
+            onPress={() => handleExternalPress("https://discord.gg/uc6tnw4TSc")}
+            className="rounded-full bg-background-50 p-3 transition-colors active:bg-background-100"
+          >
+            <Icon as={DiscordIcon} size="xl" />
           </Pressable>
         </HStack>
 
