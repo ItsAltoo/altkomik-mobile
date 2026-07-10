@@ -1,5 +1,4 @@
 import { OverlayProvider } from "@gluestack-ui/core/overlay/creator";
-import { ToastProvider } from "@gluestack-ui/core/toast/creator";
 import { useColorScheme } from "nativewind";
 import React, { useEffect } from "react";
 import { View, ViewProps } from "react-native";
@@ -31,7 +30,7 @@ export function GluestackUIProvider({
       ]}
     >
       <OverlayProvider>
-        <ToastProvider>{props.children}</ToastProvider>
+        {props.children}
       </OverlayProvider>
     </View>
   );

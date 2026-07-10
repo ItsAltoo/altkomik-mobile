@@ -19,7 +19,7 @@ const cardStyle = { width: cardWidth }
 
 const SearchScreen = () => {
   const { q } = useLocalSearchParams<{ q: string }>()
-  const query = q || ""
+  const query = (Array.isArray(q) ? q[0] : q) || ""
   const { data, isLoading, error } = useSearchComics(query)
 
   const renderItem = useCallback(({ item, index }: { item: any; index: number }) => {

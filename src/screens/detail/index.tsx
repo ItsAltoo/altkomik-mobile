@@ -43,6 +43,15 @@ const DetailScreen = ({ slug }: { slug: string }) => {
         title={data.title}
         description={data.description}
         chapters={data.chapters}
+        slug={slug}
+        comicData={{
+          slug,
+          title: data.title,
+          thumbnail: data.thumbnail,
+          type: (Array.isArray(data.description?.type) ? data.description?.type[0] : data.description?.type) || "",
+          status:
+            (Array.isArray(data.description?.status) ? data.description?.status[0] : data.description?.status) || "",
+        }}
       />
 
       <View className="px-4 pb-8 pt-6">

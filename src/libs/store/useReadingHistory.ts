@@ -77,15 +77,16 @@ export const useReadingHistory = create<ReadingHistoryState>()(
 
 export const useHydration = () => {
   const [hydrated, setHydrated] = useState(useReadingHistory.persist.hasHydrated())
-  
+
   useEffect(() => {
     const unsub = useReadingHistory.persist.onFinishHydration(() => setHydrated(true))
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setHydrated(useReadingHistory.persist.hasHydrated())
-    
+
     return () => {
       unsub()
     }
   }, [])
-  
+
   return hydrated
 }

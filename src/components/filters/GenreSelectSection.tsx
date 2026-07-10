@@ -75,9 +75,7 @@ export const GenreSelectSection = ({ title, options, selectedValue, onSelect }: 
               showsVerticalScrollIndicator={false}
               data={filteredOptions}
               keyExtractor={(opt: any) => opt.value}
-              renderItem={({ item: opt }: any) => (
-                <SelectItem label={opt.label || opt.text!} value={opt.value} />
-              )}
+              renderItem={({ item: opt }: any) => <SelectItem label={opt.label || opt.text!} value={opt.value} />}
               ListEmptyComponent={
                 <View className="items-center py-6">
                   <Text className="text-typography-500">Genre tidak ditemukan</Text>

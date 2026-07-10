@@ -67,7 +67,7 @@ export const ProfileScreen = () => {
   return (
     <Box className="flex-1 bg-background-0">
       <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{ paddingBottom: 100 }}>
-        <VStack space="2xl" className="flex-1 px-4 pt-6 pb-12">
+        <VStack space="2xl" className="flex-1 px-4 pb-12 pt-6">
           {token ? (
             <>
               <ProfileHeader userProfile={userProfile} />

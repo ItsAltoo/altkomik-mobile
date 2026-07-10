@@ -27,7 +27,7 @@ export const useAuth = create<AuthState>((set) => ({
   loadSession: async () => {
     const val = await SecureStore.getItemAsync("session_token")
     const profileStr = await SecureStore.getItemAsync("user_profile")
-    
+
     let profile = null
     if (profileStr) {
       try {
@@ -47,19 +47,19 @@ export const useAuth = create<AuthState>((set) => ({
     try {
       await GoogleSignin.hasPlayServices()
       const userInfo: any = await GoogleSignin.signIn()
-      
+
       const idToken = userInfo.data?.idToken || userInfo.idToken
       const user = userInfo.data?.user || userInfo.user
-      
+
       if (!idToken) throw new Error("Gagal mendapatkan idToken dari Google")
-      
+
       const data = await ProfileRepository.loginWithGoogle(idToken)
       if (data.success && data.token) {
         await SecureStore.setItemAsync("session_token", data.token)
-        
+
         const profile = { name: user?.name || "User", email: user?.email || null, photo: user?.photo || null }
         await SecureStore.setItemAsync("user_profile", JSON.stringify(profile))
-        
+
         set({ token: data.token, userProfile: profile })
       } else {
         console.error("Gagal login di sisi server:", data)

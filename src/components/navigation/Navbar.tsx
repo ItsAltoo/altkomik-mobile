@@ -104,7 +104,7 @@ export const Navbar = () => {
                 {/* User Name (Non-clickable) */}
                 <HStack className="items-center gap-2 px-3 py-2">
                   <Text className="text-sm font-bold text-typography-900" numberOfLines={1}>
-                    {token ? (userProfile?.name || "User") : "Tamu"}
+                    {token ? userProfile?.name || "User" : "Tamu"}
                   </Text>
                 </HStack>
 
@@ -142,11 +142,7 @@ export const Navbar = () => {
         </Popover>
       </HStack>
 
-      <LogoutDialog
-        isOpen={showLogoutDialog}
-        onClose={() => setShowLogoutDialog(false)}
-        onConfirm={handleLogout}
-      />
+      <LogoutDialog isOpen={showLogoutDialog} onClose={() => setShowLogoutDialog(false)} onConfirm={handleLogout} />
     </HStack>
   )
 }

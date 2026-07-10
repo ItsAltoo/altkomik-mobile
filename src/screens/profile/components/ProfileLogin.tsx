@@ -74,7 +74,7 @@ type ProfileLoginProps = {
 
 export const ProfileLogin = ({ isLoading, handleGoogleLogin }: ProfileLoginProps) => {
   return (
-    <VStack space="xl" className="flex-1 items-center justify-center px-4 py-12 h-[100vh]">
+    <VStack space="xl" className="h-screen flex-1 items-center justify-center px-4 py-12">
       <Box className="size-24 items-center justify-center rounded-full border-4 border-primary-50 bg-primary-100">
         <Icon as={UserIcon} size="xl" className="text-primary-500" style={{ width: 40, height: 40 }} />
       </Box>

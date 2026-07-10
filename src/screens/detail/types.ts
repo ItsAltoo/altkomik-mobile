@@ -10,6 +10,14 @@ export type ChapterRef = {
 export type DetailHeroProps = {
   thumbnail: string
   title: string
+  slug: string
+  comicData: {
+    slug: string
+    title: string
+    thumbnail: string
+    type: string
+    status: string
+  }
   description?: {
     alternativeTitle?: string
     status?: string

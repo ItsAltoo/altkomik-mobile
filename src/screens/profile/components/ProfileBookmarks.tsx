@@ -36,7 +36,7 @@ export const ProfileBookmarks = ({ isLoading, bookmarksList, bookmarksCount }: P
             <Pressable
               key={bookmark.id}
               onPress={() => router.push(`/detail-comic/${bookmark.slug}`)}
-              className="flex-row items-center justify-between rounded-lg border border-outline-100 bg-background-0 p-3 shadow-soft-1 transition-colors active:bg-background-50"
+              className="flex-row items-center justify-between rounded-lg border border-outline-100 bg-background-0 p-3 transition-colors shadow-soft-1 active:bg-background-50"
             >
               <HStack space="md" className="flex-1 items-center">
                 <Image
@@ -62,9 +62,7 @@ export const ProfileBookmarks = ({ isLoading, bookmarksList, bookmarksCount }: P
             </Pressable>
           ))}
           {bookmarksCount > 5 && (
-            <Text className="mt-1 text-center text-xs text-typography-400">
-              dan {bookmarksCount - 5} komik lainnya
-            </Text>
+            <Text className="mt-1 text-center text-xs text-typography-400">dan {bookmarksCount - 5} komik lainnya</Text>
           )}
         </VStack>
       ) : (

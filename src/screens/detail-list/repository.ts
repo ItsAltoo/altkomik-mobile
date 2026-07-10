@@ -18,12 +18,12 @@ export const ComicListRepository = {
     const endpoint = queryString ? `/comic-list?${queryString}` : "/comic-list"
 
     const { data } = await api.get<ApiResponse<ComicListGroup[]>>(endpoint)
-    
+
     // The API returns an array of groups. We return the first group which contains heading and list.
     if (data.data && data.data.length > 0) {
       return data.data[0]
     }
-    
+
     return { heading: "", list: [] }
   },
 }

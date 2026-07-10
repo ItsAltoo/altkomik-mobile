@@ -23,7 +23,7 @@ import { ListRowSkeleton } from "@/src/components/skeleton/ListRowSkeleton"
 export const BookmarkListView = () => {
   const [page, setPage] = useState(1)
   const router = useRouter()
-  
+
   const { token, isInitializing } = useAuth()
   const { listRef, showScrollTop, handleScroll, scrollToTop } = useScrollToTop()
   const { data, isLoading, hasMore, error, mutate } = useBookmarks(token, page)
@@ -45,36 +45,39 @@ export const BookmarkListView = () => {
     setRefreshing(false)
   }, [mutate, token])
 
-  const renderItem = useCallback(({ item }: { item: any }) => {
-    return (
-      <Pressable
-        onPress={() => router.push(`/detail-comic/${item.slug}`)}
-        className="mb-3 mx-4 flex-row items-center justify-between rounded-lg border border-outline-100 bg-background-0 p-3 shadow-soft-1 transition-colors active:bg-background-50"
-      >
-        <HStack space="md" className="flex-1 items-center">
-          <Image
-            source={{ uri: item.thumbnail }}
-            style={{ width: 48, height: 64, borderRadius: 4 }}
-            contentFit="cover"
-          />
-          <VStack className="flex-1">
-            <Text className="font-bold text-typography-900" numberOfLines={1}>
-              {item.title}
-            </Text>
-            <Text className="mt-0.5 text-xs text-typography-500" numberOfLines={1}>
-              {item.type} • {item.status}
-            </Text>
-            {item.chapters?.latest && (
-              <Text className="mt-0.5 text-xs text-primary-500" numberOfLines={1}>
-                {item.chapters.latest.title}
+  const renderItem = useCallback(
+    ({ item }: { item: any }) => {
+      return (
+        <Pressable
+          onPress={() => router.push(`/detail-comic/${item.slug}`)}
+          className="mx-4 mb-3 flex-row items-center justify-between rounded-lg border border-outline-100 bg-background-0 p-3 transition-colors shadow-soft-1 active:bg-background-50"
+        >
+          <HStack space="md" className="flex-1 items-center">
+            <Image
+              source={{ uri: item.thumbnail }}
+              style={{ width: 48, height: 64, borderRadius: 4 }}
+              contentFit="cover"
+            />
+            <VStack className="flex-1">
+              <Text className="font-bold text-typography-900" numberOfLines={1}>
+                {item.title}
               </Text>
-            )}
-          </VStack>
-        </HStack>
-        <Icon as={ChevronRight} size="sm" className="text-typography-400" />
-      </Pressable>
-    )
-  }, [router])
+              <Text className="mt-0.5 text-xs text-typography-500" numberOfLines={1}>
+                {item.type} • {item.status}
+              </Text>
+              {item.chapters?.latest && (
+                <Text className="mt-0.5 text-xs text-primary-500" numberOfLines={1}>
+                  {item.chapters.latest.title}
+                </Text>
+              )}
+            </VStack>
+          </HStack>
+          <Icon as={ChevronRight} size="sm" className="text-typography-400" />
+        </Pressable>
+      )
+    },
+    [router],
+  )
 
   const keyExtractor = useCallback((item: any) => item.slug, [])
 
@@ -82,14 +85,12 @@ export const BookmarkListView = () => {
     if (isInitializing) return null
     if (!token) {
       return (
-        <View className="items-center justify-center py-20 px-6">
+        <View className="items-center justify-center px-6 py-20">
           <VStack className="items-center gap-4">
             <Box className="size-16 items-center justify-center rounded-full bg-primary-50">
               <Icon as={LogIn} size="xl" className="text-primary-500" />
             </Box>
-            <Text className="text-center text-lg font-medium text-typography-900">
-              Masuk untuk melihat Bookmark
-            </Text>
+            <Text className="text-center text-lg font-medium text-typography-900">Masuk untuk melihat Bookmark</Text>
             <Text className="text-center text-sm text-typography-500">
               Silakan login melalui menu profil untuk mengakses daftar bookmark Anda.
             </Text>
@@ -111,12 +112,7 @@ export const BookmarkListView = () => {
     () => (
       <VStack className="items-center pb-8 pt-4">
         {token && data.result.length > 0 && (
-          <Pagination
-            page={page}
-            hasMore={!!hasMore}
-            isLoading={isLoading}
-            onPageChange={handlePageChange}
-          />
+          <Pagination page={page} hasMore={!!hasMore} isLoading={isLoading} onPageChange={handlePageChange} />
         )}
         <Footer />
       </VStack>

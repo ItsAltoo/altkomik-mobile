@@ -7,7 +7,13 @@ const EMPTY_ARRAY: SearchComic[] = []
 export const useSearchComics = (query: string) => {
   const { data, mutate, ...rest } = useSWR(
     query ? ["search-comics", query] : null,
-    () => SearchRepository.searchComics(query),
+    async ([_, q]) => {
+      if (!SearchRepository) {
+        console.error("SearchRepository is undefined")
+        return []
+      }
+      return await SearchRepository.searchComics(q)
+    },
     { revalidateOnFocus: false },
   )
 

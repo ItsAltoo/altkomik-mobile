@@ -18,11 +18,11 @@ export const DetailHeader = ({ thumbnail }: DetailHeaderProps) => {
       <HStack className="z-10 items-center justify-between px-3 pb-3 pt-6">
         <Pressable
           onPress={() => router.back()}
-          className="size-12 items-center justify-center rounded-full bg-primary-500"
+          className="size-12 items-center justify-center rounded-full bg-primary-500 active:bg-primary-600"
         >
           <Icon as={ArrowLeft} className="size-5 text-typography-white" />
         </Pressable>
-        <Pressable className="size-12 items-center justify-center rounded-full bg-primary-500">
+        <Pressable className="size-12 items-center justify-center rounded-full bg-primary-500 active:bg-primary-600">
           <Icon as={Share2} className="size-5 text-typography-white" />
         </Pressable>
       </HStack>

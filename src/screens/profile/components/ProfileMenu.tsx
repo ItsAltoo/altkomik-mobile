@@ -45,13 +45,21 @@ export const ProfileMenu = ({ themePref, handleTheme, handleLogout }: ProfileMen
               onPress={() => handleTheme("light")}
               className={`rounded-full p-1.5 transition-colors ${themePref === "light" ? "bg-primary-500 shadow-soft-1" : "active:bg-background-100"}`}
             >
-              <Icon as={Sun} size="sm" className={themePref === "light" ? "text-typography-0" : "text-typography-400"} />
+              <Icon
+                as={Sun}
+                size="sm"
+                className={themePref === "light" ? "text-typography-0" : "text-typography-400"}
+              />
             </Pressable>
             <Pressable
               onPress={() => handleTheme("dark")}
               className={`rounded-full p-1.5 transition-colors ${themePref === "dark" ? "bg-primary-500 shadow-soft-1" : "active:bg-background-100"}`}
             >
-              <Icon as={Moon} size="sm" className={themePref === "dark" ? "text-typography-0" : "text-typography-400"} />
+              <Icon
+                as={Moon}
+                size="sm"
+                className={themePref === "dark" ? "text-typography-0" : "text-typography-400"}
+              />
             </Pressable>
           </HStack>
         </HStack>
@@ -80,11 +88,7 @@ export const ProfileMenu = ({ themePref, handleTheme, handleLogout }: ProfileMen
         </Pressable>
       </VStack>
 
-      <LogoutDialog
-        isOpen={showLogoutDialog}
-        onClose={() => setShowLogoutDialog(false)}
-        onConfirm={handleLogout}
-      />
+      <LogoutDialog isOpen={showLogoutDialog} onClose={() => setShowLogoutDialog(false)} onConfirm={handleLogout} />
     </VStack>
   )
 }
