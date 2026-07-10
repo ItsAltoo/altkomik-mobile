@@ -1,6 +1,6 @@
 import { useColorScheme } from "nativewind"
 import React, { useState } from "react"
-import { ScrollView } from "react-native"
+import { ScrollView, View } from "react-native"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
 
 import { Box } from "@/components/ui/box"
@@ -67,9 +67,9 @@ export const ProfileScreen = () => {
   return (
     <Box className="flex-1 bg-background-0">
       <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{ paddingBottom: 100 }}>
-        <VStack space="2xl" className="flex-1 px-4 pb-12 pt-6">
+        <VStack space="2xl" className="flex-1 px-4">
           {token ? (
-            <>
+            <View className="pt-4 gap-6">
               <ProfileHeader userProfile={userProfile} />
 
               <ProfileStats
@@ -87,7 +87,7 @@ export const ProfileScreen = () => {
               <ProfileHistory recentHistory={recentHistory} historyCount={historyCount} />
 
               <ProfileMenu themePref={themePref} handleTheme={handleTheme} handleLogout={handleLogout} />
-            </>
+            </View>
           ) : (
             <ProfileLogin isLoading={isLoading} handleGoogleLogin={handleGoogleLogin} />
           )}

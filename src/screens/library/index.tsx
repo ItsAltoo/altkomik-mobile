@@ -35,7 +35,7 @@ const LibraryScreen = () => {
   )
 
   return (
-    <View className="flex-1 bg-background-0 pt-4">
+    <View className="flex-1 bg-background-0">
       <TabView
         navigationState={{ index, routes }}
         renderScene={renderScene}
