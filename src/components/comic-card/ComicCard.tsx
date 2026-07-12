@@ -1,8 +1,8 @@
 import { Image } from "expo-image"
 import { Link } from "expo-router"
 import { Calendar, Clock, Eye, Tag } from "lucide-react-native"
-import { StyleSheet, View } from "react-native"
 import React from "react"
+import { StyleSheet, View } from "react-native"
 
 import { Badge, BadgeText } from "@/components/ui/badge"
 import { Box } from "@/components/ui/box"
@@ -17,7 +17,6 @@ import { ComicCardProps } from "./types"
 
 export const ComicCard = ({
   title,
-  description,
   thumbnail,
   slug,
   flag,
@@ -27,6 +26,7 @@ export const ComicCard = ({
   latestChapter,
   latestChapterSlug,
   updateCount,
+  variant = "default",
   priority = false,
   className = "",
   style,
@@ -40,164 +40,157 @@ export const ComicCard = ({
 
   const finalLatestChapter = latestChapter || chapters?.latest?.title
   const finalLatestChapterSlug = latestChapterSlug || chapters?.latest?.slug
-  const initialChapterSlug = chapters?.initial?.slug
 
   const apiDetailLink = `/detail-comic/${slug}` as any
   const apiChapterLink = finalLatestChapterSlug ? (`/read/${finalLatestChapterSlug}` as any) : null
-  const apiInitialChapterLink = initialChapterSlug ? (`/read/${initialChapterSlug}` as any) : null
 
   const isValidImage = Boolean(thumbnail && thumbnail.startsWith("http") && !thumbnail.startsWith("https://komiku.org"))
 
+  const isCompact = variant === "compact"
+  const imageHeight = isCompact ? 150 : 180
+  const titleLines = isCompact ? 1 : 2
+
+  const hasMetadata = Boolean(timeAgo || views || release || genre)
+
   return (
     <Box
-      className={`flex-1 overflow-hidden rounded-xl border border-outline-100 bg-background-0 shadow-soft-1 ${className}`}
+      className={`flex-1 overflow-hidden rounded-xl border border-outline-100 shadow-soft-1 ${className}`}
       style={style}
     >
+      {/* IMAGE AREA */}
       <Link href={apiDetailLink} asChild>
-        <Pressable className="relative h-[180px] w-full overflow-hidden bg-background-50 transition-transform duration-200 active:scale-[0.98]">
-          {isValidImage ? (
-            <>
-              <Image
-                source={{ uri: thumbnail }}
-                style={[StyleSheet.absoluteFill, { opacity: 0.5 }]}
-                contentFit="cover"
-                blurRadius={15}
-                priority={priority ? "high" : "normal"}
-              />
-              <Image
-                source={{ uri: thumbnail }}
-                style={StyleSheet.absoluteFill}
-                contentFit="contain"
-                priority={priority ? "high" : "normal"}
-              />
-            </>
-          ) : (
-            <View className="flex-1 items-center justify-center bg-background-100  ">
-              <Text className="text-xs font-medium text-typography-500">No Image</Text>
-            </View>
-          )}
+        <Pressable
+          className="relative w-full transition-transform duration-200 active:scale-[0.98]"
+          style={{ height: imageHeight }}
+        >
+          {/* We wrap images in this View to ensure strict overflow hidden, preventing absoluteFill from bleeding */}
+          <View className="absolute inset-0 overflow-hidden bg-background-50">
+            {isValidImage ? (
+              <>
+                <Image
+                  source={{ uri: thumbnail }}
+                  style={[StyleSheet.absoluteFill, { opacity: 0.5 }]}
+                  contentFit="cover"
+                  blurRadius={15}
+                  priority={priority ? "high" : "normal"}
+                />
+                <Image
+                  source={{ uri: thumbnail }}
+                  style={StyleSheet.absoluteFill}
+                  contentFit="contain"
+                  priority={priority ? "high" : "normal"}
+                />
+              </>
+            ) : (
+              <View className="flex-1 items-center justify-center bg-background-100">
+                <Text className="text-xs font-medium text-typography-500">No Image</Text>
+              </View>
+            )}
+          </View>
 
-          {flag && (
-            <Box className="absolute right-2 top-2 overflow-hidden rounded-sm border border-outline-800/30 shadow-hard-5  ">
-              <Image source={{ uri: flag }} style={{ width: 22, height: 16 }} contentFit="cover" />
-            </Box>
-          )}
+          {/* TOP LEFT BADGES */}
+          <VStack className="absolute left-2 top-2 items-start gap-1">
+            {finalLatestChapter && (
+              <Badge
+                variant="default"
+                className="max-w-[120px] rounded-sm border border-outline-100 bg-background-0 px-1.5 py-0.5"
+              >
+                <BadgeText className="text-[9px] font-bold text-typography-900" numberOfLines={1}>
+                  {finalLatestChapter}
+                </BadgeText>
+              </Badge>
+            )}
+            <HStack className="gap-1">
+              {updateCount && (
+                <Badge className="rounded-sm border-none bg-error-500 px-1.5 py-0.5 shadow-hard-5">
+                  <BadgeText className="text-[9px] font-extrabold tracking-wider text-white">+{updateCount}</BadgeText>
+                </Badge>
+              )}
+              {isColored && (
+                <Badge className="rounded-sm border-none bg-[#F59E0B] px-1.5 py-0.5 shadow-hard-5">
+                  <BadgeText className="text-[9px] font-bold uppercase tracking-wider text-white">Color</BadgeText>
+                </Badge>
+              )}
+            </HStack>
+          </VStack>
 
-          {updateCount && (
-            <Badge className="absolute left-2 top-2 rounded-sm border-none bg-error-500 px-1.5 py-0.5 shadow-hard-5">
-              <BadgeText className="text-2xs font-extrabold tracking-wider text-white">{updateCount}</BadgeText>
-            </Badge>
-          )}
-
-          {isColored && (
-            <Badge
-              className={`absolute ${updateCount ? "top-8" : "top-2"} left-2 rounded-sm border-none bg-[#F59E0B] px-1.5 py-0.5 shadow-hard-5`}
-            >
-              <BadgeText className="text-[9px] font-bold uppercase tracking-wider text-white">Color</BadgeText>
-            </Badge>
-          )}
-
-          {finalLatestChapter && (
-            <Badge
-              variant="default"
-              className="absolute bottom-2 left-2 max-w-[120px] rounded-sm border border-outline-100 bg-background-0/90 px-2 py-0.5 backdrop-blur-md"
-            >
-              <BadgeText className="text-2xs font-bold text-typography-900" numberOfLines={1}>
-                {finalLatestChapter}
-              </BadgeText>
-            </Badge>
-          )}
-
-          {comicType && (
-            <Badge
-              variant="default"
-              className="absolute bottom-2 right-2 rounded-sm border-none bg-primary-500 px-1.5 py-0.5"
-            >
-              <BadgeText className="text-[9px] font-bold uppercase tracking-wider text-white">{comicType}</BadgeText>
-            </Badge>
-          )}
+          {/* TOP RIGHT BADGES */}
+          <VStack className="absolute right-2 top-2 items-end gap-1">
+            {comicType && (
+              <Badge variant="default" className="rounded-sm border-none bg-primary-500 px-1.5 py-0.5 shadow-hard-5">
+                <BadgeText className="text-[9px] font-bold uppercase tracking-wider text-white">{comicType}</BadgeText>
+              </Badge>
+            )}
+            {flag && (
+              <Box className="overflow-hidden rounded-sm border border-outline-200 shadow-hard-5">
+                <Image source={{ uri: flag }} style={{ width: 22, height: 16 }} contentFit="cover" />
+              </Box>
+            )}
+          </VStack>
         </Pressable>
       </Link>
 
-      <VStack className="flex-1 justify-between gap-3 bg-background-0 p-3">
-        <Link href={apiDetailLink} asChild>
-          <Pressable className="w-full transition-opacity active:opacity-70">
+      {/* INFO AREA */}
+      <Link href={apiDetailLink} asChild>
+        <Pressable
+          className="justify-between bg-background-0 p-2.5 transition-opacity active:opacity-80"
+          style={{ height: isCompact ? 130 : 150 }}
+        >
+          <VStack className="gap-1.5">
             <Text
-              numberOfLines={2}
-              className="w-full text-sm font-extrabold leading-[18px] tracking-tight text-typography-900"
+              numberOfLines={titleLines}
+              className="text-sm font-extrabold leading-[18px] tracking-tight text-typography-900"
             >
               {title}
             </Text>
-            {description && (
-              <Text numberOfLines={2} className="mt-1 text-2xs leading-[14px] text-typography-500">
-                {description}
-              </Text>
-            )}
-          </Pressable>
-        </Link>
 
-        <VStack className="mt-auto gap-3 pt-2">
-          <VStack className="gap-1.5">
-            {timeAgo && (
-              <HStack className="items-center gap-1.5">
-                <Icon as={Clock} className="size-3.5 text-primary-500" />
-                <Text className="text-[11px] font-medium text-typography-500" numberOfLines={1}>
-                  {timeAgo}
-                </Text>
-              </HStack>
-            )}
-            {views && (
-              <HStack className="items-center gap-1.5">
-                <Icon as={Eye} className="size-3.5 text-primary-500" />
-                <Text className="text-[11px] text-typography-500" numberOfLines={1}>
-                  {views}
-                </Text>
-              </HStack>
-            )}
-            {release && (
-              <HStack className="items-center gap-1.5">
-                <Icon as={Calendar} className="size-3.5 text-primary-500" />
-                <Text className="text-[11px] text-typography-500" numberOfLines={1}>
-                  {release}
-                </Text>
-              </HStack>
-            )}
-            {genre && (
-              <HStack className="items-center gap-1.5">
-                <Icon as={Tag} className="size-3.5 text-primary-500" />
-                <Text className="text-[11px] text-typography-500" numberOfLines={1}>
-                  {genre}
-                </Text>
-              </HStack>
+            {hasMetadata && (
+              <VStack className="mt-0.5 gap-1">
+                {timeAgo && (
+                  <HStack className="items-center gap-1.5">
+                    <Icon as={Clock} className="size-3 text-primary-500" color="rgb(179, 49, 241)" />
+                    <Text className="text-xs font-medium text-typography-500" numberOfLines={1}>
+                      {timeAgo}
+                    </Text>
+                  </HStack>
+                )}
+                {views && (
+                  <HStack className="items-center gap-1.5">
+                    <Icon as={Eye} className="size-3 text-primary-500" color="rgb(179, 49, 241)" />
+                    <Text className="text-xs text-typography-500" numberOfLines={1}>
+                      {views}
+                    </Text>
+                  </HStack>
+                )}
+                {release && (
+                  <HStack className="items-center gap-1.5">
+                    <Icon as={Calendar} className="size-3 text-primary-500" color="rgb(179, 49, 241)" />
+                    <Text className="text-xs text-typography-500" numberOfLines={1}>
+                      {release}
+                    </Text>
+                  </HStack>
+                )}
+                {genre && (
+                  <HStack className="items-center gap-1.5">
+                    <Icon as={Tag} className="size-3 text-primary-500" color="rgb(179, 49, 241)" />
+                    <Text className="text-xs text-typography-500" numberOfLines={1}>
+                      {genre}
+                    </Text>
+                  </HStack>
+                )}
+              </VStack>
             )}
           </VStack>
 
-          <VStack className="w-full gap-2">
-            {apiInitialChapterLink && apiInitialChapterLink !== apiChapterLink && (
-              <Link href={apiInitialChapterLink} asChild>
-                <Button size="sm" variant="outline" className="border-outline-200">
-                  <ButtonText className="text-typography-700">Read First</ButtonText>
-                </Button>
-              </Link>
-            )}
-            {apiChapterLink ? (
-              <Link href={apiChapterLink} asChild>
-                <Button size="sm" variant="solid">
-                  <ButtonText>
-                    {apiInitialChapterLink && apiInitialChapterLink !== apiChapterLink ? "Read Latest" : "Read Now"}
-                  </ButtonText>
-                </Button>
-              </Link>
-            ) : (
-              <Link href={apiDetailLink} asChild>
-                <Button size="sm" variant="solid">
-                  <ButtonText>Details</ButtonText>
-                </Button>
-              </Link>
-            )}
-          </VStack>
-        </VStack>
-      </VStack>
+          <View>
+            <Link href={apiChapterLink || apiDetailLink} asChild>
+              <Button size="xs" variant="solid" className="h-7 w-full">
+                <ButtonText className="text-xs">{apiChapterLink ? "Baca" : "Detail"}</ButtonText>
+              </Button>
+            </Link>
+          </View>
+        </Pressable>
+      </Link>
     </Box>
   )
 }

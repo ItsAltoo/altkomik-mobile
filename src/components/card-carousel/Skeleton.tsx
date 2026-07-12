@@ -20,7 +20,7 @@ export const CardCarouselSkeleton = ({ title }: CardCarouselSkeletonProps) => {
       <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerClassName="pr-4">
         <HStack className="gap-4">
           {[1, 2, 3, 4].map((item) => (
-            <ComicCardSkeleton key={item} style={{ width: cardWidth }} className="h-[360px]" />
+            <ComicCardSkeleton key={item} variant="compact" style={{ width: cardWidth }} />
           ))}
         </HStack>
       </ScrollView>

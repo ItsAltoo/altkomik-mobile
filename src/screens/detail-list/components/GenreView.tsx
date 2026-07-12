@@ -92,7 +92,7 @@ export const GenreView = () => {
           renderItem={renderItem}
           keyExtractor={keyExtractor}
           // @ts-ignore
-          estimatedItemSize={456}
+          estimatedItemSize={350}
           numColumns={numColumns}
           showsVerticalScrollIndicator={false}
           onScroll={handleScroll}

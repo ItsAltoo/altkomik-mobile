@@ -11,19 +11,22 @@ const cardStyle = { width: cardWidth }
 
 export const MemoizedComicCardWrapper = memo(
   ({ item, isEven }: { item: any; isEven: boolean }) => {
-    const marginClass = isEven ? "mr-2" : "ml-2"
+    // FlashList divides the container into 2 columns.
+    // We use padding on a full-width View to create the gap,
+    // avoiding pixel-math rounding errors that cause empty columns.
+    const paddingClass = isEven ? "pr-2" : "pl-2"
 
     if (isComicSkeleton(item)) {
       return (
-        <View className={`mb-4 ${marginClass}`}>
-          <ComicCardSkeleton style={cardStyle} className="h-[440px]" />
+        <View className={`mb-4 w-full ${paddingClass}`}>
+          <ComicCardSkeleton />
         </View>
       )
     }
 
     return (
-      <View className={`mb-4 ${marginClass}`}>
-        <ComicCard {...item} style={cardStyle} className="h-[440px]" />
+      <View className={`mb-4 w-full ${paddingClass}`}>
+        <ComicCard {...item} />
       </View>
     )
   },

@@ -1,17 +1,14 @@
-import { Icon } from "@/components/ui/icon"
 import { Text } from "@/components/ui/text"
-import { VStack } from "@/components/ui/vstack"
-import { ComicCard, ComicCardSkeleton, COMIC_SKELETON_DATA, isComicSkeleton } from "@/src/components/comic-card"
+import { COMIC_SKELETON_DATA, ComicCard, ComicCardSkeleton, isComicSkeleton } from "@/src/components/comic-card"
+import { MascotEmptyState } from "@/src/components/empty-state/MascotEmptyState"
 import { Footer } from "@/src/components/footer"
 import { FlashList } from "@shopify/flash-list"
 import { useLocalSearchParams } from "expo-router"
-import { SearchX } from "lucide-react-native"
 import { View } from "react-native"
-import { MascotEmptyState } from "@/src/components/empty-state/MascotEmptyState"
 import { useSearchComics } from "./hooks/useSearchComics"
 
-import { getGridItemWidth } from "@/src/libs/utils/layout"
 import { useListContainerStyle } from "@/src/libs/hooks/useListContainerStyle"
+import { getGridItemWidth } from "@/src/libs/utils/layout"
 import { useCallback } from "react"
 
 const numColumns = 2
@@ -30,14 +27,14 @@ const SearchScreen = () => {
     if (isComicSkeleton(item)) {
       return (
         <View className={`mb-4 ${marginClass}`}>
-          <ComicCardSkeleton style={cardStyle} className="h-[360px]" />
+          <ComicCardSkeleton style={cardStyle} />
         </View>
       )
     }
 
     return (
       <View className={`mb-4 ${marginClass}`}>
-        <ComicCard {...item} style={cardStyle} className="h-[360px]" />
+        <ComicCard {...item} style={cardStyle} />
       </View>
     )
   }, [])
@@ -85,7 +82,7 @@ const SearchScreen = () => {
           data={listData}
           renderItem={renderItem}
           // @ts-ignore: estimatedItemSize is required by FlashList but types are sometimes broken
-          estimatedItemSize={360}
+          estimatedItemSize={350}
           numColumns={numColumns}
           showsVerticalScrollIndicator={false}
           contentContainerStyle={contentContainerStyle}

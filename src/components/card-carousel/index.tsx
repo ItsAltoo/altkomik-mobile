@@ -31,7 +31,7 @@ export function CardCarousel<T extends ComicCardProps>({ title, data, isLoading 
     const customStyle = (item as any).style
     const finalStyle = customStyle ? { width: cardWidth, ...customStyle } : baseCardStyle
 
-    return <ComicCard {...item} style={finalStyle} className={`h-[360px] ${item.className || ""}`} />
+    return <ComicCard {...item} variant="compact" style={finalStyle} className={`${item.className || ""}`} />
   }
 
   const renderSeparator = () => <Box className="w-4" />
