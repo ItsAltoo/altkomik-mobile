@@ -4,6 +4,16 @@ import { Icon } from "@/components/ui/icon"
 import { Pressable } from "@/components/ui/pressable"
 import { Text } from "@/components/ui/text"
 import { VStack } from "@/components/ui/vstack"
+import { Button, ButtonText } from "@/components/ui/button"
+import {
+  AlertDialog,
+  AlertDialogBackdrop,
+  AlertDialogContent,
+  AlertDialogHeader,
+  AlertDialogCloseButton,
+  AlertDialogFooter,
+  AlertDialogBody,
+} from "@/components/ui/alert-dialog"
 import { Image } from "expo-image"
 import { useRouter } from "expo-router"
 import { BookOpen, Play, Trash2 } from "lucide-react-native"
@@ -23,6 +33,7 @@ import { ListRowSkeleton } from "@/src/components/skeleton/ListRowSkeleton"
 
 export const HistoryListView = () => {
   const [page, setPage] = useState(1)
+  const [deleteSlug, setDeleteSlug] = useState<string | null>(null)
   const router = useRouter()
 
   const { listRef, showScrollTop, handleScroll, scrollToTop } = useScrollToTop()
@@ -41,7 +52,7 @@ export const HistoryListView = () => {
   const renderRightActions = (comicSlug: string) => {
     return (
       <Pressable
-        onPress={() => deleteHistory(comicSlug)}
+        onPress={() => setDeleteSlug(comicSlug)}
         className="mb-3 ml-2 flex-row items-center justify-center rounded-lg bg-error-500 px-6 active:bg-error-600"
       >
         <Icon as={Trash2} size="xl" className="text-typography-0" />
@@ -159,6 +170,36 @@ export const HistoryListView = () => {
         />
       </View>
       <ScrollToTopFab isVisible={showScrollTop} onPress={scrollToTop} />
+
+      <AlertDialog isOpen={!!deleteSlug} onClose={() => setDeleteSlug(null)}>
+        <AlertDialogBackdrop />
+        <AlertDialogContent className="p-4 rounded-xl">
+          <AlertDialogHeader>
+            <Text className="text-typography-950 font-bold" size="lg">Hapus Riwayat</Text>
+            <AlertDialogCloseButton />
+          </AlertDialogHeader>
+          <AlertDialogBody className="mb-4 mt-2">
+            <Text size="sm">Apakah Anda yakin ingin menghapus komik ini dari riwayat bacaan?</Text>
+          </AlertDialogBody>
+          <AlertDialogFooter>
+            <Button variant="outline" action="secondary" onPress={() => setDeleteSlug(null)} size="sm">
+              <ButtonText>Batal</ButtonText>
+            </Button>
+            <Button
+              size="sm"
+              action="negative"
+              onPress={() => {
+                if (deleteSlug) {
+                  deleteHistory(deleteSlug)
+                  setDeleteSlug(null)
+                }
+              }}
+            >
+              <ButtonText>Hapus</ButtonText>
+            </Button>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </View>
   )
 }
