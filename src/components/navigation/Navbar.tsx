@@ -7,6 +7,7 @@ import { Popover, PopoverBackdrop, PopoverBody, PopoverContent } from "@/compone
 import { Pressable } from "@/components/ui/pressable"
 import { Text } from "@/components/ui/text"
 import { VStack } from "@/components/ui/vstack"
+import { LogoutDialog } from "@/src/components/dialogs/LogoutDialog"
 import { useAuth } from "@/src/screens/profile/hooks/useAuth"
 import { Image } from "expo-image"
 import { useRouter } from "expo-router"
@@ -14,12 +15,12 @@ import { StatusBar } from "expo-status-bar"
 import { LogIn, LogOut, Search, User as UserIcon } from "lucide-react-native"
 import { useEffect, useState } from "react"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
-import { LogoutDialog } from "@/src/components/dialogs/LogoutDialog"
 
 export const Navbar = () => {
   const [isSearchExpanded, setIsSearchExpanded] = useState(false)
   const [searchQuery, setSearchQuery] = useState("")
   const [showLogoutDialog, setShowLogoutDialog] = useState(false)
+  const [isPopoverOpen, setIsPopoverOpen] = useState(false)
 
   const insets = useSafeAreaInsets()
   const router = useRouter()
@@ -81,7 +82,11 @@ export const Navbar = () => {
 
         {/* Avatar with Popover */}
         <Popover
+          isOpen={isPopoverOpen}
+          onOpen={() => setIsPopoverOpen(true)}
+          onClose={() => setIsPopoverOpen(false)}
           placement="bottom right"
+          offset={2}
           size="xs"
           trigger={(triggerProps: any) => {
             return (
@@ -98,7 +103,7 @@ export const Navbar = () => {
           }}
         >
           <PopoverBackdrop />
-          <PopoverContent className="w-60 p-2 shadow-hard-5">
+          <PopoverContent className="-mt-9 w-60 p-2 shadow-hard-5">
             <PopoverBody contentContainerClassName="p-0">
               <VStack className="gap-1">
                 {/* User Name (Non-clickable) */}
@@ -113,14 +118,20 @@ export const Navbar = () => {
                 {token ? (
                   <>
                     <Pressable
-                      onPress={() => router.push("/profile")}
+                      onPress={() => {
+                        setIsPopoverOpen(false)
+                        router.push("/profile")
+                      }}
                       className="flex-row items-center gap-2 rounded-md px-3 py-2 transition-colors active:bg-background-50"
                     >
                       <Icon as={UserIcon} size="sm" className="text-typography-500" />
                       <Text className="text-sm text-typography-700">Profil</Text>
                     </Pressable>
                     <Pressable
-                      onPress={() => setShowLogoutDialog(true)}
+                      onPress={() => {
+                        setIsPopoverOpen(false)
+                        setShowLogoutDialog(true)
+                      }}
                       className="flex-row items-center gap-2 rounded-md px-3 py-2 transition-colors active:bg-error-50"
                     >
                       <Icon as={LogOut} size="sm" className="text-error-500" />
@@ -129,7 +140,10 @@ export const Navbar = () => {
                   </>
                 ) : (
                   <Pressable
-                    onPress={() => router.push("/profile")}
+                    onPress={() => {
+                      setIsPopoverOpen(false)
+                      router.push("/profile")
+                    }}
                     className="flex-row items-center gap-2 rounded-md px-3 py-2 transition-colors active:bg-success-50"
                   >
                     <Icon as={LogIn} size="sm" className="text-success-500" />
