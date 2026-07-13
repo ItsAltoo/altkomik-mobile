@@ -6,14 +6,15 @@ import { Pressable } from "@/components/ui/pressable"
 import { Text } from "@/components/ui/text"
 import { VStack } from "@/components/ui/vstack"
 import { Image } from "expo-image"
-import { Href, Link } from "expo-router"
-import { BookOpen, X } from "lucide-react-native"
+import { Href, Link, useRouter } from "expo-router"
+import { BookOpen, LogIn, X } from "lucide-react-native"
 import { useState } from "react"
 import { ActivityIndicator, View } from "react-native"
 import ImageViewing from "react-native-image-viewing"
 import { SafeAreaView } from "react-native-safe-area-context"
 import { useBookmarkCheck } from "../hooks/useBookmarkCheck"
 import { useToggleBookmark } from "../hooks/useToggleBookmark"
+import { useAuth } from "@/src/screens/profile/hooks/useAuth"
 
 type ChapterRef = {
   slug: string
@@ -47,6 +48,8 @@ export const DetailHero = ({ thumbnail, title, description, chapters, slug, comi
   const [isImageVisible, setIsImageVisible] = useState(false)
   const { isBookmarked, isLoading } = useBookmarkCheck(slug)
   const { toggleBookmark, isToggling } = useToggleBookmark(slug)
+  const { token } = useAuth()
+  const router = useRouter()
 
   return (
     <VStack className="z-10 mt-2 items-center border-b border-outline-100 px-4 pb-6">
@@ -61,19 +64,30 @@ export const DetailHero = ({ thumbnail, title, description, chapters, slug, comi
           </View>
         </Pressable>
 
-        <Button
-          size="sm"
-          className={`mb-6 mt-2 ${isBookmarked ? "bg-success-500" : ""}`}
-          onPress={() => toggleBookmark(comicData)}
-          disabled={isLoading || isToggling}
-        >
-          {isLoading || isToggling ? (
-            <ActivityIndicator size="small" color="#FFFFFF" className="mr-2" />
-          ) : (
-            <Icon as={BookOpen} className="mr-2 size-4 text-typography-white" />
-          )}
-          <ButtonText className=" text-typography-white">{isBookmarked ? "Bookmarked" : "Bookmark"}</ButtonText>
-        </Button>
+        {!token ? (
+          <Button
+            size="sm"
+            className="mb-6 mt-2"
+            onPress={() => router.push("/profile" as Href)}
+          >
+            <Icon as={LogIn} className="mr-2 size-4 text-typography-white" />
+            <ButtonText className="text-typography-white">Sign In</ButtonText>
+          </Button>
+        ) : (
+          <Button
+            size="sm"
+            className={`mb-6 mt-2 ${isBookmarked ? "bg-success-500" : ""}`}
+            onPress={() => toggleBookmark(comicData)}
+            disabled={isLoading || isToggling}
+          >
+            {isLoading || isToggling ? (
+              <ActivityIndicator size="small" color="#FFFFFF" className="mr-2" />
+            ) : (
+              <Icon as={BookOpen} className="mr-2 size-4 text-typography-white" />
+            )}
+            <ButtonText className=" text-typography-white">{isBookmarked ? "Bookmarked" : "Bookmark"}</ButtonText>
+          </Button>
+        )}
       </View>
 
       <Text className="px-4 text-center text-2xl font-bold leading-tight text-typography-900">{title}</Text>
