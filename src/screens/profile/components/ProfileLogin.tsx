@@ -60,7 +60,7 @@ const TwitterIcon = createIcon({
 
 type ProfileLoginProps = {
   isLoading: boolean
-  handleGoogleLogin: () => void
+  handleGoogleLogin: () => Promise<boolean>
 }
 
 export const ProfileLogin = ({ isLoading, handleGoogleLogin }: ProfileLoginProps) => {
@@ -79,7 +79,7 @@ export const ProfileLogin = ({ isLoading, handleGoogleLogin }: ProfileLoginProps
           size="xl"
           onPress={handleGoogleLogin}
           disabled={isLoading}
-          className="h-14 w-full flex-row items-center justify-center rounded-xl border border-outline-200 bg-white shadow-soft-2 active:opacity-80"
+          className="h-14 w-full flex-row items-center justify-center rounded-xl border border-outline-200 bg-white shadow-soft-2  active:bg-white"
         >
           {isLoading ? (
             <ButtonSpinner />

@@ -4,8 +4,10 @@ import { StatusBar } from "expo-status-bar"
 import { configureReanimatedLogger, ReanimatedLogLevel } from "react-native-reanimated"
 import { GestureHandlerRootView } from "react-native-gesture-handler"
 import { View } from "react-native"
+import Toast from "react-native-toast-message"
 
 import { GluestackUIProvider } from "@/components/ui/gluestack-ui-provider"
+import { toastConfig } from "@/src/components/ui/ToastConfig"
 import { MascotEmptyState } from "@/src/components/empty-state/MascotEmptyState"
 import "../../global.css"
 
@@ -39,6 +41,7 @@ const RootLayout = () => {
       <GluestackUIProvider mode="system">
         <StatusBar hidden />
         <Stack screenOptions={{ headerShown: false }} />
+        <Toast config={toastConfig} />
       </GluestackUIProvider>
     </GestureHandlerRootView>
   )
