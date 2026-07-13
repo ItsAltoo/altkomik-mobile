@@ -44,7 +44,6 @@ export const ComicImage = memo(({ source, onPress }: ComicImageProps) => {
             setLoading(false)
             setError(true)
           }}
-          transition={300}
         />
       </View>
     </TouchableWithoutFeedback>
