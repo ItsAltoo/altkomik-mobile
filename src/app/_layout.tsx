@@ -19,7 +19,7 @@ configureReanimatedLogger({
 export function ErrorBoundary({ error, retry }: ErrorBoundaryProps) {
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
-      <GluestackUIProvider mode="system">
+      <GluestackUIProvider mode="dark">
         <View className="flex-1 items-center justify-center bg-background-0">
           <MascotEmptyState
             mascot="ryo"
@@ -38,7 +38,7 @@ export function ErrorBoundary({ error, retry }: ErrorBoundaryProps) {
 const RootLayout = () => {
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
-      <GluestackUIProvider mode="system">
+      <GluestackUIProvider mode="dark">
         <StatusBar hidden />
         <Stack screenOptions={{ headerShown: false }} />
         <Toast config={toastConfig} />
