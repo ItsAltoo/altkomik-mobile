@@ -1,5 +1,4 @@
-import { useColorScheme } from "nativewind"
-import React, { useState } from "react"
+import React from "react"
 import { ScrollView, View } from "react-native"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
 
@@ -24,13 +23,6 @@ export const ProfileScreen = () => {
   const { data: bookmarksData, isLoading: isLoadingBookmarks } = useBookmarks(token)
   const history = useReadingHistory((state) => state.history)
   const insets = useSafeAreaInsets()
-  const { setColorScheme } = useColorScheme()
-  const [themePref, setThemePref] = useState<"system" | "light" | "dark">("system")
-
-  const handleTheme = (val: "system" | "light" | "dark") => {
-    setThemePref(val)
-    setColorScheme(val)
-  }
 
   // Calculate stats from bookmark API response
   const rawData = bookmarksData || {}
@@ -86,7 +78,7 @@ export const ProfileScreen = () => {
 
               <ProfileHistory recentHistory={recentHistory} historyCount={historyCount} />
 
-              <ProfileMenu themePref={themePref} handleTheme={handleTheme} handleLogout={handleLogout} />
+              <ProfileMenu handleLogout={handleLogout} />
             </View>
           ) : (
             <ProfileLogin isLoading={isLoading} handleGoogleLogin={handleGoogleLogin} />
