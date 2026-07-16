@@ -1,44 +1,98 @@
-# AltKomik Mobile
+<div align="center">
+  <img src="./assets/images/icon-app.png" alt="AltKomik Logo" width="120" />
+  <h1>📚 AltKomik Mobile</h1>
+  <p><strong>Aplikasi Baca Komik Modern, Cepat, dan Elegan.</strong></p>
 
-Welcome to the AltKomik Mobile repository! This project is built using Expo, React Native, and Gluestack UI.
+  <p>
+    <img src="https://img.shields.io/badge/Expo-000020?style=for-the-badge&logo=expo&logoColor=white" alt="Expo" />
+    <img src="https://img.shields.io/badge/React_Native-20232A?style=for-the-badge&logo=react&logoColor=61DAFB" alt="React Native" />
+    <img src="https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript" />
+    <img src="https://img.shields.io/badge/Gluestack_UI-E11D48?style=for-the-badge&logo=react&logoColor=white" alt="Gluestack" />
+  </p>
+</div>
 
-## Getting Started
+---
 
-1. **Install dependencies**
+## ✨ Fitur Utama
+
+- 🌙 **Dark Mode Eksklusif**: Tampilan mode gelap yang elegan, dirancang untuk kenyamanan membaca berjam-jam tanpa membuat mata lelah.
+- 🔖 **Manajemen Bookmark**: Simpan komik favoritmu dan pantau rilis terbarunya. Terintegrasi dengan akun Google untuk sinkronisasi antar perangkat.
+- 📖 **Riwayat Baca Pintar**: Lupa sampai chapter berapa? AltKomik mencatat riwayat bacaanmu secara otomatis dan menyediakan jalan pintas instan untuk melanjutkannya.
+- ⚡ **Super Cepat & Responsif**: Dibangun menggunakan arsitektur modern dan *FlashList* demi menghasilkan *scrolling* ribuan komik tanpa hambatan.
+- 🔍 **Pencarian Cerdas**: Temukan komik idamanmu dalam hitungan detik melalui antarmuka pencarian yang terintegrasi.
+- 📱 **Native-Feel Experience**: Dilengkapi transisi animasi yang mulus, *swipe actions*, dan *toast notifications* yang memberikan kesan aplikasi premium.
+
+---
+
+## 🛠️ Teknologi & Stack
+
+AltKomik Mobile dibangun di atas pondasi teknologi terdepan dalam ekosistem *mobile development*:
+- **Framework Utama**: [Expo](https://expo.dev/) & [React Native](https://reactnative.dev/)
+- **Bahasa Pemrograman**: [TypeScript](https://www.typescriptlang.org/)
+- **Styling & UI Kit**: [Gluestack-UI v4](https://gluestack.io/) berpadu harmoni dengan kekuatan **NativeWind** (TailwindCSS).
+- **State Management**: [Zustand](https://github.com/pmndrs/zustand)
+- **Data Fetching**: SWR (Stale-While-Revalidate)
+- **Autentikasi**: Google Sign-In
+
+---
+
+## 🚀 Panduan Memulai (Getting Started)
+
+Ingin berkontribusi atau sekadar menjajal aplikasinya secara lokal? Ikuti langkah-langkah berikut:
+
+### Prasyarat Instalasi
+- Node.js (Versi LTS sangat disarankan)
+- Package Manager: `pnpm` (jika belum, jalankan `npm install -g pnpm`)
+
+### Langkah Eksekusi
+1. **Kloning Repositori**
+   ```bash
+   git clone https://github.com/ItsAltoo/altkomik-mobile.git
+   cd altkomik-mobile
+   ```
+
+2. **Pasang Dependensi**
    ```bash
    pnpm install
    ```
 
-2. **Start the application**
+3. **Jalankan Aplikasi (Development Server)**
    ```bash
    pnpm dev
    ```
+   > Buka aplikasi Expo Go di smartphone kamu lalu *scan* QR Code yang muncul di terminal, atau cukup tekan `a` untuk membuka Android Emulator.
 
 ---
 
-## Project Architecture (Feature-Sliced Design)
+## 🏗️ Arsitektur Proyek (Feature-Sliced Design)
 
-This project uses a **Feature-Sliced / Domain-Driven Structure** to keep the codebase clean, scalable, and easy to maintain. We strictly separate the routing logic from the actual UI and business logic.
+Demi menjaga kebersihan, skalabilitas, dan kemudahan dalam kolaborasi tim, *codebase* ini mengadopsi pola **Feature-Sliced / Domain-Driven Structure**.
 
-### 1. Separation of Routing and UI
-- **`src/app/`**: This directory is strictly used for **routing** via Expo Router. Files here contain minimal code and simply import and export the respective view from the `src/screens` folder.
+### 1. Pemisahan Routing & UI (`src/app/`)
+Direktori ini hanya dikhususkan untuk konfigurasi **routing** melalui *Expo Router*. Berkas di dalamnya dibuat sangat minimal, sekadar mengimpor *view* utama dari folder `src/screens`.
 
-### 2. Screen Architecture (`src/screens/`)
-Each tab or page in the application (e.g., `home`, `library`, `detail`) has its own dedicated folder inside `src/screens/`. This ensures that everything related to a specific feature is kept isolated and organized.
+### 2. Arsitektur Berbasis Layar (`src/screens/`)
+Masing-masing halaman utama (contoh: `home`, `library`, `detail`) memiliki ruang/foldernya sendiri. Pola ini memastikan bahwa kode suatu fitur terisolasi dengan rapi.
 
-Inside a typical screen folder (e.g., `src/screens/home/`), you will find the following structure:
+Di dalam sebuah folder layar (misalnya: `src/screens/home/`), umumnya memuat:
+- 📄 **`index.tsx`**: Gerbang utama (*entry point*) dan *View* pembentuk halaman.
+- 📁 **`components/`**: Komponen UI yang **eksklusif** hanya digunakan di layar terkait. (Komponen global disimpan di `src/components/`).
+- 📁 **`hooks/`**: Logika bisnis dan manajemen *state* khusus untuk layar tersebut.
+- 📄 **`repository.ts`**: Akses data (API Calls, *formatting*, *fetching*). Memisahkan interaksi *backend* dari UI.
+- 📄 **`types.ts`**: Definisi antarmuka TypeScript spesifik.
+- 📄 **`utils.ts`**: Kumpulan fungsi utilitas ringan.
 
-- 📄 **`index.tsx`**: The main entry point and UI View for the screen. It combines smaller components and hooks into a single page.
-- 📁 **`components/`**: UI components that are **strictly specific** to this screen (e.g., a `HomeCarousel`). Note: Global components (like a standard `Button` or `ComicCard`) live in `src/components/`.
-- 📁 **`hooks/`**: Custom React hooks containing the business logic and state management for this screen.
-- 📄 **`repository.ts`**: The data access layer. All API calls, data fetching, and data formatting for this screen are handled here. This separates data operations from the UI.
-- 📄 **`types.ts`**: TypeScript interfaces and types specific to this screen's data and props.
-- 📄 **`utils.ts`**: Small helper functions and formatters used locally within this screen.
+### 3. Keseragaman TypeScript
+- **Kewajiban Penggunaan `type`**: Untuk standardisasi yang konsisten, keseluruhan kode ini wajib menggunakan `type` (alih-alih `interface`) ketika mendefinisikan tipe maupun *props*.
 
-### Why this structure?
-- **Highly Organized**: If there is a bug on the Home page, you know exactly where to look (`src/screens/home/`) without digging through global folders.
-- **Prevents File Bloat**: By extracting logic into `hooks`, data fetching into `repository`, and UI into `components`, the main `index.tsx` file stays clean and short.
-- **Team-Friendly**: Developers can work on different screens simultaneously with minimal risk of merge conflicts.
+---
 
-### 3. TypeScript Conventions
-- **Strictly `type` over `interface`**: In this codebase, we exclusively use `type` for defining types and props (e.g., `type ComponentProps = { ... }`). We do **not** use `interface`. This convention is enforced across the entire repository to maintain consistency.
+## 🤝 Kontribusi
+
+Sangat tertarik untuk ikut membangun AltKomik menjadi lebih hebat? Kami menerima segala jenis dukungan dan kontribusi!
+Mohon sempatkan waktu untuk membaca **[CONTRIBUTING.md](./CONTRIBUTING.md)** untuk petunjuk teknis mengenai format pembuatan *issue*, tata cara *commit* (menggunakan *Conventional Commits*), serta aturan penamaan *branch*.
+
+---
+<div align="center">
+  <p>Dibuat dengan ❤️ untuk seluruh penikmat komik.</p>
+</div>
