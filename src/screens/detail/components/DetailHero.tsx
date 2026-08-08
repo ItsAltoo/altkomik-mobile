@@ -65,11 +65,7 @@ export const DetailHero = ({ thumbnail, title, description, chapters, slug, comi
         </Pressable>
 
         {!token ? (
-          <Button
-            size="sm"
-            className="mb-6 mt-2"
-            onPress={() => router.push("/profile" as Href)}
-          >
+          <Button size="sm" className="mb-6 mt-2" onPress={() => router.push("/profile" as Href)}>
             <Icon as={LogIn} className="mr-2 size-4 text-typography-white" />
             <ButtonText className="text-typography-white">Sign In</ButtonText>
           </Button>
