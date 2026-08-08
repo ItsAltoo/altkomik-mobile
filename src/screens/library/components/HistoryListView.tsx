@@ -16,8 +16,9 @@ import {
 } from "@/components/ui/alert-dialog"
 import { Image } from "expo-image"
 import { useRouter } from "expo-router"
-import { BookOpen, Play, Trash2 } from "lucide-react-native"
+import { BookOpen, Play, Trash2, Download } from "lucide-react-native"
 import { useCallback, useState } from "react"
+import { BackupDialog } from "@/src/components/dialogs/BackupDialog"
 import { View } from "react-native"
 import { FlashList } from "@shopify/flash-list"
 import Swipeable from "react-native-gesture-handler/Swipeable"
@@ -34,6 +35,7 @@ import { ListRowSkeleton } from "@/src/components/skeleton/ListRowSkeleton"
 export const HistoryListView = () => {
   const [page, setPage] = useState(1)
   const [deleteSlug, setDeleteSlug] = useState<string | null>(null)
+  const [showBackupDialog, setShowBackupDialog] = useState(false)
   const router = useRouter()
 
   const { listRef, showScrollTop, handleScroll, scrollToTop } = useScrollToTop()
@@ -149,6 +151,23 @@ export const HistoryListView = () => {
     [page, hasMore, handlePageChange, totalCount],
   )
 
+  const renderHeader = useCallback(
+    () => (
+      <View className="px-4 pb-3">
+        <Button
+          variant="outline"
+          action="primary"
+          onPress={() => setShowBackupDialog(true)}
+          className="rounded-lg border-outline-200 bg-background-0 active:bg-background-50"
+        >
+          <Icon as={Download} size="sm" className="mr-2 text-typography-700" />
+          <ButtonText className="font-medium text-typography-700">Backup & Restore History</ButtonText>
+        </Button>
+      </View>
+    ),
+    [],
+  )
+
   const contentContainerStyle = useListContainerStyle(16, 100, 100, 0)
 
   return (
@@ -165,6 +184,7 @@ export const HistoryListView = () => {
           onScroll={handleScroll}
           scrollEventThrottle={16}
           contentContainerStyle={contentContainerStyle}
+          ListHeaderComponent={renderHeader}
           ListEmptyComponent={renderEmptyComponent}
           ListFooterComponent={renderFooter}
         />
@@ -173,9 +193,11 @@ export const HistoryListView = () => {
 
       <AlertDialog isOpen={!!deleteSlug} onClose={() => setDeleteSlug(null)}>
         <AlertDialogBackdrop />
-        <AlertDialogContent className="p-4 rounded-xl">
+        <AlertDialogContent className="rounded-xl p-4">
           <AlertDialogHeader>
-            <Text className="text-typography-950 font-bold" size="lg">Hapus Riwayat</Text>
+            <Text className="font-bold text-typography-950" size="lg">
+              Hapus Riwayat
+            </Text>
             <AlertDialogCloseButton />
           </AlertDialogHeader>
           <AlertDialogBody className="mb-4 mt-2">
@@ -200,6 +222,8 @@ export const HistoryListView = () => {
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>
+
+      <BackupDialog isOpen={showBackupDialog} onClose={() => setShowBackupDialog(false)} />
     </View>
   )
 }

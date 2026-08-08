@@ -63,29 +63,29 @@ export const useAuth = create<AuthState>((set) => ({
 
         set({ token: data.token, userProfile: profile })
         Toast.show({
-          type: 'success',
-          text1: 'Login Berhasil',
-          text2: 'Selamat datang kembali di Altkomik!',
-          position: 'top',
+          type: "success",
+          text1: "Login Berhasil",
+          text2: "Selamat datang kembali di Altkomik!",
+          position: "top",
           topOffset: 50,
         })
       } else {
         console.error("Gagal login di sisi server:", data)
         Toast.show({
-          type: 'error',
-          text1: 'Login Gagal',
-          text2: 'Gagal masuk ke akun. Silakan coba lagi nanti.',
-          position: 'top',
+          type: "error",
+          text1: "Login Gagal",
+          text2: "Gagal masuk ke akun. Silakan coba lagi nanti.",
+          position: "top",
           topOffset: 50,
         })
       }
     } catch (error) {
       console.log("[Google Login Error]:", error)
       Toast.show({
-        type: 'error',
-        text1: 'Login Gagal',
-        text2: 'Gagal masuk ke akun. Silakan coba lagi nanti.',
-        position: 'top',
+        type: "error",
+        text1: "Login Gagal",
+        text2: "Gagal masuk ke akun. Silakan coba lagi nanti.",
+        position: "top",
         topOffset: 50,
       })
     } finally {

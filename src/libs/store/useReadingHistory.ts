@@ -17,6 +17,7 @@ type ReadingHistoryState = {
   updateComicMeta: (comicSlug: string, title: string, thumbnail: string) => void
   getComicProgress: (comicSlug: string) => ReadingProgress | undefined
   deleteHistory: (comicSlug: string) => void
+  replaceHistory: (importedHistory: Record<string, ReadingProgress>) => void
 }
 
 export const useReadingHistory = create<ReadingHistoryState>()(
@@ -67,6 +68,10 @@ export const useReadingHistory = create<ReadingHistoryState>()(
           delete newHistory[comicSlug]
           return { history: newHistory }
         }),
+      replaceHistory: (importedHistory) =>
+        set(() => ({
+          history: importedHistory,
+        })),
     }),
     {
       name: "reading-history-storage",
