@@ -10,16 +10,22 @@ type PaginationProps = {
   page: number
   hasMore: boolean
   isLoading: boolean
+  totalPages?: number
   onPageChange: (page: number) => void
 }
 
-const PaginationComponent = ({ page, hasMore, isLoading, onPageChange }: PaginationProps) => {
+const PaginationComponent = ({ page, hasMore, isLoading, totalPages, onPageChange }: PaginationProps) => {
   let startPage = Math.max(1, page - 2)
   let endPage = startPage + 4
 
   if (!hasMore) {
     endPage = page
     startPage = Math.max(1, endPage - 4)
+  } else if (totalPages !== undefined) {
+    endPage = Math.min(totalPages, Math.max(page + 2, endPage))
+    if (endPage === totalPages) {
+      startPage = Math.max(1, endPage - 4)
+    }
   }
 
   const pages = Array.from({ length: endPage - startPage + 1 }, (_, i) => startPage + i)

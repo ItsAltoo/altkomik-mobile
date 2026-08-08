@@ -55,7 +55,7 @@ export const ComicListView = () => {
   }, [])
 
   const renderEmptyComponent = useCallback(
-    () => <ListEmptyState error={error} isLoading={isLoading} dataLength={data.list.length} />,
+    () => <ListEmptyState error={error} isLoading={isLoading} dataLength={data.list.length} mascot="kita" />,
     [error, isLoading, data.list.length],
   )
 

@@ -1,39 +1,39 @@
 # AltKomik API Documentation
 
-Dokumen ini merangkum seluruh *endpoint* API internal yang tersedia di dalam direktori `src/app/api` pada *project* AltKomik.
+This document summarizes all available internal API endpoints within the `src/app/api` directory of the AltKomik project.
 
 ---
 
 ## 1. Authentication (NextAuth)
 > [!NOTE]
-> Rute ini dikelola secara otomatis oleh *library* NextAuth.js untuk keperluan *login* via *browser*.
+> These routes are automatically managed by the NextAuth.js library for browser-based login purposes.
 
 - **Endpoint:** `/api/auth/[...nextauth]`
-- **Deskripsi:** Menangani semua alur OAuth (Google, Discord, Twitter) seperti *redirect*, *callback*, *signin*, dan *signout* untuk pengguna *web browser*.
-- **Otentikasi:** Tidak perlu (publik).
+- **Description:** Handles all OAuth flows (Google, Discord, Twitter) such as redirects, callbacks, signins, and signouts for web browser users.
+- **Authentication:** Not required (Public).
 
 ---
 
 ## 2. Mobile Authentication
 > [!TIP]
-> Rute khusus untuk aplikasi *mobile* (Expo/React Native) agar bisa terhubung dengan sistem *session* NextAuth.
+> Special route for mobile applications (Expo/React Native) to connect with the NextAuth session system.
 
 ### `POST /api/mobile-auth`
-- **Deskripsi:** Menerima `idToken` dari Google Sign-In SDK di *mobile*, memverifikasinya, dan mengembalikan Token Sesi NextAuth (*JWT*).
-- **Body Request:**
+- **Description:** Receives the `idToken` from the Google Sign-In SDK on mobile, verifies it, and returns the NextAuth Session Token (JWT).
+- **Request Body:**
   ```json
   {
     "idToken": "eyJhbGciOiJSUzI1NiIs..."
   }
   ```
-- **Response Sukses (200):**
+- **Success Response (200):**
   ```json
   {
     "success": true,
     "token": "JWT_SESSION_TOKEN_HERE",
     "user": {
       "id": "cm08a...",
-      "name": "Nama User",
+      "name": "User Name",
       "email": "user@email.com",
       "image": "https://..."
     }
@@ -44,60 +44,77 @@ Dokumen ini merangkum seluruh *endpoint* API internal yang tersedia di dalam dir
 
 ## 3. Bookmarks
 > [!IMPORTANT]
-> Semua rute `/api/bookmarks` membutuhkan otentikasi. Jika diakses via *browser*, NextAuth akan mendeteksinya otomatis. Jika via *mobile*, pastikan mengirim *header*: `Cookie: next-auth.session-token=TOKEN_MU`.
+> All `/api/bookmarks` routes require authentication. If accessed via a browser, NextAuth will detect it automatically. If accessed via mobile, ensure you send the following header: `Cookie: next-auth.session-token=YOUR_TOKEN`.
 
 ### `GET /api/bookmarks`
-- **Deskripsi:** Mengambil daftar komik yang disimpan (*bookmark*) oleh pengguna yang sedang *login*.
+- **Description:** Retrieves the list of comics saved (bookmarked) by the currently logged-in user.
 - **Query Params:** 
-  - `page` (opsional, default: 1)
-  - `limit` (opsional, default: 10)
+  - `page` (optional, default: 1)
+  - `limit` (optional, default: 10)
 - **Response (200):**
   ```json
   {
     "meta": { "total": 10, "page": 1, "limit": 10 },
     "result": [
-      { "slug": "komik-a", "title": "Komik A", "thumbnail": "...", "type": "Manhwa", "status": "Ongoing", "chapters": null }
+      { "slug": "comic-a", "title": "Comic A", "thumbnail": "...", "type": "Manhwa", "status": "Updated 1 week ago.", "chapters": null }
     ]
   }
   ```
 
 ### `POST /api/bookmarks`
-- **Deskripsi:** Menyimpan komik baru ke daftar *bookmark* pengguna.
-- **Body Request:**
+- **Description:** Saves a new comic to the user's bookmark list.
+- **Request Body:**
   ```json
   {
-    "slug": "komik-a",
-    "title": "Komik A",
+    "slug": "comic-a",
+    "title": "Comic A",
     "thumbnail": "https://...",
     "type": "Manhwa",
-    "status": "Ongoing"
+    "status": "Updated 1 week ago."
   }
   ```
 - **Response (201):** `{ "message": "Bookmark added successfully", "bookmark": {...} }`
 - **Response (409):** `{ "error": "Bookmark already exists" }`
 
 ### `DELETE /api/bookmarks`
-- **Deskripsi:** Menghapus komik dari daftar *bookmark* pengguna.
-- **Query Params:** `slug` (wajib, contoh: `?slug=komik-a`)
+- **Description:** Removes a comic from the user's bookmark list.
+- **Query Params:** `slug` (required, example: `?slug=comic-a`)
 - **Response (200):** `{ "message": "Bookmark removed successfully" }`
 
 ### `GET /api/bookmarks/check`
-- **Deskripsi:** Mengecek apakah sebuah komik sudah di-*bookmark* atau belum.
-- **Query Params:** `slug` (wajib, contoh: `?slug=komik-a`)
+- **Description:** Checks whether a comic is already bookmarked or not.
+- **Query Params:** `slug` (required, example: `?slug=comic-a`)
 - **Response (200):** `{ "isBookmarked": true }`
+
+### `POST /api/bookmarks/sync`
+- **Description:** Synchronizes bookmark status updates with the external API (maximum 20 comics at once).
+- **Request Body:**
+  ```json
+  {
+    "items": [
+      {
+        "id": "cm08a...",
+        "title": "Comic A",
+        "slug": "comic-a",
+        "status": "Updated 1 week ago."
+      }
+    ]
+  }
+  ```
+- **Response (200):** `{ "result": [{ "id": "cm08a...", "userId": "...", "slug": "comic-a", "title": "Comic A", "thumbnail": "https://...", "type": "Manga", "status": "Updated 1 week ago.", "createdAt": "2026-07-20T13:03:55.134Z" }] }` (Returns an array of updated comics)
 
 ---
 
 ## 4. Proxy Services
 > [!WARNING]
-> Rute *proxy* ini membutuhkan kunci `API_KEY` dari *environment variables* untuk menembus *backend* utama/eksternal.
+> These proxy routes require the `API_KEY` from environment variables to bypass the main/external backend.
 
 ### `GET /api/proxy/[...path]`
-- **Deskripsi:** Meneruskan (*forward*) semua *request* ke `API_URL` utama dengan menyisipkan *header* `"x-api-key"`. Digunakan agar kunci rahasia API tidak bocor ke *client/browser*.
-- **Contoh Penggunaan:** Memanggil `/api/proxy/search?query=solo` akan di-*forward* ke `API_URL/api/search?query=solo`.
+- **Description:** Forwards all requests to the main `API_URL` while injecting the `"x-api-key"` header. Used so that the API secret key is not leaked to the client/browser.
+- **Usage Example:** Calling `/api/proxy/search?query=solo` will be forwarded to `API_URL/api/search?query=solo`.
 
 ### `GET /api/proxy-image`
-- **Deskripsi:** Mengambil data gambar (*binary*) dari server eksternal dan meneruskannya kembali ke *client*. Berfungsi untuk membypass batasan CORS atau perlindungan *hotlinking* gambar dari server sumber.
-- **Query Params:** `url` (wajib URL gambar yang di-encode)
-- **Contoh:** `/api/proxy-image?url=https%3A%2F%2Fcontoh.com%2Fgambar.jpg`
-- **Response:** File gambar mentah (contoh: `image/jpeg`) dengan *header* `Cache-Control: private, max-age=31536000, immutable`.
+- **Description:** Fetches image data (binary) from an external server and forwards it back to the client. Functions to bypass CORS restrictions or image hotlinking protection from the source server.
+- **Query Params:** `url` (required, encoded image URL)
+- **Example:** `/api/proxy-image?url=https%3A%2F%2Fexample.com%2Fimage.jpg`
+- **Response:** Raw image file (example: `image/jpeg`) with header `Cache-Control: private, max-age=31536000, immutable`.

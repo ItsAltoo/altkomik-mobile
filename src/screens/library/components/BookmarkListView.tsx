@@ -1,25 +1,24 @@
-import { Box } from "@/components/ui/box"
 import { HStack } from "@/components/ui/hstack"
 import { Icon } from "@/components/ui/icon"
 import { Pressable } from "@/components/ui/pressable"
 import { Text } from "@/components/ui/text"
 import { VStack } from "@/components/ui/vstack"
-import { Image } from "expo-image"
-import { useRouter } from "expo-router"
-import { ChevronRight, LogIn } from "lucide-react-native"
-import { useCallback, useState } from "react"
-import { RefreshControl, View } from "react-native"
-import { FlashList } from "@shopify/flash-list"
+import { ListEmptyState } from "@/src/components/empty-state/ListEmptyState"
+import { MascotEmptyState } from "@/src/components/empty-state/MascotEmptyState"
 import { Footer } from "@/src/components/footer"
 import { Pagination } from "@/src/components/pagination/Pagination"
+import { ListRowSkeleton } from "@/src/components/skeleton/ListRowSkeleton"
 import { ScrollToTopFab } from "@/src/components/ui/ScrollToTopFab"
 import { useListContainerStyle } from "@/src/libs/hooks/useListContainerStyle"
 import { useScrollToTop } from "@/src/libs/hooks/useScrollToTop"
-import { ListEmptyState } from "@/src/components/empty-state/ListEmptyState"
-import { MascotEmptyState } from "@/src/components/empty-state/MascotEmptyState"
-import { useBookmarks } from "../hooks/useBookmarks"
 import { useAuth } from "@/src/screens/profile/hooks/useAuth"
-import { ListRowSkeleton } from "@/src/components/skeleton/ListRowSkeleton"
+import { FlashList } from "@shopify/flash-list"
+import { Image } from "expo-image"
+import { useRouter } from "expo-router"
+import { ChevronRight } from "lucide-react-native"
+import { useCallback, useState } from "react"
+import { RefreshControl, View } from "react-native"
+import { useBookmarks } from "../hooks/useBookmarks"
 
 export const BookmarkListView = () => {
   const [page, setPage] = useState(1)
@@ -27,7 +26,7 @@ export const BookmarkListView = () => {
 
   const { token, isInitializing } = useAuth()
   const { listRef, showScrollTop, handleScroll, scrollToTop } = useScrollToTop()
-  const { data, isLoading, hasMore, error, mutate } = useBookmarks(token, page)
+  const { data, isLoading, hasMore, error, mutate, totalPages, total } = useBookmarks(token, page)
   const [refreshing, setRefreshing] = useState(false)
 
   const handlePageChange = useCallback(
@@ -108,12 +107,21 @@ export const BookmarkListView = () => {
     () => (
       <VStack className="items-center pb-8 pt-4">
         {token && data.result.length > 0 && (
-          <Pagination page={page} hasMore={!!hasMore} isLoading={isLoading} onPageChange={handlePageChange} />
+          <>
+            <Pagination
+              page={page}
+              hasMore={!!hasMore}
+              isLoading={isLoading}
+              totalPages={totalPages}
+              onPageChange={handlePageChange}
+            />
+            <Text className="mt-4 text-xs font-medium text-typography-500">Total {total} komik</Text>
+          </>
         )}
         <Footer />
       </VStack>
     ),
-    [page, hasMore, isLoading, handlePageChange, token, data.result.length],
+    [page, hasMore, isLoading, handlePageChange, token, data.result.length, totalPages, total],
   )
 
   const contentContainerStyle = useListContainerStyle(16, 100, 100, 0) // No horizontal padding here since it's on the items
