@@ -17,4 +17,25 @@ export const LibraryRepository = {
     })
     return data
   },
+  syncBookmarks: async (items: any[]): Promise<BookmarkResponse> => {
+    const token = await SecureStore.getItemAsync("session_token")
+    
+    // Map items to match API_SEC.md POST /api/bookmarks/sync expected body
+    const mappedItems = items.map((item) => ({
+      id: item.id, // Included if it exists from the GET request
+      title: item.title,
+      slug: item.slug,
+      status: item.status,
+    }))
+
+    const { data } = await axios.post<BookmarkResponse>(`${API_BASE_URL}/api/bookmarks/sync`, { items: mappedItems }, {
+      headers: token
+        ? {
+            Authorization: `Bearer ${token}`,
+            Cookie: `next-auth.session-token=${token}; __Secure-next-auth.session-token=${token}`,
+          }
+        : {},
+    })
+    return data
+  },
 }
