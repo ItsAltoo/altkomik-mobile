@@ -60,7 +60,7 @@ const TwitterIcon = createIcon({
 
 type ProfileLoginProps = {
   isLoading: boolean
-  handleGoogleLogin: () => Promise<boolean>
+  handleGoogleLogin: () => Promise<void>
 }
 
 export const ProfileLogin = ({ isLoading, handleGoogleLogin }: ProfileLoginProps) => {
