@@ -184,6 +184,10 @@ git commit -m "Changes"
 git commit -m "Update files"
 ```
 
+### AI-Assisted Commits
+
+If you use an AI tool (Claude, Copilot, ChatGPT, etc.) to help write code, do not add AI attribution trailers to the commit message — no `Co-Authored-By: <AI tool>`, session links, or similar tags. Commits should look and read the same regardless of whether an AI tool was involved. You're still responsible for reviewing and understanding everything you commit.
+
 ## Creating Pull Requests
 
 ### Branch Naming
