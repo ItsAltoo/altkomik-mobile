@@ -4,8 +4,10 @@ import { Icon } from "@/components/ui/icon"
 import { Pressable } from "@/components/ui/pressable"
 import { Text } from "@/components/ui/text"
 import { VStack } from "@/components/ui/vstack"
-import { ChevronRight, Info, LogOut } from "lucide-react-native"
+import { ChevronRight, Heart, Info, LogOut } from "lucide-react-native"
 import { LogoutDialog } from "@/src/components/dialogs/LogoutDialog"
+import { SAWERIA_URL } from "@/src/libs/constants/links"
+import * as Linking from "expo-linking"
 import { useRouter } from "expo-router"
 
 type ProfileMenuProps = {
@@ -33,6 +35,18 @@ export const ProfileMenu = ({ handleLogout }: ProfileMenuProps) => {
             <Text className="text-xs text-typography-400">v1.0.0</Text>
             <Icon as={ChevronRight} size="sm" className="text-typography-400" />
           </HStack>
+        </Pressable>
+
+        {/* Support */}
+        <Pressable
+          onPress={() => Linking.openURL(SAWERIA_URL).catch((err) => console.error("Couldn't load page", err))}
+          className="flex-row items-center justify-between border-b border-outline-100 p-4 transition-colors active:bg-background-50"
+        >
+          <HStack space="md" className="items-center">
+            <Icon as={Heart} size="md" className="text-error-500" />
+            <Text className="font-medium text-typography-900">Dukung Kami</Text>
+          </HStack>
+          <Icon as={ChevronRight} size="sm" className="text-typography-400" />
         </Pressable>
 
         {/* Logout */}
