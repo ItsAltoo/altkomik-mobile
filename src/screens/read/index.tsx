@@ -19,6 +19,7 @@ type ReadScreenProps = {
 export const ReadScreen = ({ slug }: ReadScreenProps) => {
   const { data, isLoading, error } = useReadComic(slug)
   const [isNavVisible, setIsNavVisible] = useState(true)
+  const [isZoomed, setIsZoomed] = useState(false)
   const router = useRouter()
   const insets = useSafeAreaInsets()
   const { width } = Dimensions.get("window")
@@ -80,12 +81,13 @@ export const ReadScreen = ({ slug }: ReadScreenProps) => {
         ref={flashListRef}
         data={data.images}
         keyExtractor={(_, index) => index.toString()}
-        renderItem={({ item }) => <ComicImage source={item} onPress={toggleNav} />}
+        renderItem={({ item }) => <ComicImage source={item} onPress={toggleNav} onZoomChange={setIsZoomed} />}
         // @ts-ignore: estimatedItemSize is required by FlashList but types are sometimes broken
         estimatedItemSize={width * 1.5}
         ListHeaderComponent={renderHeader}
         ListFooterComponent={renderFooter}
         showsVerticalScrollIndicator={false}
+        scrollEnabled={!isZoomed}
       />
 
       <FloatingNav
