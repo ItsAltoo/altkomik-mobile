@@ -5,6 +5,7 @@ import { Pressable } from "@/components/ui/pressable"
 import { Text } from "@/components/ui/text"
 import { VStack } from "@/components/ui/vstack"
 import { DiscordIcon } from "@/src/components/icons/DiscordIcon"
+import { DISCORD_URL } from "@/src/libs/constants/links"
 import { Image } from "expo-image"
 import * as Linking from "expo-linking"
 import { useRouter } from "expo-router"
@@ -50,7 +51,7 @@ export const Footer = () => {
 
         <HStack className="mt-2 justify-center">
           <Pressable
-            onPress={() => handleExternalPress("https://discord.gg/uc6tnw4TSc")}
+            onPress={() => handleExternalPress(DISCORD_URL)}
             className="rounded-full bg-background-50 p-3 transition-colors active:bg-background-100"
           >
             <Icon as={DiscordIcon} size="xl" />

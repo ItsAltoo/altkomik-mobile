@@ -32,6 +32,8 @@ import { useHistoryPaginated } from "../hooks/useHistoryPaginated"
 import { useReadingHistory, useHydration } from "@/src/libs/store/useReadingHistory"
 import { ListRowSkeleton } from "@/src/components/skeleton/ListRowSkeleton"
 
+const HISTORY_PAGE_LIMIT = 10
+
 export const HistoryListView = () => {
   const [page, setPage] = useState(1)
   const [deleteSlug, setDeleteSlug] = useState<string | null>(null)
@@ -39,7 +41,8 @@ export const HistoryListView = () => {
   const router = useRouter()
 
   const { listRef, showScrollTop, handleScroll, scrollToTop } = useScrollToTop()
-  const { data, hasMore, totalCount } = useHistoryPaginated(page)
+  const { data, hasMore, totalCount } = useHistoryPaginated(page, HISTORY_PAGE_LIMIT)
+  const totalPages = Math.ceil(totalCount / HISTORY_PAGE_LIMIT)
   const deleteHistory = useReadingHistory((state) => state.deleteHistory)
   const isHydrated = useHydration()
 
@@ -143,12 +146,18 @@ export const HistoryListView = () => {
     () => (
       <VStack className="items-center pb-8 pt-4">
         {totalCount > 0 && (
-          <Pagination page={page} hasMore={!!hasMore} isLoading={false} onPageChange={handlePageChange} />
+          <Pagination
+            page={page}
+            hasMore={!!hasMore}
+            isLoading={false}
+            totalPages={totalPages}
+            onPageChange={handlePageChange}
+          />
         )}
         <Footer />
       </VStack>
     ),
-    [page, hasMore, handlePageChange, totalCount],
+    [page, hasMore, handlePageChange, totalCount, totalPages],
   )
 
   const renderHeader = useCallback(

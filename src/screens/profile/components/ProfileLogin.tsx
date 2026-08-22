@@ -2,7 +2,6 @@ import { Button, ButtonIcon, ButtonSpinner, ButtonText } from "@/components/ui/b
 import { HStack } from "@/components/ui/hstack"
 import { Text } from "@/components/ui/text"
 import { VStack } from "@/components/ui/vstack"
-import { DiscordIcon } from "@/src/components/icons/DiscordIcon"
 import { createIcon } from "@gluestack-ui/core/icon/creator"
 import { Image } from "expo-image"
 import { Link } from "expo-router"
@@ -47,17 +46,6 @@ const GoogleIcon = createIcon({
   ),
 })
 
-const TwitterIcon = createIcon({
-  Root: Svg,
-  viewBox: "0 0 24 24",
-  path: (
-    <Path
-      fill="#000000"
-      d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"
-    />
-  ),
-})
-
 type ProfileLoginProps = {
   isLoading: boolean
   handleGoogleLogin: () => Promise<void>
@@ -89,28 +77,6 @@ export const ProfileLogin = ({ isLoading, handleGoogleLogin }: ProfileLoginProps
               <ButtonText className="font-bold text-black">Google</ButtonText>
             </HStack>
           )}
-        </Button>
-
-        <Button
-          size="xl"
-          disabled={true}
-          className="h-14 w-full flex-row items-center justify-center rounded-xl border border-outline-200 bg-white/80 shadow-soft-2 active:opacity-80"
-        >
-          <HStack space="sm" className="items-center">
-            <ButtonIcon as={DiscordIcon} size="lg" />
-            <ButtonText className="font-bold text-black">Discord</ButtonText>
-          </HStack>
-        </Button>
-
-        <Button
-          size="xl"
-          disabled={true}
-          className="h-14 w-full flex-row items-center justify-center rounded-xl border border-outline-200 bg-white/80 shadow-soft-2 active:opacity-80"
-        >
-          <HStack space="sm" className="items-center">
-            <ButtonIcon as={TwitterIcon} size="lg" />
-            <ButtonText className="font-bold text-black">Twitter</ButtonText>
-          </HStack>
         </Button>
       </VStack>
 
