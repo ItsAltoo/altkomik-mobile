@@ -14,18 +14,18 @@ type PaginationProps = {
   onPageChange: (page: number) => void
 }
 
+const MAX_VISIBLE_PAGES = 5
+
 const PaginationComponent = ({ page, hasMore, isLoading, totalPages, onPageChange }: PaginationProps) => {
-  let startPage = Math.max(1, page - 2)
-  let endPage = startPage + 4
+  let startPage = Math.max(1, page - (MAX_VISIBLE_PAGES - 2))
+  let endPage = startPage + MAX_VISIBLE_PAGES - 1
 
   if (!hasMore) {
     endPage = page
-    startPage = Math.max(1, endPage - 4)
-  } else if (totalPages !== undefined) {
-    endPage = Math.min(totalPages, Math.max(page + 2, endPage))
-    if (endPage === totalPages) {
-      startPage = Math.max(1, endPage - 4)
-    }
+    startPage = Math.max(1, endPage - (MAX_VISIBLE_PAGES - 1))
+  } else if (totalPages !== undefined && endPage > totalPages) {
+    endPage = totalPages
+    startPage = Math.max(1, endPage - (MAX_VISIBLE_PAGES - 1))
   }
 
   const pages = Array.from({ length: endPage - startPage + 1 }, (_, i) => startPage + i)
