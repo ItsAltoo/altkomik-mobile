@@ -2,7 +2,7 @@ import axios from "axios"
 import { authClient } from "@/src/libs/auth-client"
 import { BookmarkResponse } from "@/src/libs/types"
 
-const API_BASE_URL = process.env.EXPO_PUBLIC_BASE_API_URL
+const API_BASE_URL = process.env.EXPO_PUBLIC_API_URL
 
 export const LibraryRepository = {
   getBookmarks: async (page = 1, limit = 10): Promise<BookmarkResponse> => {

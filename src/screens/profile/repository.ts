@@ -1,7 +1,7 @@
 import axios from "axios"
 import { authClient } from "@/src/libs/auth-client"
 
-const API_BASE_URL = process.env.EXPO_PUBLIC_BASE_API_URL
+const API_BASE_URL = process.env.EXPO_PUBLIC_API_URL
 
 export const ProfileRepository = {
   getBookmarks: async () => {
