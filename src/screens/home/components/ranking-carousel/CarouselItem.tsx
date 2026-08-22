@@ -1,7 +1,7 @@
 import { Image } from "expo-image"
 import { LinearGradient } from "expo-linear-gradient"
 import { Link } from "expo-router"
-import { StyleSheet, useWindowDimensions } from "react-native"
+import { StyleSheet } from "react-native"
 
 import { Badge, BadgeText } from "@/components/ui/badge"
 import { HStack } from "@/components/ui/hstack"
@@ -10,14 +10,16 @@ import { Text } from "@/components/ui/text"
 import { VStack } from "@/components/ui/vstack"
 import { Comic } from "@/src/libs/types"
 
+const ITEM_MARGIN_HORIZONTAL = 16 // mx-2 (8px) on both sides
+
 type Props = {
   item: Comic
+  cellWidth: number
 }
 
-export const CarouselItem = ({ item }: Props) => {
-  const { width } = useWindowDimensions()
+export const CarouselItem = ({ item, cellWidth }: Props) => {
   const detailLink = `/detail-comic/${item.slug}` as any
-  const itemWidth = width - 45
+  const itemWidth = cellWidth - ITEM_MARGIN_HORIZONTAL
 
   return (
     <Link href={detailLink} asChild>
