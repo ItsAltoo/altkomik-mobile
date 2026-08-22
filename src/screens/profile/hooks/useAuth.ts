@@ -2,7 +2,7 @@ import { create } from "zustand"
 import * as SecureStore from "expo-secure-store"
 import { GoogleSignin } from "@react-native-google-signin/google-signin"
 import Toast from "react-native-toast-message"
-import { ProfileRepository } from "../repository"
+import { authClient } from "@/src/libs/auth-client"
 
 interface AuthState {
   isLoading: boolean
@@ -16,6 +16,7 @@ interface AuthState {
 
 GoogleSignin.configure({
   webClientId: process.env.EXPO_PUBLIC_GOOGLE_WEB_CLIENT_ID,
+  iosClientId: process.env.EXPO_PUBLIC_GOOGLE_IOS_CLIENT_ID,
   scopes: ["profile", "email"],
 })
 
@@ -26,7 +27,7 @@ export const useAuth = create<AuthState>((set) => ({
   userProfile: null,
 
   loadSession: async () => {
-    const val = await SecureStore.getItemAsync("session_token")
+    const cookie = await authClient.getCookie()
     const profileStr = await SecureStore.getItemAsync("user_profile")
 
     let profile = null
@@ -37,7 +38,7 @@ export const useAuth = create<AuthState>((set) => ({
     }
 
     set({
-      token: val,
+      token: cookie || null,
       userProfile: profile,
       isInitializing: false,
     })
@@ -50,18 +51,24 @@ export const useAuth = create<AuthState>((set) => ({
       const userInfo: any = await GoogleSignin.signIn()
 
       const idToken = userInfo.data?.idToken || userInfo.idToken
-      const user = userInfo.data?.user || userInfo.user
 
       if (!idToken) throw new Error("Gagal mendapatkan idToken dari Google")
 
-      const data = await ProfileRepository.loginWithGoogle(idToken)
-      if (data.success && data.token) {
-        await SecureStore.setItemAsync("session_token", data.token)
+      const { data, error } = await authClient.signIn.social({
+        provider: "google",
+        idToken: { token: idToken },
+      })
 
-        const profile = { name: user?.name || "User", email: user?.email || null, photo: user?.photo || null }
+      if (!error && data && "user" in data) {
+        const cookie = await authClient.getCookie()
+        const profile = {
+          name: data.user?.name || "User",
+          email: data.user?.email || null,
+          photo: data.user?.image || null,
+        }
         await SecureStore.setItemAsync("user_profile", JSON.stringify(profile))
 
-        set({ token: data.token, userProfile: profile })
+        set({ token: cookie || null, userProfile: profile })
         Toast.show({
           type: "success",
           text1: "Login Berhasil",
@@ -70,7 +77,7 @@ export const useAuth = create<AuthState>((set) => ({
           topOffset: 50,
         })
       } else {
-        console.error("Gagal login di sisi server:", data)
+        console.error("Gagal login di sisi server:", error)
         Toast.show({
           type: "error",
           text1: "Login Gagal",
@@ -99,7 +106,7 @@ export const useAuth = create<AuthState>((set) => ({
     } catch (error) {
       console.error(error)
     }
-    await SecureStore.deleteItemAsync("session_token")
+    await authClient.signOut()
     await SecureStore.deleteItemAsync("user_profile")
     set({ token: null, userProfile: null })
   },
