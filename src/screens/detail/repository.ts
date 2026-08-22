@@ -16,7 +16,7 @@ export const DetailRepository = {
 
   checkBookmark: async (slug: string) => {
     const cookie = await authClient.getCookie()
-    const { data } = await axios.get(`${process.env.EXPO_PUBLIC_BASE_API_URL}/api/bookmarks/check?slug=${slug}`, {
+    const { data } = await axios.get(`${process.env.EXPO_PUBLIC_API_URL}/api/bookmarks/check?slug=${slug}`, {
       headers: cookie ? { Cookie: cookie } : {},
     })
     return data as { isBookmarked: boolean }
@@ -24,7 +24,7 @@ export const DetailRepository = {
 
   addBookmark: async (comicData: { slug: string; title: string; thumbnail: string; type: string; status: string }) => {
     const cookie = await authClient.getCookie()
-    const { data } = await axios.post(`${process.env.EXPO_PUBLIC_BASE_API_URL}/api/bookmarks`, comicData, {
+    const { data } = await axios.post(`${process.env.EXPO_PUBLIC_API_URL}/api/bookmarks`, comicData, {
       headers: cookie ? { Cookie: cookie } : {},
     })
     return data
@@ -32,7 +32,7 @@ export const DetailRepository = {
 
   removeBookmark: async (slug: string) => {
     const cookie = await authClient.getCookie()
-    const { data } = await axios.delete(`${process.env.EXPO_PUBLIC_BASE_API_URL}/api/bookmarks?slug=${slug}`, {
+    const { data } = await axios.delete(`${process.env.EXPO_PUBLIC_API_URL}/api/bookmarks?slug=${slug}`, {
       headers: cookie ? { Cookie: cookie } : {},
     })
     return data

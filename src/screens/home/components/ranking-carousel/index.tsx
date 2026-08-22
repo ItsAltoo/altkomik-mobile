@@ -1,11 +1,12 @@
 import { Box } from "@/components/ui/box"
-import { FlatList, useWindowDimensions } from "react-native"
+import { useCallback, useState } from "react"
+import { useWindowDimensions } from "react-native"
+import { Carousel } from "react-native-reanimated-carousel"
 
 import { Comic } from "@/src/libs/types"
 import { CarouselItem } from "./CarouselItem"
 import { PaginationDots } from "./PaginationDots"
 import { ComicCarouselSkeleton } from "./Skeleton"
-import { useAutoSlide } from "./useAutoSlide"
 
 type ComicCarouselProps = {
   data: Comic[]
@@ -16,8 +17,9 @@ type ComicCarouselProps = {
 export const ComicCarousel = ({ data, isLoading = false, autoPlay = true }: ComicCarouselProps) => {
   const { width } = useWindowDimensions()
   const itemWidth = width - 32 // px-4 padding = 32px
+  const [activeIndex, setActiveIndex] = useState(0)
 
-  const { activeIndex, flatListRef, onScroll } = useAutoSlide(data?.length || 0, isLoading, autoPlay, itemWidth)
+  const onSnapToItem = useCallback((index: number) => setActiveIndex(index), [])
 
   if (isLoading) {
     return <ComicCarouselSkeleton />
@@ -25,28 +27,16 @@ export const ComicCarousel = ({ data, isLoading = false, autoPlay = true }: Comi
 
   if (!data || data.length === 0) return null
 
-  const getItemLayout = (_: any, index: number) => ({
-    length: itemWidth,
-    offset: itemWidth * index,
-    index,
-  })
-
   return (
     <Box className="w-full bg-background-0">
-      <FlatList
-        ref={flatListRef}
+      <Carousel
+        style={{ width: itemWidth, height: 280 }}
         data={data}
-        keyExtractor={(item, index) => item.slug || index.toString()}
-        horizontal
-        snapToInterval={itemWidth}
-        decelerationRate="fast"
-        disableIntervalMomentum={true}
-        snapToAlignment="start"
-        showsHorizontalScrollIndicator={false}
-        onScroll={onScroll}
-        scrollEventThrottle={16}
-        renderItem={({ item }) => <CarouselItem item={item} />}
-        getItemLayout={getItemLayout}
+        loop={data.length > 1}
+        autoplay={autoPlay && data.length > 1}
+        autoplayInterval={4000}
+        onSnapToItem={onSnapToItem}
+        renderItem={({ item }) => <CarouselItem item={item} cellWidth={itemWidth} />}
       />
 
       <PaginationDots dataLength={data.length} activeIndex={activeIndex} />

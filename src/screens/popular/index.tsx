@@ -55,7 +55,7 @@ const PopularScreen = () => {
   }, [])
 
   const renderEmptyComponent = useCallback(
-    () => <ListEmptyState error={error} isLoading={isLoading} dataLength={data.length} />,
+    () => <ListEmptyState error={error} isLoading={isLoading} dataLength={data.length} mascot="kita" />,
     [error, isLoading, data.length],
   )
 

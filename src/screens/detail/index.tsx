@@ -9,9 +9,10 @@ import { useComicDetail } from "./hooks/useComicDetail"
 import { useSimilarComics } from "./hooks/useSimilarComics"
 import { useReadingHistory } from "@/src/libs/store/useReadingHistory"
 import { useEffect } from "react"
+import { MascotEmptyState } from "@/src/components/empty-state/MascotEmptyState"
 
 const DetailScreen = ({ slug }: { slug: string }) => {
-  const { data, isLoading } = useComicDetail(slug || "")
+  const { data, isLoading, error, mutate } = useComicDetail(slug || "")
   const { data: similarComics, isLoading: isLoadingSimilar } = useSimilarComics(slug || "")
   const updateComicMeta = useReadingHistory((state) => state.updateComicMeta)
 
@@ -20,6 +21,21 @@ const DetailScreen = ({ slug }: { slug: string }) => {
       updateComicMeta(slug, data.title, data.thumbnail)
     }
   }, [data, slug, updateComicMeta])
+
+  if (error) {
+    return (
+      <View className="flex-1 items-center justify-center bg-background-0">
+        <MascotEmptyState
+          mascot="ryo"
+          title="Gagal Memuat Komik"
+          description="Terjadi kesalahan saat memuat detail komik. Silakan coba lagi."
+          size="lg"
+          actionLabel="Coba Lagi"
+          onAction={() => mutate()}
+        />
+      </View>
+    )
+  }
 
   if (isLoading || !data) {
     return (
